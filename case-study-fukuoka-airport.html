@@ -171,8 +171,27 @@
   .hero-subtitle {
     font-size: 16px;
     color: var(--text-muted);
+    margin-bottom: 0;
+  }
+
+  .hero-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 52px;
+    align-items: center;
     margin-bottom: 40px;
-    max-width: 640px;
+  }
+
+  .hero-image-col {
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(15,28,73,0.12);
+  }
+
+  .hero-image-col img {
+    width: 100%;
+    display: block;
+    height: auto;
   }
 
   .hero-meta {
@@ -993,13 +1012,21 @@
 
 <!-- HERO -->
 <section class="hero">
-  <div class="container">
-    <div class="hero-badge">
-      <span class="material-icons" style="font-size:14px;">business</span>
-      導入事例 ― 観光案内・インバウンド対応
+  <div class="container-wide">
+    <div class="hero-inner">
+      <div>
+        <div class="hero-badge">
+          <span class="material-icons" style="font-size:14px;">business</span>
+          導入事例 ― 観光案内・インバウンド対応
+        </div>
+        <h1 class="hero-title">0.5秒で言語の壁を突破！福岡空港・博多駅が実現した「20言語対応」の舞台裏</h1>
+        <p class="hero-subtitle">福岡県のAI活用事業でFeloが正式採用。福岡空港国際観光案内所・博多駅総合案内所において、多言語AI翻訳がインバウンド対応を革新しました。</p>
+      </div>
+      <div class="hero-image-col">
+        <img src="https://prcdn.freetls.fastly.net/release_image/87269/109/87269-109-c2a85d319815c8559fa8a7b02e3b28c6-1304x736.jpg?width=1950&height=1350&quality=85%2C65&format=jpeg&auto=webp&fit=bounds&bg-color=fff"
+             alt="福岡空港 × Felo 導入事例">
+      </div>
     </div>
-    <h1 class="hero-title">0.5秒で言語の壁を突破！<br>福岡空港・博多駅が実現した<br>「20言語対応」の舞台裏</h1>
-    <p class="hero-subtitle">福岡県のAI活用事業でFeloが正式採用。<br>福岡空港国際観光案内所・博多駅総合案内所において、多言語AI翻訳がインバウンド対応を革新しました。</p>
     <div class="stats-grid">
       <div class="stat-card">
         <div class="stat-number">20<span style="font-size:22px;">+</span></div>
@@ -1021,12 +1048,6 @@
         <div class="stat-unit">安定対応</div>
         <div class="stat-label">語学力に依存しないサービス</div>
       </div>
-    </div>
-
-    <div style="margin-top:40px;border-radius:16px;overflow:hidden;box-shadow:0 4px 24px rgba(15,28,73,0.10);">
-      <img src="https://prcdn.freetls.fastly.net/release_image/87269/109/87269-109-c2a85d319815c8559fa8a7b02e3b28c6-1304x736.jpg?width=1950&height=1350&quality=85%2C65&format=jpeg&auto=webp&fit=bounds&bg-color=fff"
-           alt="福岡空港 × Felo 導入事例"
-           style="width:100%;display:block;height:auto;">
     </div>
   </div>
 </section>
