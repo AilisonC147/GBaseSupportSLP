@@ -343,6 +343,48 @@
         .phase-card h4 { font-size: 15px; font-weight: 700; color: var(--sol-text); margin-bottom: 10px; }
         .phase-card p { font-size: 13px; color: var(--sol-secondary); margin: 0; line-height: 1.7; }
 
+        /* Strategy section */
+        .strategy-quote {
+            background: linear-gradient(135deg, #fff9f5 0%, #fff 100%);
+            border-left: 4px solid var(--sol-orange);
+            border-radius: 12px; padding: 24px 28px;
+            margin-bottom: 28px;
+        }
+        .strategy-quote-text {
+            font-size: 17px; font-weight: 800; color: var(--sol-text);
+            margin-bottom: 8px;
+        }
+        .strategy-quote-text .quote-mark { color: var(--sol-orange); font-size: 22px; margin-right: 4px; }
+        .strategy-quote-sub { font-size: 13px; color: var(--sol-secondary); line-height: 1.75; margin: 0; }
+        .strategy-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 8px; }
+        .strategy-card {
+            background: var(--sol-bg); border: 1px solid var(--sol-border);
+            border-radius: 12px; padding: 28px 24px; position: relative; overflow: hidden;
+        }
+        .strategy-card::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+            background: linear-gradient(90deg, var(--sol-orange), #f5a843);
+        }
+        .strategy-icon {
+            width: 44px; height: 44px; background: rgba(238,134,43,0.12);
+            border-radius: 10px; display: flex; align-items: center; justify-content: center;
+            margin-bottom: 12px;
+        }
+        .strategy-icon .material-icons { font-size: 22px; color: var(--sol-orange); }
+        .strategy-label {
+            font-size: 11px; font-weight: 700; letter-spacing: 0.08em;
+            color: var(--sol-orange); margin-bottom: 8px;
+        }
+        .strategy-card h4 { font-size: 15px; font-weight: 700; color: var(--sol-text); margin-bottom: 10px; }
+        .strategy-card p { font-size: 13px; color: var(--sol-secondary); margin: 0; line-height: 1.7; }
+        .strategy-facility {
+            display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px;
+        }
+        .strategy-facility span {
+            font-size: 11px; font-weight: 600; color: var(--sol-orange);
+            background: rgba(238,134,43,0.1); border-radius: 4px; padding: 2px 8px;
+        }
+
         /* CTA */
         .cta-section {
             background: var(--sol-bg-dark); border-radius: 20px;
@@ -406,7 +448,7 @@
             .hero-image { order: -1; }
             .arch-tools { grid-template-columns: repeat(2,1fr); }
             .feature-grid { grid-template-columns: 1fr; }
-            .challenge-list, .reason-grid, .phase-grid { grid-template-columns: 1fr; }
+            .challenge-list, .reason-grid, .phase-grid, .strategy-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -528,6 +570,44 @@
             <tr><th>コンセプト</th><td>「温故創新」— 過去から学び、未来をつくるスマートイノベーションエコシステム</td></tr>
             <tr><th>利用者</th><td>清水建設社員・NOVARE入居企業・パートナー企業</td></tr>
         </table>
+    </section>
+
+    <!-- ===== NOVAREの戦略的意義 ===== -->
+    <section>
+        <h2>NOVAREが担う戦略的意義</h2>
+        <div class="strategy-quote">
+            <p class="strategy-quote-text"><span class="quote-mark">「</span>ふるきをたずね、あたらしきをつくる<span class="quote-mark">」</span></p>
+            <p class="strategy-quote-sub">温故創新の森 NOVAREは、清水建設にとって単なる研究施設ではありません。創造の大地・継承の木々・交流の風と水 ― 自立かつ連携する5つの施設が都市に新たなイノベーションを生む「森」として設計されたこの拠点は、200年超の歴史を持つ清水建設が次の100年に向けて仕掛けた、最大規模の戦略的転換の核心です。</p>
+        </div>
+        <div class="strategy-grid">
+            <div class="strategy-card">
+                <div class="strategy-icon"><span class="material-icons">transform</span></div>
+                <div class="strategy-label">転換エンジン</div>
+                <h4>「建造者」から「価値創造者」へ</h4>
+                <p>200年超の歴史で培った「接注施工」の立場を超え、スマートシティ運営・空間サービスなど新たなビジネスモデルを能動的に創出する拠点として機能。NOVARE Hub・Labは建築ロボット・新素材・デジタルツイン（DX）の研究開発を通じて、「建造者」から「価値創造者」への事業構造転換を推進します。</p>
+                <div class="strategy-facility">
+                    <span>NOVARE Hub</span><span>NOVARE Lab</span>
+                </div>
+            </div>
+            <div class="strategy-card">
+                <div class="strategy-icon"><span class="material-icons">hub</span></div>
+                <div class="strategy-label">オープンイノベーション</div>
+                <h4>産学・スタートアップとの共創プラットフォーム</h4>
+                <p>スタートアップ・研究機関・アーティスト・一般市民をNOVAREに招き入れる「開かれた場」として設計。異分野の知識融合から、内部エンジニアだけでは生まれない「非連続性イノベーション」を誘発します。インキュベーションプログラム・コーポレートベンチャリング・産学連携が有機的に連携します。</p>
+                <div class="strategy-facility">
+                    <span>NOVARE Hub</span><span>産学連携</span><span>地域連携</span>
+                </div>
+            </div>
+            <div class="strategy-card">
+                <div class="strategy-icon"><span class="material-icons">balance</span></div>
+                <div class="strategy-label">温故創新の双核戦略</div>
+                <h4>守正（継承）× 出奇（創造）の両立</h4>
+                <p>NOVARE Archives・Academyで「ものづくりの匠の精神」と「知・技・人のDNA」を次世代に継承する一方、Hub・Labでは先端技術の実験を加速。「信頼ある老舗工匠」と「挑戦するテクノロジー先駆者」を一つの施設群で体現し、清水建設のブランドアイデンティティを強化します。</p>
+                <div class="strategy-facility">
+                    <span>NOVARE Archives</span><span>NOVARE Academy</span><span>旧渋沢邸</span>
+                </div>
+            </div>
+        </div>
     </section>
 
     <!-- ===== 背景 ===== -->
