@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>清水建設 NOVARE 導入事例｜GBase SUPPORT</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #7C3AED;
+            --primary-light: #A78BFA;
+            --text-dark: #1F2937;
+            --text-gray: #6B7280;
+            --bg-light: #F9FAFB;
+            --bg-white: #FFFFFF;
+            --border-color: #E5E7EB;
+            --accent-green: #10B981;
+            --sol-text: rgb(27, 20, 13);
+            --sol-orange: rgb(238, 134, 43);
+            --sol-secondary: rgb(102, 102, 102);
+            --sol-bg: rgb(248, 247, 246);
+            --sol-border: rgb(231, 218, 207);
+            --sol-bg-dark: rgb(34, 24, 16);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: "Plus Jakarta Sans", "Noto Sans JP", -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.8;
+            color: var(--sol-text);
+            background-color: var(--bg-white);
+        }
+
+        /* ===== HEADER ===== */
+        .site-header {
+            position: sticky; top: 0; z-index: 50; width: 100%;
+            border-bottom: 1px solid var(--sol-border);
+            background: rgba(255,255,255,0.95); backdrop-filter: blur(4px);
+        }
+        .site-header-inner { padding: 0 40px; display: flex; justify-content: center; }
+        .site-header-content {
+            display: flex; height: 64px; width: 100%; max-width: 1200px;
+            align-items: center; justify-content: space-between;
+        }
+        .site-logo img { height: 32px; width: auto; }
+        .site-logo { display: flex; align-items: center; text-decoration: none; opacity: 1; transition: opacity 0.2s; }
+        .site-logo:hover { opacity: 0.8; }
+        .site-nav { display: flex; align-items: center; gap: 0; }
+        .nav-link {
+            font-size: 14px; font-weight: 500; color: var(--sol-text);
+            text-decoration: none; padding: 20px 16px;
+            border-bottom: 2px solid transparent; transition: color 0.2s, border-color 0.2s;
+        }
+        .nav-link:hover { color: var(--sol-orange); }
+        .nav-dropdown { position: relative; }
+        .nav-btn {
+            display: flex; align-items: center; gap: 4px;
+            font-size: 14px; font-weight: 500; color: var(--sol-text);
+            background: none; border: none; cursor: pointer;
+            padding: 20px 16px; border-bottom: 2px solid transparent;
+            transition: color 0.2s;
+        }
+        .nav-btn svg { width: 14px; height: 14px; }
+        .nav-btn:hover { color: var(--sol-orange); }
+        .nav-dropdown-menu {
+            display: none; position: absolute; top: 100%; left: 0;
+            background: #fff; border: 1px solid var(--sol-border);
+            border-radius: 8px; box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+            min-width: 220px; padding: 8px; z-index: 100;
+        }
+        .nav-dropdown:hover .nav-dropdown-menu { display: block; }
+        .nav-dropdown-inner { display: flex; flex-direction: column; gap: 2px; }
+        .nav-dropdown-item {
+            display: block; padding: 8px 12px; border-radius: 6px;
+            text-decoration: none; color: var(--sol-text); transition: background 0.15s;
+        }
+        .nav-dropdown-item:hover { background: var(--sol-bg); }
+        .item-title { font-size: 13px; font-weight: 600; }
+        .item-sub { font-size: 12px; color: var(--sol-secondary); margin-top: 2px; }
+        .site-header-actions { display: flex; align-items: center; gap: 8px; }
+        .nav-login {
+            font-size: 14px; font-weight: 500; color: var(--sol-text);
+            text-decoration: none; padding: 8px 12px; transition: color 0.2s;
+        }
+        .nav-login:hover { color: var(--sol-orange); }
+        .btn-outline-round {
+            font-size: 13px; font-weight: 600; color: var(--sol-orange);
+            border: 1.5px solid var(--sol-orange); border-radius: 9999px;
+            padding: 7px 16px; text-decoration: none; transition: all 0.2s;
+        }
+        .btn-outline-round:hover { background: var(--sol-orange); color: #fff; }
+        .btn-gradient-round {
+            font-size: 13px; font-weight: 600; color: #fff;
+            background: linear-gradient(135deg, var(--sol-orange), #f59e0b);
+            border-radius: 9999px; padding: 7px 16px; text-decoration: none;
+            border: none; transition: opacity 0.2s;
+        }
+        .btn-gradient-round:hover { opacity: 0.88; }
+
+        /* ===== HERO ===== */
+        .hero {
+            background: var(--sol-bg);
+            border-bottom: 1px solid var(--sol-border);
+            padding: 64px 40px;
+        }
+        .hero-content {
+            max-width: 1200px; margin: 0 auto;
+            display: grid; grid-template-columns: 1fr 1fr;
+            gap: 56px; align-items: center;
+        }
+        .company-tag {
+            display: inline-flex; align-items: center; gap: 6px;
+            background: rgba(238,134,43,0.1); color: var(--sol-orange);
+            border: 1px solid rgba(238,134,43,0.3);
+            font-size: 12px; font-weight: 700; padding: 4px 12px;
+            border-radius: 9999px; margin-bottom: 20px; letter-spacing: 0.06em;
+        }
+        .hero-text h1 {
+            font-size: clamp(22px, 3.2vw, 36px);
+            font-weight: 800; color: var(--sol-text);
+            line-height: 1.35; margin-bottom: 28px; letter-spacing: -0.01em;
+        }
+        .hero-text h1 .highlight { color: var(--sol-orange); }
+        .hero-stats {
+            display: grid; grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+        .stat-item {
+            background: #fff; border: 1px solid var(--sol-border);
+            border-radius: 12px; padding: 16px;
+        }
+        .stat-number {
+            font-size: 28px; font-weight: 900; color: var(--sol-orange);
+            line-height: 1; margin-bottom: 6px;
+        }
+        .stat-number .material-icons { font-size: 26px; }
+        .stat-label { font-size: 12px; color: var(--sol-secondary); line-height: 1.4; }
+        .hero-image { border-radius: 16px; overflow: hidden; box-shadow: 0 8px 32px rgba(34,24,16,0.12); }
+        .hero-image img { width: 100%; display: block; height: auto; }
+
+        /* ===== MAIN ===== */
+        main { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
+        section { padding: 56px 0; border-bottom: 1px solid var(--sol-border); }
+        section:last-child { border-bottom: none; }
+        section h2 {
+            font-size: clamp(18px, 2.4vw, 26px); font-weight: 800;
+            color: var(--sol-text); margin-bottom: 24px;
+            padding-bottom: 12px; border-bottom: 2px solid var(--sol-orange);
+            display: inline-block;
+        }
+        section p { color: var(--sol-secondary); line-height: 1.9; margin-bottom: 16px; }
+        section p:last-child { margin-bottom: 0; }
+
+        /* Profile table */
+        .profile-table { width: 100%; border-collapse: collapse; font-size: 14px; margin-top: 8px; }
+        .profile-table th, .profile-table td {
+            padding: 12px 16px; border: 1px solid var(--sol-border); text-align: left;
+        }
+        .profile-table th {
+            background: var(--sol-bg); font-weight: 700;
+            color: var(--sol-text); width: 160px; white-space: nowrap;
+        }
+        .profile-table td { color: var(--sol-secondary); }
+
+        /* Challenge cards */
+        .challenge-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 8px; }
+        .challenge-item {
+            background: #fff9f5; border: 1px solid var(--sol-border);
+            border-left: 4px solid var(--sol-orange);
+            border-radius: 8px; padding: 20px;
+        }
+        .challenge-item h4 { font-size: 14px; font-weight: 700; color: var(--sol-text); margin-bottom: 8px; }
+        .challenge-item p { font-size: 13px; color: var(--sol-secondary); margin: 0; line-height: 1.7; }
+
+        /* Reason cards */
+        .reason-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 8px; }
+        .reason-card {
+            background: var(--sol-bg); border: 1px solid var(--sol-border);
+            border-radius: 12px; padding: 24px;
+        }
+        .reason-number {
+            width: 32px; height: 32px; background: var(--sol-orange); color: #fff;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 14px; font-weight: 800; margin-bottom: 14px;
+        }
+        .reason-card h4 { font-size: 15px; font-weight: 700; color: var(--sol-text); margin-bottom: 10px; }
+        .reason-card p { font-size: 13px; color: var(--sol-secondary); margin: 0; line-height: 1.7; }
+
+        /* ===== ARCHITECTURE DIAGRAM ===== */
+        .arch-diagram {
+            background: var(--sol-bg);
+            border: 1px solid var(--sol-border);
+            border-radius: 16px;
+            padding: 36px;
+            margin-top: 8px;
+            overflow-x: auto;
+        }
+        .arch-users {
+            display: grid; grid-template-columns: 1fr 1fr;
+            gap: 20px; margin-bottom: 24px;
+        }
+        .arch-user {
+            background: #fff; border: 1px solid var(--sol-border);
+            border-radius: 12px; padding: 18px;
+            display: flex; flex-direction: column; gap: 10px;
+        }
+        .arch-user-head {
+            display: flex; align-items: center; gap: 10px;
+            border-bottom: 1px solid var(--sol-border); padding-bottom: 10px;
+        }
+        .arch-user-icon {
+            width: 36px; height: 36px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 18px;
+        }
+        .arch-user-icon.employee { background: rgba(238,134,43,0.12); color: var(--sol-orange); }
+        .arch-user-icon.resident { background: rgba(16,185,129,0.12); color: #10B981; }
+        .arch-user-tag {
+            font-size: 11px; font-weight: 700; padding: 2px 8px;
+            border-radius: 4px; margin-bottom: 2px;
+        }
+        .arch-user-tag.employee { background: rgba(238,134,43,0.1); color: var(--sol-orange); }
+        .arch-user-tag.resident { background: rgba(16,185,129,0.1); color: #10B981; }
+        .arch-user-title { font-size: 14px; font-weight: 700; color: var(--sol-text); }
+        .arch-user-feats { display: flex; flex-wrap: wrap; gap: 6px; }
+        .arch-user-feat {
+            display: inline-flex; align-items: center; gap: 4px;
+            font-size: 12px; color: var(--sol-secondary);
+            background: var(--sol-bg); padding: 4px 8px; border-radius: 6px;
+            border: 1px solid var(--sol-border);
+        }
+        .arch-user-feat .material-icons { font-size: 13px; }
+        .arch-arrow-down {
+            display: flex; flex-direction: column; align-items: center;
+            gap: 4px; color: var(--sol-secondary); font-size: 12px;
+            margin: 0 0 12px 0;
+        }
+        .arch-arrow-down .material-icons { color: var(--sol-orange); font-size: 20px; }
+
+        .arch-core {
+            background: var(--sol-bg-dark); border-radius: 12px;
+            padding: 20px 24px; margin-bottom: 24px;
+            display: flex; align-items: center; gap: 16px;
+        }
+        .arch-core-icon {
+            width: 52px; height: 52px; background: var(--sol-orange);
+            border-radius: 12px; display: flex; align-items: center;
+            justify-content: center; flex-shrink: 0;
+        }
+        .arch-core-icon img { height: 32px; filter: brightness(0) invert(1); }
+        .arch-core-text { flex: 1; }
+        .arch-core-name { font-size: 18px; font-weight: 800; color: #fff; }
+        .arch-core-sub { font-size: 12px; color: rgba(255,255,255,0.6); margin-top: 2px; }
+        .arch-core-badge {
+            background: rgba(238,134,43,0.2); border: 1px solid rgba(238,134,43,0.4);
+            color: var(--sol-orange); font-size: 11px; font-weight: 700;
+            padding: 4px 10px; border-radius: 6px;
+        }
+
+        .arch-mcp-label {
+            text-align: center; font-size: 12px; font-weight: 700;
+            color: var(--sol-secondary); margin-bottom: 12px;
+            display: flex; align-items: center; justify-content: center; gap: 8px;
+        }
+        .arch-mcp-label::before, .arch-mcp-label::after {
+            content: ''; flex: 1; height: 1px; background: var(--sol-border);
+        }
+
+        .arch-tools {
+            display: grid; grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+        }
+        .arch-tool {
+            background: #fff; border: 1px solid var(--sol-border);
+            border-radius: 10px; padding: 14px 12px;
+            text-align: center; transition: box-shadow 0.2s;
+        }
+        .arch-tool:hover { box-shadow: 0 4px 16px rgba(34,24,16,0.08); }
+        .arch-tool-icon {
+            width: 40px; height: 40px; border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 10px;
+        }
+        .arch-tool-icon .material-icons { font-size: 20px; }
+        .arch-tool-name { font-size: 13px; font-weight: 700; color: var(--sol-text); margin-bottom: 4px; }
+        .arch-tool-api { font-size: 10px; color: var(--sol-secondary); }
+
+        /* Feature cards */
+        .feature-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-top: 8px; }
+        .feature-card {
+            background: var(--bg-white); border: 1px solid var(--sol-border);
+            border-radius: 14px; padding: 24px; transition: box-shadow 0.2s;
+        }
+        .feature-card:hover { box-shadow: 0 6px 24px rgba(34,24,16,0.07); }
+        .feature-card-head {
+            display: flex; align-items: center; gap: 14px; margin-bottom: 16px;
+        }
+        .feature-card-icon {
+            width: 48px; height: 48px; border-radius: 12px;
+            display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+        }
+        .feature-card-icon .material-icons { font-size: 24px; }
+        .feature-card h4 { font-size: 16px; font-weight: 700; color: var(--sol-text); }
+        .feature-card h4 small {
+            display: block; font-size: 11px; font-weight: 500;
+            color: var(--sol-secondary); margin-top: 2px;
+        }
+        .feature-card p { font-size: 13px; color: var(--sol-secondary); line-height: 1.7; margin: 0; }
+        .feature-scene {
+            margin-top: 14px; background: var(--sol-bg);
+            border-radius: 8px; padding: 12px 14px;
+            border-left: 3px solid var(--sol-orange);
+        }
+        .feature-scene-label {
+            font-size: 10px; font-weight: 700; color: var(--sol-orange);
+            text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px;
+        }
+        .feature-scene p {
+            font-size: 13px; color: var(--sol-text); margin: 0;
+            font-style: italic; line-height: 1.6;
+        }
+
+        /* Results table */
+        .results-table { width: 100%; border-collapse: collapse; font-size: 14px; margin-top: 8px; }
+        .results-table th, .results-table td {
+            padding: 14px 16px; border: 1px solid var(--sol-border); text-align: left;
+        }
+        .results-table th { background: var(--sol-bg); font-weight: 700; color: var(--sol-text); }
+        .results-table .value { font-weight: 700; color: var(--sol-orange); }
+
+        /* Phase cards */
+        .phase-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 8px; }
+        .phase-card {
+            background: var(--sol-bg); border: 1px solid var(--sol-border);
+            border-radius: 12px; padding: 24px;
+        }
+        .phase-badge {
+            display: inline-block; font-size: 11px; font-weight: 700;
+            background: rgba(238,134,43,0.15); color: var(--sol-orange);
+            padding: 3px 10px; border-radius: 4px; margin-bottom: 12px;
+        }
+        .phase-card h4 { font-size: 15px; font-weight: 700; color: var(--sol-text); margin-bottom: 10px; }
+        .phase-card p { font-size: 13px; color: var(--sol-secondary); margin: 0; line-height: 1.7; }
+
+        /* CTA */
+        .cta-section {
+            background: var(--sol-bg-dark); border-radius: 20px;
+            padding: 56px; text-align: center; margin: 56px 0;
+        }
+        .cta-section h2 {
+            color: #fff; border: none; margin-bottom: 14px;
+            display: block; font-size: clamp(20px, 2.8vw, 30px);
+        }
+        .cta-section p { color: rgba(255,255,255,0.7); font-size: 15px; margin-bottom: 32px; }
+        .cta-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+        .cta-btn {
+            display: inline-flex; align-items: center; gap: 6px;
+            padding: 13px 28px; border-radius: 9999px;
+            font-size: 15px; font-weight: 700; text-decoration: none;
+            transition: all 0.2s; cursor: pointer;
+        }
+        .cta-btn-primary {
+            background: var(--sol-orange); color: #fff; border: 2px solid var(--sol-orange);
+        }
+        .cta-btn-primary:hover { opacity: 0.88; transform: translateY(-2px); }
+        .cta-btn-secondary {
+            background: transparent; color: #fff; border: 2px solid rgba(255,255,255,0.5);
+        }
+        .cta-btn-secondary:hover { border-color: #fff; background: rgba(255,255,255,0.08); }
+
+        /* Footer */
+        .site-footer {
+            background: var(--sol-bg-dark);
+            color: rgba(255,255,255,0.7);
+            padding: 48px 40px 24px;
+        }
+        .site-footer-inner { max-width: 1200px; margin: 0 auto; }
+        .site-footer-grid {
+            display: grid; grid-template-columns: 1fr 1fr 1fr auto;
+            gap: 40px; margin-bottom: 40px;
+        }
+        .site-footer h3 {
+            font-size: 13px; font-weight: 700; color: #fff;
+            margin-bottom: 14px; padding-bottom: 8px;
+            border-bottom: 1px solid rgba(255,255,255,0.12);
+        }
+        .site-footer h3.mt { margin-top: 28px; }
+        .site-footer ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+        .site-footer ul a {
+            font-size: 13px; color: rgba(255,255,255,0.6);
+            text-decoration: none; transition: color 0.2s;
+        }
+        .site-footer ul a:hover { color: var(--sol-orange); }
+        .site-footer-brand { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; }
+        .footer-logo img { height: 28px; filter: brightness(0) invert(1); }
+        .footer-tagline { font-size: 12px; color: rgba(255,255,255,0.5); line-height: 1.6; }
+        .site-footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px;
+            font-size: 12px; color: rgba(255,255,255,0.4);
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .hero-content { grid-template-columns: 1fr; }
+            .hero-image { order: -1; }
+            .arch-tools { grid-template-columns: repeat(2,1fr); }
+            .feature-grid { grid-template-columns: 1fr; }
+            .challenge-list, .reason-grid, .phase-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header class="site-header">
+    <div class="site-header-inner">
+        <div class="site-header-content">
+            <a href="https://cs.gbase.ai/" class="site-logo">
+                <img src="https://cs.gbase.ai/title-logo.png" alt="GBase Support">
+            </a>
+            <nav class="site-nav">
+                <a href="https://cs.gbase.ai/" class="nav-link">ホーム</a>
+                <div class="nav-dropdown">
+                    <button class="nav-btn">ソリューション
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                    </button>
+                    <div class="nav-dropdown-menu">
+                        <div class="nav-dropdown-inner">
+                            <a href="https://cs.gbase.ai/solution#case-study" class="nav-dropdown-item">
+                                <div class="item-title">商業施設・百貨店</div>
+                            </a>
+                            <a href="https://cs.gbase.ai/solution#case-study" class="nav-dropdown-item">
+                                <div class="item-title">オフィス・イノベーション施設</div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-dropdown">
+                    <button class="nav-btn">製品／機能
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                    </button>
+                    <div class="nav-dropdown-menu">
+                        <div class="nav-dropdown-inner">
+                            <a href="https://cs.gbase.ai/solution#feature-faq" class="nav-dropdown-item">
+                                <div class="item-title">FAQ・施設案内AI</div>
+                                <div class="item-sub">よくある質問を自動対応</div>
+                            </a>
+                            <a href="https://cs.gbase.ai/solution#feature-floormap" class="nav-dropdown-item">
+                                <div class="item-title">フロアマップ・ナビゲーション</div>
+                                <div class="item-sub">3Dマップで目的地まで案内</div>
+                            </a>
+                            <a href="https://cs.gbase.ai/solution#feature-realtime" class="nav-dropdown-item">
+                                <div class="item-title">MCP Agent連携</div>
+                                <div class="item-sub">外部システムをAIで操作</div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <a href="https://cs.gbase.ai/price" class="nav-link">料金</a>
+                <div class="nav-dropdown">
+                    <button class="nav-btn">リソース
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                    </button>
+                    <div class="nav-dropdown-menu">
+                        <div class="nav-dropdown-inner">
+                            <a href="https://cs.gbase.ai/blog" class="nav-dropdown-item">
+                                <div class="item-title">ブログ</div>
+                            </a>
+                            <a href="https://docs.gbase.ai/user-manual/quickstart" target="_blank" rel="noopener noreferrer" class="nav-dropdown-item">
+                                <div class="item-title">マニュアル</div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <div class="site-header-actions">
+                <a href="https://admin.gbase.ai/" class="nav-login">ログイン</a>
+                <a href="https://cs.gbase.ai/register" class="btn-outline-round">無料ではじめる</a>
+                <a href="https://cs.gbase.ai/contact" class="btn-gradient-round">お問い合わせ</a>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+    <div class="hero-content">
+        <div class="hero-text">
+            <span class="company-tag">清水建設 NOVARE</span>
+            <h1>建物と対話するAI。<br>NOVAREが実現した<br><span class="highlight">AIコンシェルジュ</span>の全貌</h1>
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <div class="stat-number">4</div>
+                    <div class="stat-label">MCP連携ツール（IoT / 位置情報 / メッセージ / 天気）</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">2</div>
+                    <div class="stat-label">アクセス権限（社員 / NOVARE入居者）</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number"><span class="material-icons">devices</span></div>
+                    <div class="stat-label">Chat + Canvas 2表示モード対応</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">7日</div>
+                    <div class="stat-label">天気予報（気温・湿度・降水確率）</div>
+                </div>
+            </div>
+        </div>
+        <div class="hero-image">
+            <img src="https://www.shimz.co.jp/novare/common/img/top/institution.png"
+                 alt="温故創新の森NOVARE"
+                 onerror="this.src='https://www.shimz.co.jp/novare/common/img/top/explanation_img.png'">
+        </div>
+    </div>
+</section>
+
+<main>
+    <!-- ===== 企業プロフィール ===== -->
+    <section>
+        <h2>導入企業プロフィール</h2>
+        <table class="profile-table">
+            <tr><th>施設名</th><td>温故創新の森 NOVARE（清水建設株式会社）</td></tr>
+            <tr><th>所在地</th><td>〒135-0052 東京都江東区潮2丁目8番20号</td></tr>
+            <tr><th>アクセス</th><td>JR京葉線「潮見駅」徒歩3分（東京駅から8分）</td></tr>
+            <tr><th>施設構成</th><td>NOVARE Hub / NOVARE Lab / NOVARE Academy / NOVARE Archives / 旧渋沢邸</td></tr>
+            <tr><th>コンセプト</th><td>「温故創新」— 過去から学び、未来をつくるスマートイノベーションエコシステム</td></tr>
+            <tr><th>利用者</th><td>清水建設社員・NOVARE入居企業・パートナー企業</td></tr>
+        </table>
+    </section>
+
+    <!-- ===== 背景 ===== -->
+    <section>
+        <h2>導入の背景</h2>
+        <p>清水建設は、デジタルを活用したイノベーション施策として「建物との対話」をテーマに様々な取り組みを実施しています。イノベーション拠点「NOVARE」には、スマートビル技術やAI・IoTの先端システムが集積していますが、これらと施設ユーザーを直感的につなぐインターフェースが求められていました。</p>
+        <p>Phase 1でGBase Supportを活用したAIコンシェルジュの基盤を構築した後、Phase 2では<strong>MCP（Model Context Protocol）Agent</strong>を通じて施設内の各システムとAIを連結し、会話するだけでIoTデバイスの操作や社員の位置情報の把握、WowTalkでのメッセージ送付など、より実用的な機能を実現することにしました。</p>
+    </section>
+
+    <!-- ===== 課題 ===== -->
+    <section>
+        <h2>導入前の課題</h2>
+        <div class="challenge-list">
+            <div class="challenge-item">
+                <h4>バラバラなシステム間の連携不足</h4>
+                <p>DX-Core（空調・照明制御）、EmpathicBuilding（位置情報）、WowTalk（社内チャット）など各システムが独立して動作しており、ユーザーは個別アプリを使い分ける必要がありました。</p>
+            </div>
+            <div class="challenge-item">
+                <h4>IoT操作の煩雑さ</h4>
+                <p>会議室の空調や照明を操作するには専用画面を開く必要があり、直感的な操作ができませんでした。「会議が終わった」という自然な言葉で照明を消せる体験が求められていました。</p>
+            </div>
+            <div class="challenge-item">
+                <h4>リアルタイム情報へのアクセス困難</h4>
+                <p>同僚の現在地確認、天気に応じた外出計画、最新ウェブ情報の取得など、日常業務に必要な情報を得るためのアクション数が多く、生産性向上の妨げになっていました。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== 選んだ理由 ===== -->
+    <section>
+        <h2>GBase Supportを選んだ理由</h2>
+        <div class="reason-grid">
+            <div class="reason-card">
+                <div class="reason-number">1</div>
+                <h4>MCPプロトコルによる柔軟なシステム連携</h4>
+                <p>MCP（Model Context Protocol）に対応したAgent設計により、DX-Core、EmpathicBuilding、WowTalkなど既存の社内システムをAIとシームレスに接続できます。新規開発コストを最小化しながら機能拡張が可能です。</p>
+            </div>
+            <div class="reason-card">
+                <div class="reason-number">2</div>
+                <h4>Chat + Canvasの2つの表示モード</h4>
+                <p>テキスト会話（Chat）とビジュアル表示（Canvas）を柔軟に切り替え。フロアマップ上へのポインター表示や天気予報のグラフ表示など、情報の性質に応じた最適な見せ方を実現します。</p>
+            </div>
+            <div class="reason-card">
+                <div class="reason-number">3</div>
+                <h4>アクセス権限の柔軟な設定</h4>
+                <p>QRコードのアクセス制限機能により、社員向け（IoT操作・位置情報など高権限機能）と入居者・社外向け（情報閲覧のみ）の2系統を1つのプラットフォームで管理できます。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== システム構成 ===== -->
+    <section>
+        <h2>導入システム構成</h2>
+        <div class="arch-diagram">
+
+            <!-- ユーザー層 -->
+            <div class="arch-users">
+                <div class="arch-user">
+                    <div class="arch-user-head">
+                        <div class="arch-user-icon employee">
+                            <span class="material-icons">badge</span>
+                        </div>
+                        <div>
+                            <div class="arch-user-tag employee">社員向け</div>
+                            <div class="arch-user-title">清水建設 社員</div>
+                        </div>
+                    </div>
+                    <div class="arch-user-feats">
+                        <div class="arch-user-feat"><span class="material-icons">qr_code_scanner</span>QRコード（制限あり）</div>
+                        <div class="arch-user-feat"><span class="material-icons">smartphone</span>スマホ / PC</div>
+                        <div class="arch-user-feat"><span class="material-icons">devices</span>IoT操作・位置情報取得可</div>
+                    </div>
+                </div>
+                <div class="arch-user">
+                    <div class="arch-user-head">
+                        <div class="arch-user-icon resident">
+                            <span class="material-icons">groups</span>
+                        </div>
+                        <div>
+                            <div class="arch-user-tag resident">社外向け</div>
+                            <div class="arch-user-title">NOVARE入居者</div>
+                        </div>
+                    </div>
+                    <div class="arch-user-feats">
+                        <div class="arch-user-feat"><span class="material-icons">qr_code_scanner</span>QRコード（制限なし）</div>
+                        <div class="arch-user-feat"><span class="material-icons">smartphone</span>スマホ / PC</div>
+                        <div class="arch-user-feat"><span class="material-icons">info_outline</span>情報閲覧・天気・検索</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 下矢印 -->
+            <div class="arch-arrow-down">
+                <span class="material-icons">south</span>
+                <span>Chat / Canvas 表示</span>
+            </div>
+
+            <!-- GBase Support コア -->
+            <div class="arch-core">
+                <div class="arch-core-icon">
+                    <img src="https://cs.gbase.ai/title-logo.png" alt="GBase Support">
+                </div>
+                <div class="arch-core-text">
+                    <div class="arch-core-name">GBase SUPPORT</div>
+                    <div class="arch-core-sub">AI Agent + MCP Agent Hub — 自然言語で4つの外部システムを操作</div>
+                </div>
+                <div class="arch-core-badge">MCP Protocol</div>
+            </div>
+
+            <!-- MCP連携ラベル -->
+            <div class="arch-mcp-label">MCP Agent 連携ツール</div>
+
+            <!-- 4ツール -->
+            <div class="arch-tools">
+                <div class="arch-tool">
+                    <div class="arch-tool-icon" style="background:#fff3e0;">
+                        <span class="material-icons" style="color:#EE862B;">search</span>
+                    </div>
+                    <div class="arch-tool-name">ウェブサーチ</div>
+                    <div class="arch-tool-api">web_search</div>
+                </div>
+                <div class="arch-tool">
+                    <div class="arch-tool-icon" style="background:#e8f5e9;">
+                        <span class="material-icons" style="color:#2e7d32;">chat</span>
+                    </div>
+                    <div class="arch-tool-name">WowTalk</div>
+                    <div class="arch-tool-api">wowtalk_send_message</div>
+                </div>
+                <div class="arch-tool">
+                    <div class="arch-tool-icon" style="background:#e3f2fd;">
+                        <span class="material-icons" style="color:#1565c0;">wb_sunny</span>
+                    </div>
+                    <div class="arch-tool-name">天気情報</div>
+                    <div class="arch-tool-api">weather_get_by_location</div>
+                </div>
+                <div class="arch-tool">
+                    <div class="arch-tool-icon" style="background:#fce4ec;">
+                        <span class="material-icons" style="color:#c62828;">device_hub</span>
+                    </div>
+                    <div class="arch-tool-name">IoT制御</div>
+                    <div class="arch-tool-api">DX-Core / EmpathicBuilding</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== 4つの機能 ===== -->
+    <section>
+        <h2>Phase 2 ユースケース</h2>
+        <p>MCPプロトコルで連携した4つのツールにより、自然な会話で施設のあらゆる情報・操作にアクセスできます。</p>
+        <div class="feature-grid">
+
+            <!-- 1. ウェブサーチ -->
+            <div class="feature-card">
+                <div class="feature-card-head">
+                    <div class="feature-card-icon" style="background:#fff3e0;">
+                        <span class="material-icons" style="color:#EE862B;">travel_explore</span>
+                    </div>
+                    <h4>ウェブサーチ
+                        <small>web_search ツール</small>
+                    </h4>
+                </div>
+                <p>AIがリアルタイムでウェブ検索を実行し、最新情報を取得して回答します。施設・業界・技術動向など、知識ベースに収録されていない最新情報もカバーします。</p>
+                <div class="feature-scene">
+                    <div class="feature-scene-label">活用シーン</div>
+                    <p>「NOVAREの最寄り駅の今の混雑状況を教えて」「最新の建設DX関連ニュースをまとめて」</p>
+                </div>
+            </div>
+
+            <!-- 2. WowTalk -->
+            <div class="feature-card">
+                <div class="feature-card-head">
+                    <div class="feature-card-icon" style="background:#e8f5e9;">
+                        <span class="material-icons" style="color:#2e7d32;">chat_bubble</span>
+                    </div>
+                    <h4>WowTalk 連携
+                        <small>wowtalk_send_message_to_member</small>
+                    </h4>
+                </div>
+                <p>AIコンシェルジュを通じてWowTalk（社内チャット）にメッセージを送信できます。個人への緊急メッセージ送付、グループへの一括通知など、業務コミュニケーションをAIがサポートします。</p>
+                <div class="feature-scene">
+                    <div class="feature-scene-label">活用シーン</div>
+                    <p>「田中さんに『会議室が変更になりました』と送って」「プロジェクトチームに今日の予定変更を一斉通知して」</p>
+                </div>
+            </div>
+
+            <!-- 3. 天気情報 -->
+            <div class="feature-card">
+                <div class="feature-card-head">
+                    <div class="feature-card-icon" style="background:#e3f2fd;">
+                        <span class="material-icons" style="color:#1565c0;">cloud</span>
+                    </div>
+                    <h4>天気情報
+                        <small>weather_get_by_location</small>
+                    </h4>
+                </div>
+                <p>OpenWeatherMap APIを通じて指定地点のリアルタイム・7日間天気予報を取得します。気温・湿度・降水確率などの詳細情報をCanvas画面にビジュアル表示します。視覚障がいのある方には音声でも対応可能です。</p>
+                <div class="feature-scene">
+                    <div class="feature-scene-label">活用シーン</div>
+                    <p>「今週の東京の天気を教えて」「明日の外出には傘が必要？」「潮見周辺の今後7日間の天気を表示して」</p>
+                </div>
+            </div>
+
+            <!-- 4. IoT制御 -->
+            <div class="feature-card">
+                <div class="feature-card-head">
+                    <div class="feature-card-icon" style="background:#fce4ec;">
+                        <span class="material-icons" style="color:#c62828;">settings_remote</span>
+                    </div>
+                    <h4>IoT制御 + 位置情報
+                        <small>DX-Core / EmpathicBuilding 連携</small>
+                    </h4>
+                </div>
+                <p>DX-Coreを通じて会議室の空調・照明をAI経由で操作。EmpathicBuildingの位置情報サービスと連携し、NOVARE Hub 2F・3Fの社員位置をCanvas画面のフロアマップ上にポインター表示します。</p>
+                <div class="feature-scene">
+                    <div class="feature-scene-label">活用シーン</div>
+                    <p>「会議室の照明を消して」「第1会議室の温度を2度下げて」「田中さんは今どのフロアにいる？」</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ===== 導入効果 ===== -->
+    <section>
+        <h2>導入効果・目標値</h2>
+        <table class="results-table">
+            <tr><th>指標</th><th>内容</th><th>効果</th></tr>
+            <tr>
+                <td>IoT操作の効率化</td>
+                <td>空調・照明操作のアクション数削減</td>
+                <td class="value">専用アプリ不要、会話一発で操作</td>
+            </tr>
+            <tr>
+                <td>社員探索</td>
+                <td>NOVARE Hub 2F/3F の位置情報取得</td>
+                <td class="value">フロアマップで即座に視覚化</td>
+            </tr>
+            <tr>
+                <td>社内コミュニケーション</td>
+                <td>WowTalkへのメッセージ送付</td>
+                <td class="value">AI経由で個人・グループ送信</td>
+            </tr>
+            <tr>
+                <td>情報アクセス</td>
+                <td>天気予報・ウェブ検索</td>
+                <td class="value">7日間予報・リアルタイム検索</td>
+            </tr>
+            <tr>
+                <td>アクセス管理</td>
+                <td>社員/入居者の機能分離</td>
+                <td class="value">QRコードで2系統を自動振り分け</td>
+            </tr>
+        </table>
+    </section>
+
+    <!-- ===== 今後の展望 ===== -->
+    <section>
+        <h2>今後の展望（Phase 3以降）</h2>
+        <p>NOVARE × GBase Supportの共創プロジェクトはPhase 3以降も継続し、さらなる機能拡張を予定しています。</p>
+        <div class="phase-grid">
+            <div class="phase-card">
+                <div class="phase-badge">Phase 3 候補</div>
+                <h4>オープンスペースのAI空調制御</h4>
+                <p>EmpathicBuildingの位置情報とDX-CoreのDefineAreaを組み合わせ、オープンスペースの在室人数に応じた自動空調調整を実現します。「暑い」と言うだけで、AIが位置を確認しながら最適な設定を行います。</p>
+            </div>
+            <div class="phase-card">
+                <div class="phase-badge">Phase 3 候補</div>
+                <h4>パーソナライズされた空調設定</h4>
+                <p>各ユーザーの「快適温度」などの好みをLLMがRAGとして記憶し、空調調整時に自動的にその人が快適と感じる設定を提案・適用。AIがユーザーごとの環境を最適化します。</p>
+            </div>
+            <div class="phase-card">
+                <div class="phase-badge">Phase 3 候補</div>
+                <h4>Empathic Building 全館展開</h4>
+                <p>現在のNOVARE Hub 2F/3Fから対象を全館に拡張し、すべての施設ユーザーの位置情報を活用したサービスを提供。会議室の空き状況確認・予約連携も予定しています。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CTA ===== -->
+    <div class="cta-section">
+        <h2>あなたの施設でも、AIと建物を対話させませんか？</h2>
+        <p>MCP Agent連携によるIoT操作・位置情報・社内メッセージをワンプラットフォームで実現します。<br>まずはお気軽にお問い合わせください。</p>
+        <div class="cta-buttons">
+            <a href="https://cs.gbase.ai/register" class="cta-btn cta-btn-secondary">14日間無料トライアル</a>
+            <a href="https://cs.gbase.ai/contact" class="cta-btn cta-btn-primary">お問い合わせ</a>
+        </div>
+    </div>
+</main>
+
+<!-- ===== FOOTER ===== -->
+<footer class="site-footer">
+    <div class="site-footer-inner">
+        <div class="site-footer-grid">
+            <div>
+                <h3>GBase Support</h3>
+                <ul>
+                    <li><a href="https://cs.gbase.ai/">トップ</a></li>
+                    <li><a href="https://gbase.ai/#features">製品概要</a></li>
+                    <li><a href="https://cs.gbase.ai/solution#case-study">ソリューション一覧</a></li>
+                    <li><a href="https://cs.gbase.ai/price">料金プラン</a></li>
+                    <li><a href="https://cs.gbase.ai/blog">ブログ・資料</a></li>
+                    <li><a href="https://cs.gbase.ai/contact">お問い合わせ</a></li>
+                    <li><a href="https://admin.gbase.ai/">ログイン</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3>Sparticle について</h3>
+                <ul>
+                    <li><a href="https://sparticle.com" target="_blank" rel="noopener noreferrer">会社概要</a></li>
+                    <li><a href="https://www.sparticle.com/ja/recruit" target="_blank" rel="noopener noreferrer">採用情報</a></li>
+                </ul>
+                <h3 class="mt">その他のプロダクト</h3>
+                <ul>
+                    <li><a href="https://gbase.ai/" target="_blank" rel="noopener noreferrer">GBase（AIナレッジエージェント）</a></li>
+                    <li><a href="https://subtitles.felo.me/" target="_blank" rel="noopener noreferrer">Felo Subtitles（多言語字幕会議）</a></li>
+                    <li><a href="https://s.gbase.ai/" target="_blank" rel="noopener noreferrer">GBase GTM（顧客リーチAIエージェント）</a></li>
+                </ul>
+            </div>
+            <div></div>
+            <div class="site-footer-brand">
+                <a href="https://cs.gbase.ai/" class="footer-logo">
+                    <img src="https://cs.gbase.ai/title-logo.png" alt="GBase Support">
+                </a>
+                <div class="footer-tagline">AIで、施設と人をつなぐ。<br>カスタマーサポートAIエージェント</div>
+            </div>
+        </div>
+        <div class="site-footer-bottom">
+            © 2025 Sparticle Inc. All rights reserved.
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>
