@@ -715,21 +715,22 @@
 
   /* ===== CTA ===== */
   .cta-section {
-    background: var(--blue-gradient);
+    background: var(--hero-bg);
     padding: 80px 0;
     text-align: center;
+    border-top: 1px solid #DBEAFE;
   }
 
   .cta-title {
     font-size: clamp(20px, 3vw, 30px);
     font-weight: 900;
-    color: white;
+    color: var(--navy);
     margin-bottom: 12px;
   }
 
   .cta-subtitle {
     font-size: 15px;
-    color: rgba(255,255,255,0.85);
+    color: var(--text-muted);
     margin-bottom: 32px;
   }
 
@@ -740,14 +741,33 @@
     flex-wrap: wrap;
   }
 
-  .btn-white {
+  .btn-cta-primary {
     display: inline-flex;
     align-items: center;
     gap: 8px;
     padding: 14px 32px;
-    border: 2px solid white;
+    border: none;
     border-radius: 9999px;
-    background: white;
+    background: var(--blue-gradient);
+    color: white;
+    font-size: 15px;
+    font-weight: 700;
+    text-decoration: none;
+    cursor: pointer;
+    transition: opacity 0.2s, transform 0.2s;
+    font-family: var(--font);
+  }
+
+  .btn-cta-primary:hover { opacity: 0.88; transform: translateY(-1px); }
+
+  .btn-cta-outline {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 32px;
+    border: 1.5px solid var(--blue);
+    border-radius: 9999px;
+    background: transparent;
     color: var(--blue);
     font-size: 15px;
     font-weight: 700;
@@ -757,32 +777,14 @@
     font-family: var(--font);
   }
 
-  .btn-white:hover { background: rgba(255,255,255,0.9); }
-
-  .btn-white-outline {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 14px 32px;
-    border: 2px solid rgba(255,255,255,0.7);
-    border-radius: 9999px;
-    background: transparent;
-    color: white;
-    font-size: 15px;
-    font-weight: 700;
-    text-decoration: none;
-    cursor: pointer;
-    transition: all 0.2s;
-    font-family: var(--font);
-  }
-
-  .btn-white-outline:hover { border-color: white; background: rgba(255,255,255,0.1); }
+  .btn-cta-outline:hover { background: rgba(37,99,235,0.05); }
 
   /* ===== FOOTER ===== */
   footer {
-    background: #0D1526;
-    color: rgba(255,255,255,0.7);
+    background: #F8FAFC;
+    color: #334155;
     padding: 60px 0 24px;
+    border-top: 1px solid #E2E8F0;
   }
 
   .footer-grid {
@@ -810,21 +812,19 @@
   .footer-brand-name {
     font-size: 16px;
     font-weight: 700;
-    color: white;
+    color: var(--navy);
   }
 
   .footer-brand-desc {
     font-size: 12px;
     line-height: 1.7;
-    color: rgba(255,255,255,0.55);
+    color: #64748B;
   }
 
   .footer-col-title {
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 700;
-    color: rgba(255,255,255,0.5);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
+    color: #334155;
     margin-bottom: 14px;
   }
 
@@ -836,21 +836,21 @@
 
   .footer-links a {
     font-size: 13px;
-    color: rgba(255,255,255,0.65);
+    color: #64748B;
     text-decoration: none;
     transition: color 0.2s;
   }
 
-  .footer-links a:hover { color: white; }
+  .footer-links a:hover { color: var(--navy); }
 
   .footer-bottom {
-    border-top: 1px solid rgba(255,255,255,0.1);
+    border-top: 1px solid #E2E8F0;
     padding-top: 24px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     font-size: 12px;
-    color: rgba(255,255,255,0.4);
+    color: #94A3B8;
   }
 
   .footer-social {
@@ -859,13 +859,13 @@
   }
 
   .footer-social a {
-    color: rgba(255,255,255,0.4);
+    color: #94A3B8;
     text-decoration: none;
     font-size: 12px;
     transition: color 0.2s;
   }
 
-  .footer-social a:hover { color: rgba(255,255,255,0.8); }
+  .footer-social a:hover { color: #334155; }
 
   /* Divider line for sections */
   .breadcrumb {
@@ -1317,8 +1317,8 @@
     <h2 class="cta-title">Felo瞬訳で、あなたの施設もインバウンド対応を革新しませんか？</h2>
     <p class="cta-subtitle">観光案内所・商業施設・公共機関など、あらゆる多言語対応のニーズに対応します。</p>
     <div class="cta-buttons">
-      <a href="https://subtitles.felo.me/ja" class="btn-white">⬇ 無料ダウンロード</a>
-      <a href="https://subtitles.felo.me/ja#contact" class="btn-white-outline">お問い合わせ</a>
+      <a href="https://subtitles.felo.me/ja" class="btn-cta-primary">⬇ 無料ダウンロード</a>
+      <a href="https://subtitles.felo.me/ja#contact" class="btn-cta-outline">お問い合わせ</a>
     </div>
   </div>
 </section>
