@@ -243,15 +243,9 @@
             padding: 20px 24px; margin-bottom: 24px;
             display: flex; align-items: center; gap: 16px;
         }
-        .arch-core-icon {
-            width: 52px; height: 52px; background: var(--sol-orange);
-            border-radius: 12px; display: flex; align-items: center;
-            justify-content: center; flex-shrink: 0;
-        }
-        .arch-core-icon img { height: 32px; filter: brightness(0) invert(1); }
-        .arch-core-text { flex: 1; }
-        .arch-core-name { font-size: 18px; font-weight: 800; color: #fff; }
-        .arch-core-sub { font-size: 12px; color: rgba(255,255,255,0.6); margin-top: 2px; }
+        .arch-core-content { flex: 1; display: flex; flex-direction: column; gap: 8px; }
+        .arch-core-logo { height: 36px; width: auto; }
+        .arch-core-sub { font-size: 12px; color: rgba(255,255,255,0.6); }
         .arch-core-badge {
             background: rgba(238,134,43,0.2); border: 1px solid rgba(238,134,43,0.4);
             color: var(--sol-orange); font-size: 11px; font-weight: 700;
@@ -708,10 +702,8 @@
 
             <!-- GBase Support コア -->
             <div class="arch-core">
-                <div class="arch-core-icon">
-                    <img src="https://cs.gbase.ai/title-logo.png" alt="GBase Support">
-                </div>
-                <div class="arch-core-text">
+                <div class="arch-core-content">
+                    <img src="https://cs.gbase.ai/title-logo.png" alt="GBase Support" class="arch-core-logo">
                     <div class="arch-core-sub">AI Agent + MCP Agent Hub — 自然言語で4つの外部システムを操作</div>
                 </div>
                 <div class="arch-core-badge">MCP Protocol</div>
@@ -727,28 +719,24 @@
                         <span class="material-icons" style="color:#EE862B;">search</span>
                     </div>
                     <div class="arch-tool-name">ウェブサーチ</div>
-                    <div class="arch-tool-api">web_search</div>
                 </div>
                 <div class="arch-tool">
                     <div class="arch-tool-icon" style="background:#e8f5e9;">
                         <span class="material-icons" style="color:#2e7d32;">chat</span>
                     </div>
                     <div class="arch-tool-name">WowTalk</div>
-                    <div class="arch-tool-api">wowtalk_send_message</div>
                 </div>
                 <div class="arch-tool">
                     <div class="arch-tool-icon" style="background:#e3f2fd;">
                         <span class="material-icons" style="color:#1565c0;">wb_sunny</span>
                     </div>
                     <div class="arch-tool-name">天気情報</div>
-                    <div class="arch-tool-api">weather_get_by_location</div>
                 </div>
                 <div class="arch-tool">
                     <div class="arch-tool-icon" style="background:#fce4ec;">
                         <span class="material-icons" style="color:#c62828;">device_hub</span>
                     </div>
                     <div class="arch-tool-name">IoT制御</div>
-                    <div class="arch-tool-api">DX-Core / EmpathicBuilding</div>
                 </div>
             </div>
         </div>
@@ -766,9 +754,7 @@
                     <div class="feature-card-icon" style="background:#fff3e0;">
                         <span class="material-icons" style="color:#EE862B;">travel_explore</span>
                     </div>
-                    <h4>ウェブサーチ
-                        <small>web_search ツール</small>
-                    </h4>
+                    <h4>ウェブサーチ</h4>
                 </div>
                 <p>AIがリアルタイムでウェブ検索を実行し、最新情報を取得して回答します。施設・業界・技術動向など、知識ベースに収録されていない最新情報もカバーします。</p>
                 <div class="feature-scene">
@@ -783,9 +769,7 @@
                     <div class="feature-card-icon" style="background:#e8f5e9;">
                         <span class="material-icons" style="color:#2e7d32;">chat_bubble</span>
                     </div>
-                    <h4>WowTalk 連携
-                        <small>wowtalk_send_message_to_member</small>
-                    </h4>
+                    <h4>WowTalk 連携</h4>
                 </div>
                 <p>AIコンシェルジュを通じてWowTalk（社内チャット）にメッセージを送信できます。個人への緊急メッセージ送付、グループへの一括通知など、業務コミュニケーションをAIがサポートします。</p>
                 <div class="feature-scene">
@@ -800,9 +784,7 @@
                     <div class="feature-card-icon" style="background:#e3f2fd;">
                         <span class="material-icons" style="color:#1565c0;">cloud</span>
                     </div>
-                    <h4>天気情報
-                        <small>weather_get_by_location</small>
-                    </h4>
+                    <h4>天気情報</h4>
                 </div>
                 <p>OpenWeatherMap APIを通じて指定地点のリアルタイム・7日間天気予報を取得します。気温・湿度・降水確率などの詳細情報をCanvas画面にビジュアル表示します。視覚障がいのある方には音声でも対応可能です。</p>
                 <div class="feature-scene">
@@ -817,9 +799,7 @@
                     <div class="feature-card-icon" style="background:#fce4ec;">
                         <span class="material-icons" style="color:#c62828;">settings_remote</span>
                     </div>
-                    <h4>IoT制御 + 位置情報
-                        <small>DX-Core / EmpathicBuilding 連携</small>
-                    </h4>
+                    <h4>IoT制御 + 位置情報</h4>
                 </div>
                 <p>DX-Coreを通じて会議室の空調・照明をAI経由で操作。EmpathicBuildingの位置情報サービスと連携し、NOVARE Hub 2F・3Fの社員位置をCanvas画面のフロアマップ上にポインター表示します。</p>
                 <div class="feature-scene">
