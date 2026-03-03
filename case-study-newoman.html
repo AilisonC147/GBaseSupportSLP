@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NEWoMan高輪 導入事例｜GBase SUPPORT</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary-color: #7C3AED;
@@ -14,6 +17,13 @@
             --bg-white: #FFFFFF;
             --border-color: #E5E7EB;
             --accent-green: #10B981;
+            /* Official site colors */
+            --sol-text: rgb(27, 20, 13);
+            --sol-orange: rgb(238, 134, 43);
+            --sol-secondary: rgb(102, 102, 102);
+            --sol-bg: rgb(248, 247, 246);
+            --sol-border: rgb(231, 218, 207);
+            --sol-bg-dark: rgb(34, 24, 16);
         }
 
         * {
@@ -23,78 +33,145 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Yu Gothic", YuGothic, Verdana, Meiryo, "M+ 1p", sans-serif;
+            font-family: "Plus Jakarta Sans", "Noto Sans JP", -apple-system, BlinkMacSystemFont, sans-serif;
             line-height: 1.8;
-            color: var(--text-dark);
+            color: var(--sol-text);
             background-color: var(--bg-white);
         }
 
-        header {
-            position: fixed;
+        /* ===== OFFICIAL HEADER ===== */
+        .site-header {
+            position: sticky;
             top: 0;
-            left: 0;
-            right: 0;
-            background: var(--bg-white);
-            border-bottom: 1px solid var(--border-color);
-            z-index: 1000;
+            z-index: 50;
+            width: 100%;
+            border-bottom: 1px solid var(--sol-border);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(4px);
+        }
+        .site-header-inner {
             padding: 0 40px;
-            height: 70px;
             display: flex;
+            justify-content: center;
+        }
+        .site-header-content {
+            display: flex;
+            height: 64px;
+            width: 100%;
+            max-width: 1200px;
             align-items: center;
             justify-content: space-between;
         }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 24px;
-            font-weight: 700;
-            color: var(--text-dark);
-            text-decoration: none;
+        .site-logo img { height: 32px; width: auto; }
+        .site-logo { display: flex; align-items: center; text-decoration: none; opacity: 1; transition: opacity 0.2s; }
+        .site-logo:hover { opacity: 0.8; }
+        .site-nav { display: flex; align-items: center; gap: 0; }
+        .nav-link {
+            font-size: 14px; font-weight: 500; color: var(--sol-text);
+            text-decoration: none; padding: 20px 16px;
+            border-bottom: 2px solid transparent;
+            transition: color 0.2s, border-color 0.2s;
         }
-
-        .logo-icon {
-            width: 36px;
-            height: 36px;
-            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 20px;
+        .nav-link:hover { color: var(--sol-orange); }
+        .nav-dropdown { position: relative; }
+        .nav-btn {
+            display: flex; align-items: center; gap: 4px;
+            font-size: 14px; font-weight: 500; color: var(--sol-text);
+            background: none; border: none; cursor: pointer;
+            padding: 20px 16px; border-bottom: 2px solid transparent;
+            transition: color 0.2s;
         }
-
-        .logo span { color: var(--primary-color); }
-
-        nav {
-            display: flex;
-            gap: 30px;
-            align-items: center;
+        .nav-btn:hover { color: var(--sol-orange); }
+        .nav-btn svg { width: 16px; height: 16px; }
+        .nav-dropdown-menu {
+            position: absolute; left: 0; top: 100%;
+            padding-top: 8px; display: none; min-width: 224px; z-index: 50;
         }
-
-        nav a {
-            text-decoration: none;
-            color: var(--text-gray);
-            font-size: 14px;
-            transition: color 0.3s;
+        .nav-dropdown:hover .nav-dropdown-menu { display: block; }
+        .nav-dropdown-inner {
+            background: white; border: 1px solid var(--sol-border);
+            border-radius: 8px; box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+            padding: 8px; display: flex; flex-direction: column; gap: 4px;
         }
-
-        nav a:hover { color: var(--primary-color); }
-
-        .nav-cta {
-            background: var(--text-dark);
-            color: white !important;
-            padding: 10px 24px;
-            border-radius: 6px;
-            font-weight: 500;
+        .nav-dropdown-item {
+            display: block; padding: 8px 16px; font-size: 14px;
+            text-decoration: none; color: var(--sol-text);
+            border-radius: 6px; transition: background 0.2s;
         }
+        .nav-dropdown-item:hover { background: rgba(238,134,43,0.05); }
+        .nav-dropdown-item .item-title { font-weight: 600; }
+        .nav-dropdown-item .item-sub { font-size: 12px; color: var(--sol-secondary); margin-top: 2px; }
+        .site-header-actions { display: flex; align-items: center; gap: 12px; }
+        .nav-login {
+            font-size: 14px; font-weight: 500; color: var(--sol-text);
+            text-decoration: none; transition: color 0.2s;
+        }
+        .nav-login:hover { color: var(--sol-orange); }
+        .btn-outline-round {
+            display: flex; align-items: center; justify-content: center;
+            border-radius: 9999px; height: 40px; padding: 0 20px;
+            border: 1px solid var(--sol-border); color: var(--sol-text);
+            font-size: 14px; font-weight: 500; text-decoration: none;
+            transition: border-color 0.2s;
+        }
+        .btn-outline-round:hover { border-color: var(--sol-text); }
+        .btn-gradient-round {
+            display: flex; align-items: center; justify-content: center;
+            border-radius: 9999px; height: 40px; padding: 0 20px;
+            background: linear-gradient(to right, #3B82F6, #8B5CF6);
+            color: white; font-size: 14px; font-weight: 500; text-decoration: none;
+            transition: opacity 0.2s;
+        }
+        .btn-gradient-round:hover { opacity: 0.9; }
 
-        .nav-cta:hover { background: var(--primary-color); }
+        /* ===== OFFICIAL FOOTER ===== */
+        .site-footer {
+            width: 100%; background: var(--sol-bg);
+            padding-top: 64px; padding-bottom: 32px;
+            border-top: 1px solid var(--sol-border);
+        }
+        .site-footer-inner {
+            width: 100%; padding: 0 40px;
+            display: flex; justify-content: center;
+        }
+        .site-footer-grid {
+            max-width: 1200px; width: 100%;
+            display: grid; grid-template-columns: 1fr 1fr 0.4fr 1fr;
+            gap: 32px;
+        }
+        .site-footer h3 {
+            font-weight: 700; color: var(--sol-text);
+            font-size: 14px; margin-bottom: 16px;
+        }
+        .site-footer h3.mt { margin-top: 24px; }
+        .site-footer ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+        .site-footer ul a {
+            font-size: 14px; color: var(--sol-secondary);
+            text-decoration: none; transition: color 0.2s;
+        }
+        .site-footer ul a:hover { color: var(--sol-orange); }
+        .site-footer-brand { display: flex; flex-direction: column; gap: 16px; }
+        .site-footer-brand .footer-logo img { height: 32px; width: auto; }
+        .site-footer-brand .footer-logo { display: flex; align-items: center; text-decoration: none; transition: opacity 0.2s; }
+        .site-footer-brand .footer-logo:hover { opacity: 0.8; }
+        .site-footer-brand .copyright { font-size: 12px; color: var(--sol-secondary); }
+        .social-links { display: flex; align-items: center; gap: 12px; }
+        .social-link {
+            width: 40px; height: 40px; border-radius: 9999px;
+            border: 1px solid var(--sol-border);
+            display: flex; align-items: center; justify-content: center;
+            color: var(--sol-secondary); text-decoration: none;
+            transition: color 0.2s, border-color 0.2s;
+        }
+        .social-link:hover { color: var(--sol-orange); border-color: var(--sol-orange); }
+        .social-link svg { width: 16px; height: 16px; }
+        .social-link .note-n { font-weight: 700; font-size: 14px; }
+        .footer-legal { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; }
+        .footer-legal a { font-size: 12px; color: var(--sol-secondary); text-decoration: none; transition: color 0.2s; }
+        .footer-legal a:hover { color: var(--sol-orange); }
+        .footer-legal .dot { color: var(--sol-border); font-size: 12px; }
 
         .hero {
-            margin-top: 70px;
             background: linear-gradient(135deg, #F3E8FF 0%, #E0E7FF 100%);
             padding: 80px 40px;
         }
@@ -140,6 +217,12 @@
             font-size: 36px;
             font-weight: 700;
             color: var(--primary-color);
+        }
+
+        .stat-number .material-icons {
+            font-size: 40px;
+            color: var(--primary-color);
+            vertical-align: middle;
         }
 
         .stat-label {
@@ -238,7 +321,7 @@
 
         .reason-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(3, 1fr);
             gap: 24px;
             margin-top: 30px;
         }
@@ -479,25 +562,26 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            padding: 14px 32px;
-            border-radius: 8px;
-            font-size: 16px;
+            padding: 0 28px;
+            height: 44px;
+            border-radius: 9999px;
+            font-size: 15px;
             font-weight: 600;
             text-decoration: none;
-            transition: all 0.3s;
+            transition: all 0.2s;
         }
 
         .cta-btn-primary {
-            background: var(--primary-color);
+            background: linear-gradient(to right, #3B82F6, #8B5CF6);
             color: white;
         }
 
-        .cta-btn-primary:hover { background: var(--primary-light); }
+        .cta-btn-primary:hover { opacity: 0.88; }
 
         .cta-btn-secondary {
             background: transparent;
             color: white;
-            border: 2px solid rgba(255,255,255,0.3);
+            border: 1.5px solid rgba(255,255,255,0.35);
         }
 
         .cta-btn-secondary:hover { border-color: white; }
@@ -564,21 +648,222 @@
             .reason-grid, .feature-grid { grid-template-columns: 1fr; }
             .footer-content { grid-template-columns: 1fr; }
         }
+
+        /* ===== System Diagram Visual ===== */
+        .sdv {
+            background: #F8F7F6;
+            border: 1px solid #E7DACF;
+            border-radius: 20px;
+            padding: 32px;
+            font-family: "Plus Jakarta Sans", "Noto Sans JP", sans-serif;
+            margin: 30px 0;
+        }
+        .sdv-top {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            align-items: center;
+        }
+        .sdv-card {
+            background: #fff;
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 2px 16px rgba(27,20,13,0.08);
+        }
+        .sdv-card-head {
+            padding: 14px 18px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: white;
+        }
+        /* Customer card — Blue (#3B82F6) */
+        .sdv-card-customer { border: 1.5px solid #BFDBFE; }
+        .sdv-card-customer .sdv-card-head { background: linear-gradient(135deg, #1D4ED8, #3B82F6); }
+        .sdv-card-customer .sdv-feat .material-icons { color: #3B82F6; }
+        .sdv-card-customer .sdv-feat { border-bottom-color: #EFF6FF; }
+
+        /* Staff card — Orange (#EE862B) */
+        .sdv-card-staff { border: 1.5px solid #FDE8CC; }
+        .sdv-card-staff .sdv-card-head { background: linear-gradient(135deg, #C2680A, #EE862B); }
+        .sdv-card-staff .sdv-feat .material-icons { color: #EE862B; }
+        .sdv-card-staff .sdv-feat { border-bottom-color: #FFF7ED; }
+
+        .sdv-head-icon {
+            width: 38px; height: 38px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 8px;
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0;
+        }
+        .sdv-head-icon .material-icons { font-size: 20px; }
+        .sdv-tag {
+            font-size: 10px; font-weight: 600;
+            letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.82;
+        }
+        .sdv-title { font-size: 14px; font-weight: 700; margin-top: 2px; }
+        .sdv-body { padding: 14px 18px; }
+        .sdv-feat {
+            display: flex; align-items: center; gap: 9px;
+            padding: 8px 0;
+            border-bottom: 1px solid #F5EDE6;
+            font-size: 13px; color: #1B140D; font-weight: 500;
+        }
+        .sdv-feat:last-child { border-bottom: none; }
+        .sdv-feat .material-icons { font-size: 15px; flex-shrink: 0; }
+
+        /* Horizontal connector — blue→orange gradient */
+        .sdv-conn {
+            display: flex; flex-direction: column; align-items: center; gap: 6px;
+            padding: 0 20px;
+        }
+        .sdv-conn-line {
+            width: 76px; height: 2px;
+            background: linear-gradient(to right, #3B82F6, #EE862B);
+            position: relative;
+        }
+        .sdv-dot {
+            position: absolute;
+            width: 7px; height: 7px;
+            border-radius: 50%;
+            top: 50%; transform: translateY(-50%);
+            animation-duration: 1.8s;
+            animation-iteration-count: infinite;
+            animation-timing-function: linear;
+        }
+        /* dots going right = blue (customer → staff) */
+        .sdv-dot-r { background: #3B82F6; }
+        /* dots going left  = orange (staff → customer) */
+        .sdv-dot-l { background: #EE862B; }
+        @keyframes sdv-r {
+            0%   { left: 0; opacity: 0; }
+            15%  { opacity: 1; }
+            85%  { opacity: 1; }
+            100% { left: calc(100% - 7px); opacity: 0; }
+        }
+        @keyframes sdv-l {
+            0%   { left: calc(100% - 7px); opacity: 0; }
+            15%  { opacity: 1; }
+            85%  { opacity: 1; }
+            100% { left: 0; opacity: 0; }
+        }
+        .sdv-conn-label { font-size: 10px; color: #999; white-space: nowrap; font-weight: 500; }
+
+        /* Down arrow — purple (GBase Support brand) */
+        .sdv-down {
+            display: flex; flex-direction: column; align-items: center;
+            padding: 6px 0;
+        }
+        .sdv-down-line {
+            width: 2px; height: 22px;
+            background: linear-gradient(to bottom, #E7DACF, #7C3AED);
+        }
+        .sdv-down-icon { color: #7C3AED; font-size: 22px; animation: sdv-bounce 1.6s ease-in-out infinite; }
+        @keyframes sdv-bounce {
+            0%, 100% { transform: translateY(0); }
+            50%       { transform: translateY(3px); }
+        }
+
+        /* Cloud platform — Purple (GBase Support logo color) */
+        .sdv-cloud {
+            background: white;
+            border: 1.5px solid #7C3AED;
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 4px 24px rgba(124,58,237,0.12);
+        }
+        .sdv-cloud-head {
+            background: linear-gradient(135deg, #5B21B6, #7C3AED);
+            padding: 16px 24px;
+            display: flex; align-items: center; gap: 12px;
+            color: white;
+        }
+        .sdv-cloud-ic { font-size: 22px; color: rgba(255,255,255,0.9); }
+        .sdv-cloud-name { font-size: 15px; font-weight: 700; }
+        .sdv-cloud-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+        }
+        .sdv-ci {
+            padding: 20px 14px;
+            display: flex; flex-direction: column;
+            align-items: center; text-align: center; gap: 10px;
+            border-right: 1px solid #EDE9FE;
+            background: #FAFAFF;
+        }
+        .sdv-ci:last-child { border-right: none; }
+        .sdv-ci-ic { font-size: 26px; color: #7C3AED; }
+        .sdv-ci-t { font-size: 12px; color: #1B140D; font-weight: 500; line-height: 1.5; }
     </style>
 </head>
 <body>
-    <header>
-        <a href="https://cs.gbase.ai/" class="logo">
-            <div class="logo-icon">G</div>
-            GBase<span>SUPPORT</span>
-        </a>
-        <nav>
-            <a href="#">製品紹介</a>
-            <a href="#">機能</a>
-            <a href="#">導入事例</a>
-            <a href="#">料金</a>
-            <a href="#" class="nav-cta">お問い合わせ</a>
-        </nav>
+    <header class="site-header">
+        <div class="site-header-inner">
+            <div class="site-header-content">
+                <a href="https://cs.gbase.ai/" class="site-logo">
+                    <img src="https://cs.gbase.ai/title-logo.png" alt="GBase Support">
+                </a>
+                <nav class="site-nav">
+                    <a href="https://cs.gbase.ai/" class="nav-link">ホーム</a>
+                    <div class="nav-dropdown">
+                        <button class="nav-btn">ソリューション
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                        </button>
+                        <div class="nav-dropdown-menu">
+                            <div class="nav-dropdown-inner">
+                                <a href="https://cs.gbase.ai/solution#case-study" class="nav-dropdown-item">
+                                    <div class="item-title">商業施設・百貨店</div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="nav-dropdown">
+                        <button class="nav-btn">製品／機能
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                        </button>
+                        <div class="nav-dropdown-menu">
+                            <div class="nav-dropdown-inner">
+                                <a href="https://cs.gbase.ai/solution#feature-faq" class="nav-dropdown-item">
+                                    <div class="item-title">FAQ・施設案内AI</div>
+                                    <div class="item-sub">よくある質問を自動対応</div>
+                                </a>
+                                <a href="https://cs.gbase.ai/solution#feature-floormap" class="nav-dropdown-item">
+                                    <div class="item-title">フロアマップ・ナビゲーション</div>
+                                    <div class="item-sub">3Dマップで目的地まで案内</div>
+                                </a>
+                                <a href="https://cs.gbase.ai/solution#feature-realtime" class="nav-dropdown-item">
+                                    <div class="item-title">リアルタイム会話</div>
+                                    <div class="item-sub">10言語以上の音声対話</div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="https://cs.gbase.ai/price" class="nav-link">料金</a>
+                    <div class="nav-dropdown">
+                        <button class="nav-btn">リソース
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                        </button>
+                        <div class="nav-dropdown-menu">
+                            <div class="nav-dropdown-inner">
+                                <a href="https://cs.gbase.ai/blog" class="nav-dropdown-item">
+                                    <div class="item-title">ブログ</div>
+                                </a>
+                                <a href="https://docs.gbase.ai/user-manual/quickstart" target="_blank" rel="noopener noreferrer" class="nav-dropdown-item">
+                                    <div class="item-title">マニュアル</div>
+                                </a>
+                                <a href="https://cs.gbase.ai/blog/release-notes/" class="nav-dropdown-item">
+                                    <div class="item-title">リリースノート</div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+                <div class="site-header-actions">
+                    <a href="https://admin.gbase.ai/" class="nav-login">ログイン</a>
+                    <a href="https://cs.gbase.ai/register" class="btn-outline-round">無料ではじめる</a>
+                    <a href="https://cs.gbase.ai/contact" class="btn-gradient-round">お問い合わせ</a>
+                </div>
+            </div>
+        </div>
     </header>
 
     <section class="hero">
@@ -592,21 +877,25 @@
                 </h1>
                 <div class="hero-stats">
                     <div class="stat-item">
-                        <div class="stat-number">50〜70%</div>
-                        <div class="stat-label">案内所対応削減</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-number">1秒以内</div>
-                        <div class="stat-label">AI応答速度</div>
+                        <div class="stat-number">50%+</div>
+                        <div class="stat-label">案内所・電話対応削減</div>
                     </div>
                     <div class="stat-item">
                         <div class="stat-number">10+</div>
-                        <div class="stat-label">多言語対応</div>
+                        <div class="stat-label">多言語対応(Inbound)</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number"><span class="material-icons">devices</span></div>
+                        <div class="stat-label">PC・スマホ・大型タッチパネル対応</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">1秒</div>
+                        <div class="stat-label">以内に即時応答</div>
                     </div>
                 </div>
             </div>
             <div class="hero-image">
-                <img src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=600&h=400&fit=crop" alt="NEWoMan高輪 商業施設" />
+                <img src="https://raw.githubusercontent.com/AilisonC147/GBaseSupportSLP/main/banner.jpg" alt="NEWoMan高輪 商業施設" />
             </div>
         </div>
     </section>
@@ -640,8 +929,8 @@
                     <p>広大な施設内での道案内や店舗情報の問い合わせで案内所が常に混雑状態でした。</p>
                 </div>
                 <div class="challenge-item">
-                    <h4>営業時間外の対応</h4>
-                    <p>早朝・深夜の利用客への案内が十分に提供できていませんでした。</p>
+                    <h4>定型問い合わせによるスタッフリソースの逼迫</h4>
+                    <p>「○○の店はどこ？」「営業時間は？」など繰り返し寄せられる定型的な問い合わせ対応に多くの人的リソースが割かれ、お客様へのきめ細やかな商品案内や高付加価値な接客に集中できていませんでした。</p>
                 </div>
             </div>
         </section>
@@ -664,40 +953,87 @@
                     <h4>独自のRAGシステム</h4>
                     <p>店舗・施設情報を事前に学習したナレッジベースにより、的確な問い合わせ対応を実現します。</p>
                 </div>
-                <div class="reason-card">
-                    <div class="reason-number">4</div>
-                    <h4>最短1週間での導入</h4>
-                    <p>テナント情報（PDF/Web）を読み込ませるだけで迅速に構築。開業スケジュールに合わせた導入が可能でした。</p>
-                </div>
             </div>
         </section>
 
         <section>
             <h2>導入システム構成</h2>
-            <div class="system-diagram">
-<pre>
-┌─────────────────────────────────────────────────────────────────┐
-│                    NEWoMan高輪 AI案内システム                      │
-├─────────────────────────────────────────────────────────────────┤
-│                                                                 │
-│  【お客様側】              │      【スタッフ側】                   │
-│  ┌──────────────┐         │      ┌──────────────┐              │
-│  │ お客様スマホ  │         │      │スタッフ管理画面│              │
-│  │ ・QRコード読取│  ←───→  │      │ ・会話履歴確認 │              │
-│  │ ・多言語AI対話│         │      │ ・リアルタイム │              │
-│  │ ・場所案内    │         │      │   モニタリング │              │
-│  └──────────────┘         │      └──────────────┘              │
-│         ↓                 │             ↓                      │
-├─────────────────────────────┴──────────────────────────────────┤
-│                    GBase SUPPORT クラウド                        │
-│  ┌─────────────────────────────────────────────────────────┐   │
-│  │  ・生成AIによる自動応答                                    │   │
-│  │  ・多言語翻訳（10言語以上）                                │   │
-│  │  ・店舗情報ナレッジベース                                  │   │
-│  │  ・フロアマップ連携                                        │   │
-│  └─────────────────────────────────────────────────────────┘   │
-└─────────────────────────────────────────────────────────────────┘
-</pre>
+            <div class="sdv">
+                <!-- Top: Customer ↔ Staff -->
+                <div class="sdv-top">
+                    <!-- Customer card -->
+                    <div class="sdv-card sdv-card-customer">
+                        <div class="sdv-card-head">
+                            <div class="sdv-head-icon"><span class="material-icons">smartphone</span></div>
+                            <div>
+                                <div class="sdv-tag">お客様側</div>
+                                <div class="sdv-title">お客様スマホ</div>
+                            </div>
+                        </div>
+                        <div class="sdv-body">
+                            <div class="sdv-feat"><span class="material-icons">qr_code_scanner</span>QRコード読取</div>
+                            <div class="sdv-feat"><span class="material-icons">chat_bubble_outline</span>多言語AI対話</div>
+                            <div class="sdv-feat"><span class="material-icons">place</span>場所案内</div>
+                        </div>
+                    </div>
+
+                    <!-- Animated connector -->
+                    <div class="sdv-conn">
+                        <div class="sdv-conn-line">
+                            <span class="sdv-dot sdv-dot-r" style="animation-name:sdv-r; animation-delay:0s"></span>
+                            <span class="sdv-dot sdv-dot-r" style="animation-name:sdv-r; animation-delay:0.9s"></span>
+                            <span class="sdv-dot sdv-dot-l" style="animation-name:sdv-l; animation-delay:0.45s"></span>
+                        </div>
+                        <span class="sdv-conn-label">リアルタイム連携</span>
+                    </div>
+
+                    <!-- Staff card -->
+                    <div class="sdv-card sdv-card-staff">
+                        <div class="sdv-card-head">
+                            <div class="sdv-head-icon"><span class="material-icons">computer</span></div>
+                            <div>
+                                <div class="sdv-tag">スタッフ側</div>
+                                <div class="sdv-title">スタッフ管理画面</div>
+                            </div>
+                        </div>
+                        <div class="sdv-body">
+                            <div class="sdv-feat"><span class="material-icons">history</span>会話履歴確認</div>
+                            <div class="sdv-feat"><span class="material-icons">monitor</span>リアルタイムモニタリング</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Down arrow -->
+                <div class="sdv-down">
+                    <div class="sdv-down-line"></div>
+                    <span class="material-icons sdv-down-icon">south</span>
+                </div>
+
+                <!-- Cloud platform -->
+                <div class="sdv-cloud">
+                    <div class="sdv-cloud-head">
+                        <span class="material-icons sdv-cloud-ic">cloud</span>
+                        <span class="sdv-cloud-name">GBase SUPPORT</span>
+                    </div>
+                    <div class="sdv-cloud-grid">
+                        <div class="sdv-ci">
+                            <span class="material-icons sdv-ci-ic">smart_toy</span>
+                            <span class="sdv-ci-t">生成AIによる<br>自動応答</span>
+                        </div>
+                        <div class="sdv-ci">
+                            <span class="material-icons sdv-ci-ic">translate</span>
+                            <span class="sdv-ci-t">多言語翻訳<br>（10言語以上）</span>
+                        </div>
+                        <div class="sdv-ci">
+                            <span class="material-icons sdv-ci-ic">storage</span>
+                            <span class="sdv-ci-t">店舗情報<br>ナレッジベース</span>
+                        </div>
+                        <div class="sdv-ci">
+                            <span class="material-icons sdv-ci-ic">map</span>
+                            <span class="sdv-ci-t">フロアマップ<br>連携</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -727,7 +1063,7 @@
             <h2>導入効果</h2>
             <table class="results-table">
                 <tr><th>指標</th><th>効果</th></tr>
-                <tr><td>案内所対応</td><td class="value">50〜70%削減</td></tr>
+                <tr><td>案内所対応</td><td class="value">50%+削減</td></tr>
                 <tr><td>AI応答速度</td><td class="value">1秒以内</td></tr>
                 <tr><td>多言語対応</td><td class="value">10言語以上</td></tr>
                 <tr><td>対応時間</td><td class="value">24時間365日</td></tr>
@@ -748,75 +1084,91 @@
         </section>
 
         <section>
-            <h2>導入プロセス</h2>
-            <table class="process-table">
-                <tr><th>ステップ</th><th>期間</th><th>内容</th></tr>
-                <tr><td><span class="step-badge">STEP 1</span></td><td>1日目</td><td>ヒアリング・要件定義</td></tr>
-                <tr><td><span class="step-badge">STEP 2</span></td><td>2〜3日目</td><td>テナント情報・FAQ取り込み</td></tr>
-                <tr><td><span class="step-badge">STEP 3</span></td><td>4〜5日目</td><td>AI応答テスト・チューニング</td></tr>
-                <tr><td><span class="step-badge">STEP 4</span></td><td>6日目</td><td>フロア配置・スタッフ研修</td></tr>
-                <tr><td><span class="step-badge">STEP 5</span></td><td>開業日〜</td><td>本番稼働・継続的改善</td></tr>
-            </table>
-            <p style="font-size: 14px; color: var(--text-gray);">※最短1週間での導入も可能（施設規模・要件により異なる）</p>
-        </section>
-
-        <section>
-            <h2>GBase SUPPORTの特長まとめ</h2>
-            <ul class="summary-list">
-                <li><span class="check-icon">✓</span><div><strong>専用端末不要</strong> - お客様のスマホ、iPad、既存サイネージで動作</div></li>
-                <li><span class="check-icon">✓</span><div><strong>多言語対応</strong> - 10言語以上でインバウンド対応</div></li>
-                <li><span class="check-icon">✓</span><div><strong>24時間365日</strong> - 無人対応で営業時間外も安心</div></li>
-                <li><span class="check-icon">✓</span><div><strong>最短1週間導入</strong> - PDFやWebを読み込むだけ</div></li>
-                <li><span class="check-icon">✓</span><div><strong>有人連携</strong> - AIで対応困難な場合はスタッフへ即時転送</div></li>
-            </ul>
+            <h2>今後の展望</h2>
+            <p>NEWoMan高輪では、GBase SUPPORTの活用をさらに発展させ、より高度な顧客体験の実現を目指しています。</p>
+            <div class="reason-grid">
+                <div class="reason-card">
+                    <div class="reason-number">1</div>
+                    <h4>商品検索AIの展開</h4>
+                    <p>「赤いワンピースはありますか？」といったカテゴリ・カラーによる曖昧検索にも対応する商品検索AIの導入を検討しています。POS連携によるリアルタイム在庫照会と組み合わせることで、お客様の購買体験をさらに向上させます。</p>
+                </div>
+                <div class="reason-card">
+                    <div class="reason-number">2</div>
+                    <h4>LINE公式アカウント連携の展開</h4>
+                    <p>来館前からのお問い合わせ対応を強化するため、LINE公式アカウントとの連携を予定しています。プッシュ通知によるイベント案内やクーポン配信を通じて、リピーター獲得と継続的な顧客接点の構築を目指します。</p>
+                </div>
+                <div class="reason-card">
+                    <div class="reason-number">3</div>
+                    <h4>有人転送・スタッフ連携の強化</h4>
+                    <p>AIで対応困難なケースや特別なご要望に対し、スタッフへのシームレスな転送フローをさらに最適化。「AIと人の協働」による最高のおもてなしを追求します。</p>
+                </div>
+            </div>
         </section>
 
         <section class="cta-section">
             <h2>お問い合わせ</h2>
             <p>GBase SUPPORTについての詳細は、以下よりお問い合わせください。</p>
             <div class="cta-buttons">
-                <a href="https://cs.gbase.ai/" class="cta-btn cta-btn-primary">🌐 公式サイト</a>
-                <a href="#" class="cta-btn cta-btn-secondary">💻 14日間無料トライアル</a>
-                <a href="#" class="cta-btn cta-btn-secondary">📄 導入事例PDFダウンロード</a>
+                <a href="https://cs.gbase.ai/register" class="cta-btn cta-btn-secondary">14日間無料トライアル</a>
+                <a href="https://cs.gbase.ai/contact" class="cta-btn cta-btn-primary">お問い合わせ</a>
             </div>
         </section>
     </main>
-    <footer>
-        <div class="footer-content">
-            <div class="footer-brand">
-                <a href="https://cs.gbase.ai/" class="logo">
-                    <div class="logo-icon">G</div>
-                    GBase<span>SUPPORT</span>
-                </a>
-                <p>AIナレッジエージェントで<br>社内外の問い合わせ対応を自動化</p>
+    <footer class="site-footer">
+        <div class="site-footer-inner">
+            <div class="site-footer-grid">
+                <div>
+                    <h3>GBase Support</h3>
+                    <ul>
+                        <li><a href="https://cs.gbase.ai/">トップ</a></li>
+                        <li><a href="https://gbase.ai/#features">製品概要</a></li>
+                        <li><a href="https://cs.gbase.ai/solution#case-study">ソリューション一覧</a></li>
+                        <li><a href="https://cs.gbase.ai/contact">コンサルティング向け</a></li>
+                        <li><a href="https://cs.gbase.ai/price">料金プラン</a></li>
+                        <li><a href="https://cs.gbase.ai/blog">ブログ・資料</a></li>
+                        <li><a href="https://cs.gbase.ai/contact">お問い合わせ</a></li>
+                        <li><a href="https://admin.gbase.ai/">ログイン</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>Sparticle について</h3>
+                    <ul>
+                        <li><a href="https://sparticle.com" target="_blank" rel="noopener noreferrer">会社概要</a></li>
+                        <li><a href="https://www.sparticle.com/ja/recruit" target="_blank" rel="noopener noreferrer">採用情報</a></li>
+                    </ul>
+                    <h3 class="mt">その他のプロダクト</h3>
+                    <ul>
+                        <li><a href="https://gbase.ai/" target="_blank" rel="noopener noreferrer">GBase(AIナレッジエージェント)</a></li>
+                        <li><a href="https://subtitles.felo.me/" target="_blank" rel="noopener noreferrer">Felo Subtitles(多言語字幕会議エージェント)</a></li>
+                        <li><a href="https://s.gbase.ai/" target="_blank" rel="noopener noreferrer">GBase GTM(顧客リーチAIエージェント)</a></li>
+                    </ul>
+                </div>
+                <div></div>
+                <div class="site-footer-brand">
+                    <a href="https://cs.gbase.ai/" class="footer-logo">
+                        <img src="https://cs.gbase.ai/title-logo.png" alt="GBase Support">
+                    </a>
+                    <p class="copyright">© Sparticle / GBase, All rights reserved.</p>
+                    <div class="social-links">
+                        <a href="https://x.com/GBaseHub" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="X (Twitter)">
+                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                        </a>
+                        <a href="https://linkedin.com/company/sparticle" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="LinkedIn">
+                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                        </a>
+                        <a href="https://note.com/sparticle_gbase" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Note">
+                            <span class="note-n">n</span>
+                        </a>
+                    </div>
+                    <div class="footer-legal">
+                        <a href="https://cs.gbase.ai/terms-of-use">利用規約</a>
+                        <span class="dot">·</span>
+                        <a href="https://cs.gbase.ai/privacy-policy">プライバシーポリシー</a>
+                        <span class="dot">·</span>
+                        <a href="https://cs.gbase.ai/security">セキュリティ</a>
+                    </div>
+                </div>
             </div>
-            <div class="footer-links">
-                <h4>製品</h4>
-                <ul>
-                    <li><a href="#">GBase</a></li>
-                    <li><a href="#">GBase Support</a></li>
-                    <li><a href="#">Felo Subtitles</a></li>
-                </ul>
-            </div>
-            <div class="footer-links">
-                <h4>リソース</h4>
-                <ul>
-                    <li><a href="#">ブログ</a></li>
-                    <li><a href="#">リリースノート</a></li>
-                    <li><a href="#">導入事例</a></li>
-                </ul>
-            </div>
-            <div class="footer-links">
-                <h4>企業情報</h4>
-                <ul>
-                    <li><a href="#">会社概要</a></li>
-                    <li><a href="#">お問い合わせ</a></li>
-                    <li><a href="#">プライバシーポリシー</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>© 2025 GBase. All rights reserved.</p>
         </div>
     </footer>
 </body>
