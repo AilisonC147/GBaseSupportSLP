@@ -413,8 +413,9 @@
 
         /* Footer */
         .site-footer {
-            background: var(--sol-bg-dark);
-            color: rgba(255,255,255,0.7);
+            background: var(--sol-bg);
+            border-top: 1px solid var(--sol-border);
+            color: var(--sol-secondary);
             padding: 48px 40px 24px;
         }
         .site-footer-inner { max-width: 1200px; margin: 0 auto; }
@@ -423,23 +424,23 @@
             gap: 40px; margin-bottom: 40px;
         }
         .site-footer h3 {
-            font-size: 13px; font-weight: 700; color: #fff;
+            font-size: 13px; font-weight: 700; color: var(--sol-text);
             margin-bottom: 14px; padding-bottom: 8px;
-            border-bottom: 1px solid rgba(255,255,255,0.12);
+            border-bottom: 1px solid var(--sol-border);
         }
         .site-footer h3.mt { margin-top: 28px; }
         .site-footer ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
         .site-footer ul a {
-            font-size: 13px; color: rgba(255,255,255,0.6);
+            font-size: 13px; color: var(--sol-secondary);
             text-decoration: none; transition: color 0.2s;
         }
         .site-footer ul a:hover { color: var(--sol-orange); }
         .site-footer-brand { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; }
-        .footer-logo img { height: 28px; filter: brightness(0) invert(1); }
-        .footer-tagline { font-size: 12px; color: rgba(255,255,255,0.5); line-height: 1.6; }
+        .footer-logo img { height: 28px; }
+        .footer-tagline { font-size: 12px; color: var(--sol-secondary); line-height: 1.6; }
         .site-footer-bottom {
-            border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px;
-            font-size: 12px; color: rgba(255,255,255,0.4);
+            border-top: 1px solid var(--sol-border); padding-top: 20px;
+            font-size: 12px; color: var(--sol-secondary);
         }
 
         /* Responsive */
@@ -711,7 +712,6 @@
                     <img src="https://cs.gbase.ai/title-logo.png" alt="GBase Support">
                 </div>
                 <div class="arch-core-text">
-                    <div class="arch-core-name">GBase SUPPORT</div>
                     <div class="arch-core-sub">AI Agent + MCP Agent Hub — 自然言語で4つの外部システムを操作</div>
                 </div>
                 <div class="arch-core-badge">MCP Protocol</div>
