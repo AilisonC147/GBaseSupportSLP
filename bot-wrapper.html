@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Bot</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background: #f5f5f5;
+        }
+        /* Override widget styles to make it full screen */
+        #gptbase-bubble-window {
+            position: fixed !important;
+            bottom: 0 !important;
+            right: 0 !important;
+            left: 0 !important;
+            top: 0 !important;
+            width: 100% !important;
+            height: 100% !important;
+            max-width: none !important;
+            max-height: none !important;
+            border-radius: 0 !important;
+            display: block !important;
+        }
+        #gptbase-bubble-button {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+    <!-- GBase Widget Embed Script -->
+    <script>
+        window.gptbaseConfig = {
+            chatbotId: 'a182ac3e-0552-4fc0-aced-cd995e5f91c2'
+        };
+    </script>
+    <script src="https://gptbase.ai/plugin/plugin.js" id="a182ac3e-0552-4fc0-aced-cd995e5f91c2" defer></script>
+
+    <script>
+        // Auto-open the chat widget when ready
+        function waitForWidget() {
+            var widgetWindow = document.getElementById('gptbase-bubble-window');
+            if (widgetWindow) {
+                // Widget is ready, send openChat message
+                widgetWindow.contentWindow.postMessage({ openChat: true }, '*');
+                console.log('Widget found, opening chat');
+            } else {
+                // Wait and try again
+                setTimeout(waitForWidget, 100);
+            }
+        }
+
+        // Send message to widget by finding and filling input
+        function sendMessageToWidget(question) {
+            var widgetIframe = document.getElementById('gptbase-bubble-window');
+            if (!widgetIframe) {
+                console.log('Widget iframe not found');
+                return false;
+            }
+
+            try {
+                var widgetDoc = widgetIframe.contentDocument || widgetIframe.contentWindow.document;
+
+                // Find textarea in widget
+                var textarea = widgetDoc.querySelector('textarea');
+                if (!textarea) {
+                    console.log('Textarea not found in widget');
+                    return false;
+                }
+
+                // Set value using native setter to trigger React state
+                var nativeInputValueSetter = Object.getOwnPropertyDescriptor(
+                    window.HTMLTextAreaElement.prototype, 'value'
+                ).set;
+                nativeInputValueSetter.call(textarea, question);
+
+                // Dispatch input event
+                var inputEvent = new Event('input', { bubbles: true });
+                textarea.dispatchEvent(inputEvent);
+
+                // Find and click send button after short delay
+                setTimeout(function() {
+                    // Look for send button (usually has SVG icon)
+                    var buttons = widgetDoc.querySelectorAll('button');
+                    for (var i = 0; i < buttons.length; i++) {
+                        var btn = buttons[i];
+                        // Send button is typically on the right side of input
+                        var rect = btn.getBoundingClientRect();
+                        if (rect.right > widgetDoc.body.clientWidth - 100) {
+                            if (btn.querySelector('svg') || btn.textContent.includes('送信')) {
+                                btn.click();
+                                console.log('Send button clicked');
+                                break;
+                            }
+                        }
+                    }
+                }, 200);
+
+                console.log('Message sent:', question);
+                return true;
+
+            } catch (e) {
+                console.log('Error accessing widget:', e.message);
+                // Fallback: try postMessage
+                widgetIframe.contentWindow.postMessage({ type: 'send', question: question }, '*');
+                return false;
+            }
+        }
+
+        // Listen for messages from parent (kiosk page)
+        window.addEventListener('message', function(event) {
+            console.log('Received message:', event.data);
+
+            if (event.data && event.data.type === 'send' && event.data.question) {
+                sendMessageToWidget(event.data.question);
+            }
+        });
+
+        // Start waiting for widget
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(waitForWidget, 500);
+        });
+    </script>
+</body>
+</html>

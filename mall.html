@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html class="light scroll-smooth" lang="ja">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Virtual Mall | GBase Support - 仮想商業施設でAI体験</title>
+    <meta name="description" content="Sparticle Virtual Mallで、商業施設向けAIコンシェルジュの全機能を体験。フロアナビ、商品検索、多言語対応、音声会話などをインタラクティブにお試しください。">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#ee862b",
+                        "primary-dark": "#d9731e",
+                        "background-light": "#f8f7f6",
+                        "surface-light": "#ffffff",
+                        "text-main-light": "#1b140d",
+                        "text-secondary-light": "#666666",
+                        "border-light": "#e7dacf",
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans", "Noto Sans JP", "sans-serif"],
+                        "body": ["Plus Jakarta Sans", "Noto Sans JP", "sans-serif"]
+                    },
+                },
+            },
+        }
+    </script>
+
+    <style>
+        .mall-zone-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .mall-zone-card:hover {
+            transform: translateY(-8px) scale(1.02);
+        }
+        .mall-zone-card.active {
+            transform: translateY(-4px);
+            border-color: #ee862b !important;
+            box-shadow: 0 8px 30px rgba(238, 134, 43, 0.2);
+        }
+        .glow-blue { box-shadow: 0 0 40px rgba(59, 130, 246, 0.25); }
+        .glow-orange { box-shadow: 0 0 40px rgba(249, 115, 22, 0.25); }
+        .glow-pink { box-shadow: 0 0 40px rgba(236, 72, 153, 0.25); }
+        .glow-green { box-shadow: 0 0 40px rgba(34, 197, 94, 0.25); }
+        .glow-purple { box-shadow: 0 0 40px rgba(168, 85, 247, 0.25); }
+        .bg-glow-blue { background-color: rgba(59, 130, 246, 0.15); }
+        .bg-glow-orange { background-color: rgba(249, 115, 22, 0.15); }
+        .bg-glow-pink { background-color: rgba(236, 72, 153, 0.15); }
+        .bg-glow-green { background-color: rgba(34, 197, 94, 0.15); }
+        .bg-glow-purple { background-color: rgba(168, 85, 247, 0.15); }
+        .text-zone-blue { color: rgb(37, 99, 235); }
+        .text-zone-orange { color: rgb(234, 88, 12); }
+        .text-zone-pink { color: rgb(219, 39, 119); }
+        .text-zone-green { color: rgb(22, 163, 74); }
+        .text-zone-purple { color: rgb(147, 51, 234); }
+        .bg-badge-blue { background-color: rgba(59, 130, 246, 0.1); }
+        .bg-badge-orange { background-color: rgba(249, 115, 22, 0.1); }
+        .bg-badge-pink { background-color: rgba(236, 72, 153, 0.1); }
+        .bg-badge-green { background-color: rgba(34, 197, 94, 0.1); }
+        .bg-badge-purple { background-color: rgba(168, 85, 247, 0.1); }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        .float-animation {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 0.8; }
+        }
+        .pulse-glow {
+            animation: pulse-glow 2s ease-in-out infinite;
+        }
+    </style>
+</head>
+
+<body class="bg-background-light font-body text-text-main-light min-h-screen">
+
+    <!-- Header -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-surface-light/95 backdrop-blur-lg border-b border-border-light">
+        <div class="max-w-[1400px] mx-auto px-4 md:px-8 h-16 flex items-center justify-between">
+            <!-- Logo -->
+            <a href="index.html" class="flex items-center gap-3 hover:opacity-80 transition-opacity">
+                <img src="https://cs.gbase.ai/title-logo.png" alt="GBase Support" class="h-7 w-auto" />
+            </a>
+
+            <!-- Center Title -->
+            <div class="hidden md:flex items-center gap-2">
+                <span class="text-2xl">🏬</span>
+                <span class="font-bold text-lg text-text-main-light">Sparticle Virtual Mall</span>
+                <span class="text-xs bg-primary/10 text-primary px-2 py-0.5 rounded-full font-bold">DEMO</span>
+            </div>
+
+            <!-- Right Actions -->
+            <div class="flex items-center gap-4">
+                <a href="index.html" id="back-link" class="text-sm text-text-secondary-light hover:text-primary transition-colors flex items-center gap-1">
+                    <span class="material-symbols-outlined text-lg">arrow_back</span>
+                    トップに戻る
+                </a>
+                <a href="register.html" class="hidden md:flex items-center justify-center rounded-full h-9 px-5 bg-primary hover:bg-primary-dark transition-colors text-white text-sm font-bold">
+                    無料トライアル
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="pt-16">
+
+        <!-- Hero Section -->
+        <section class="relative py-12 md:py-16 bg-surface-light border-b border-border-light">
+            <div class="max-w-[1400px] mx-auto px-4 md:px-8 text-center">
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-6">
+                    <span class="material-symbols-outlined text-primary">auto_awesome</span>
+                    <span class="text-primary text-sm font-bold">Interactive Experience</span>
+                </div>
+
+                <h1 class="text-3xl md:text-5xl font-black mb-4 leading-tight text-text-main-light">
+                    仮想商業施設で<span class="text-primary">AIコンシェルジュ</span>を体験
+                </h1>
+
+                <p class="text-text-secondary-light text-lg max-w-2xl mx-auto mb-8">
+                    下のエリアをクリックして、各機能のAIを実際に体験してみましょう
+                </p>
+
+                <!-- Quick Stats -->
+                <div class="flex flex-wrap justify-center gap-6 md:gap-10">
+                    <div class="text-center">
+                        <p class="text-2xl font-black text-primary">5</p>
+                        <p class="text-xs text-text-secondary-light">体験エリア</p>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-2xl font-black text-primary">10+</p>
+                        <p class="text-xs text-text-secondary-light">対応言語</p>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-2xl font-black text-primary">24h</p>
+                        <p class="text-xs text-text-secondary-light">対応可能</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Mall Floor Map Section -->
+        <section class="py-10 md:py-12 bg-background-light">
+            <div class="max-w-[1400px] mx-auto px-4 md:px-8">
+                <div class="text-center mb-8">
+                    <h2 class="text-xl md:text-2xl font-bold mb-2 text-text-main-light">フロアマップ</h2>
+                    <p class="text-text-secondary-light text-sm">クリックして各エリアのAIを体験</p>
+                </div>
+
+                <!-- Floor Map Grid -->
+                <div class="grid grid-cols-2 md:grid-cols-5 gap-4 md:gap-5 mb-6">
+                    <!-- Zone 1: 総合案内 -->
+                    <button onclick="selectZone(0)" class="mall-zone-card active group relative bg-white border-2 border-blue-200 hover:border-blue-400 rounded-2xl p-5 md:p-6 text-center shadow-sm" data-zone="0">
+                        <div class="text-4xl md:text-5xl mb-3 float-animation">🎫</div>
+                        <h3 class="text-text-main-light font-bold text-base mb-1">総合案内</h3>
+                        <p class="text-text-secondary-light text-xs">Information</p>
+                        <div class="mt-2 inline-flex items-center gap-1 text-blue-600 text-xs font-medium">
+                            <span class="material-symbols-outlined text-sm">touch_app</span>
+                            体験する
+                        </div>
+                    </button>
+
+                    <!-- Zone 2: フロアナビ -->
+                    <button onclick="selectZone(1)" class="mall-zone-card group relative bg-white border-2 border-orange-200 hover:border-orange-400 rounded-2xl p-5 md:p-6 text-center shadow-sm" data-zone="1">
+                        <div class="text-4xl md:text-5xl mb-3">🗺️</div>
+                        <h3 class="text-text-main-light font-bold text-base mb-1">フロアナビ</h3>
+                        <p class="text-text-secondary-light text-xs">Navigation</p>
+                        <div class="mt-2 inline-flex items-center gap-1 text-orange-600 text-xs font-medium opacity-0 group-hover:opacity-100 transition-opacity">
+                            <span class="material-symbols-outlined text-sm">touch_app</span>
+                            体験する
+                        </div>
+                    </button>
+
+                    <!-- Zone 3: 商品検索 -->
+                    <button onclick="selectZone(2)" class="mall-zone-card group relative bg-white border-2 border-pink-200 hover:border-pink-400 rounded-2xl p-5 md:p-6 text-center shadow-sm" data-zone="2">
+                        <div class="text-4xl md:text-5xl mb-3">🛍️</div>
+                        <h3 class="text-text-main-light font-bold text-base mb-1">商品検索</h3>
+                        <p class="text-text-secondary-light text-xs">Product Search</p>
+                        <div class="mt-2 inline-flex items-center gap-1 text-pink-600 text-xs font-medium opacity-0 group-hover:opacity-100 transition-opacity">
+                            <span class="material-symbols-outlined text-sm">touch_app</span>
+                            体験する
+                        </div>
+                    </button>
+
+                    <!-- Zone 4: 多言語対応 -->
+                    <button onclick="selectZone(3)" class="mall-zone-card group relative bg-white border-2 border-green-200 hover:border-green-400 rounded-2xl p-5 md:p-6 text-center shadow-sm" data-zone="3">
+                        <div class="text-4xl md:text-5xl mb-3">🌍</div>
+                        <h3 class="text-text-main-light font-bold text-base mb-1">多言語対応</h3>
+                        <p class="text-text-secondary-light text-xs">Multilingual</p>
+                        <div class="mt-2 inline-flex items-center gap-1 text-green-600 text-xs font-medium opacity-0 group-hover:opacity-100 transition-opacity">
+                            <span class="material-symbols-outlined text-sm">touch_app</span>
+                            体験する
+                        </div>
+                    </button>
+
+                    <!-- Zone 5: 音声会話 -->
+                    <button onclick="selectZone(4)" class="mall-zone-card group relative bg-white border-2 border-purple-200 hover:border-purple-400 rounded-2xl p-5 md:p-6 text-center shadow-sm col-span-2 md:col-span-1" data-zone="4">
+                        <div class="text-4xl md:text-5xl mb-3">🎤</div>
+                        <h3 class="text-text-main-light font-bold text-base mb-1">音声会話</h3>
+                        <p class="text-text-secondary-light text-xs">Voice Chat</p>
+                        <div class="mt-2 inline-flex items-center gap-1 text-purple-600 text-xs font-medium opacity-0 group-hover:opacity-100 transition-opacity">
+                            <span class="material-symbols-outlined text-sm">touch_app</span>
+                            体験する
+                        </div>
+                    </button>
+                </div>
+
+                <!-- Keyboard Hint -->
+                <p class="text-center text-text-secondary-light text-xs">
+                    <span class="material-symbols-outlined text-xs align-middle">keyboard</span>
+                    キーボードの数字キー 1-5 でも選択可能
+                </p>
+            </div>
+        </section>
+
+        <!-- Demo Area Section -->
+        <section id="demo-area" class="py-10 md:py-16 bg-surface-light border-t border-border-light">
+            <div class="max-w-[1400px] mx-auto px-4 md:px-8">
+
+                <!-- Zone Content Container -->
+                <div id="zone-content" class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
+
+                    <!-- Left: Zone Info -->
+                    <div id="zone-info" class="order-2 lg:order-1">
+                        <!-- Zone Header -->
+                        <div class="mb-6">
+                            <div id="zone-badge" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-badge-blue text-zone-blue text-sm font-bold mb-3">
+                                <span id="zone-icon">🎫</span>
+                                <span id="zone-label">総合案内</span>
+                            </div>
+                            <h2 id="zone-title" class="text-2xl md:text-3xl font-black mb-3 text-text-main-light">総合案内デスク</h2>
+                            <p id="zone-description" class="text-text-secondary-light text-base leading-relaxed">
+                                商業施設の入口に設置されたAIコンシェルジュ。営業時間、イベント情報、施設の基本案内など、よくある質問に即座に回答します。
+                            </p>
+                        </div>
+
+                        <!-- Features List -->
+                        <div id="zone-features" class="bg-background-light rounded-xl p-5 mb-6 border border-border-light">
+                            <h3 class="text-text-main-light font-bold mb-3 flex items-center gap-2 text-sm">
+                                <span class="material-symbols-outlined text-primary text-lg">checklist</span>
+                                このエリアの機能
+                            </h3>
+                            <ul class="space-y-2" id="zone-features-list">
+                                <!-- Features populated by JS -->
+                            </ul>
+                        </div>
+
+                        <!-- Try Suggestions -->
+                        <div id="zone-suggestions" class="bg-primary/5 rounded-xl p-5 border border-primary/10">
+                            <h3 class="text-text-main-light font-bold mb-3 flex items-center gap-2 text-sm">
+                                <span class="material-symbols-outlined text-primary text-lg">lightbulb</span>
+                                試してみよう
+                            </h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-2" id="zone-prompts">
+                                <!-- Prompts populated by JS -->
+                            </div>
+                            <p class="text-text-secondary-light text-xs mt-3">クリックでコピー → 右のチャットに貼り付け</p>
+                        </div>
+
+                        <!-- Language Selector (shown for FAQ and multilingual zones) -->
+                        <div id="lang-selector" class="bg-white rounded-xl p-5 border border-border-light mt-6">
+                            <h3 class="text-text-main-light font-bold mb-3 flex items-center gap-2 text-sm">
+                                <span class="material-symbols-outlined text-primary text-lg">translate</span>
+                                言語を選択
+                            </h3>
+                            <div class="grid grid-cols-5 gap-2" id="lang-buttons">
+                                <!-- Language buttons populated by JS -->
+                            </div>
+                        </div>
+
+                        <!-- Navigation -->
+                        <div class="flex items-center justify-between mt-6">
+                            <button onclick="prevZone()" id="prev-btn" class="flex items-center gap-2 px-4 py-2 bg-white hover:bg-gray-50 border border-border-light rounded-lg text-text-secondary-light font-medium transition-colors disabled:opacity-30 disabled:cursor-not-allowed text-sm" disabled>
+                                <span class="material-symbols-outlined text-lg">arrow_back</span>
+                                前へ
+                            </button>
+                            <span id="zone-counter" class="text-text-secondary-light text-sm">1 / 5</span>
+                            <button onclick="nextZone()" id="next-btn" class="flex items-center gap-2 px-4 py-2 bg-white hover:bg-gray-50 border border-border-light rounded-lg text-text-secondary-light font-medium transition-colors text-sm">
+                                次へ
+                                <span class="material-symbols-outlined text-lg">arrow_forward</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Right: Bot Demo -->
+                    <div class="order-1 lg:order-2 lg:sticky lg:top-24">
+                        <div class="flex flex-col items-center">
+                            <!-- Phone Frame -->
+                            <div id="phone-container" class="relative">
+                                <div class="relative bg-gray-900 rounded-[2.5rem] p-2.5 shadow-xl glow-blue" id="phone-frame">
+                                    <!-- Phone Notch -->
+                                    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-1/3 h-6 bg-gray-900 rounded-b-xl z-10"></div>
+                                    <!-- Phone Screen -->
+                                    <div class="relative rounded-[2rem] overflow-hidden bg-white aspect-[9/19] w-[260px] md:w-[300px]">
+                                        <iframe
+                                            id="bot-iframe"
+                                            src="https://gbase.ai/bot/a182ac3e-0552-4fc0-aced-cd995e5f91c2?lang=ja"
+                                            class="w-full h-full border-0"
+                                            allow="microphone"
+                                            title="AI Bot Demo">
+                                        </iframe>
+                                    </div>
+                                </div>
+                                <!-- Glow Effect -->
+                                <div id="phone-glow" class="absolute -inset-4 bg-glow-blue rounded-[3rem] blur-2xl -z-10 pulse-glow"></div>
+                            </div>
+
+                            <!-- Hint -->
+                            <div class="mt-4 text-center">
+                                <p class="text-text-secondary-light text-sm flex items-center justify-center gap-1">
+                                    <span class="material-symbols-outlined text-primary text-lg">mic</span>
+                                    「話しかけて」ボタンで音声入力も可能
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="py-12 md:py-16 bg-primary/5 border-t border-border-light">
+            <div class="max-w-[800px] mx-auto px-4 md:px-8 text-center">
+                <h2 class="text-2xl md:text-3xl font-black mb-3 text-text-main-light">
+                    体験いかがでしたか？
+                </h2>
+                <p class="text-text-secondary-light text-base mb-6">
+                    このAIコンシェルジュを、あなたの施設にも導入できます。
+                </p>
+                <div class="flex flex-col sm:flex-row gap-3 justify-center">
+                    <a href="register.html" class="flex items-center justify-center rounded-lg h-12 px-6 bg-primary hover:bg-primary-dark transition-colors text-white font-bold shadow-lg shadow-primary/20">
+                        14日間無料トライアル
+                    </a>
+                    <a href="contact.html" class="flex items-center justify-center rounded-lg h-12 px-6 bg-white hover:bg-gray-50 border border-border-light transition-colors text-text-main-light font-medium">
+                        お問い合わせ
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-6 border-t border-border-light bg-surface-light">
+        <div class="max-w-[1400px] mx-auto px-4 md:px-8 flex flex-col md:flex-row items-center justify-between gap-3">
+            <div class="flex items-center gap-3">
+                <img src="https://cs.gbase.ai/title-logo.png" alt="GBase Support" class="h-5 w-auto opacity-60" />
+                <span class="text-text-secondary-light text-xs">© Sparticle / GBase</span>
+            </div>
+            <div class="flex items-center gap-4 text-xs text-text-secondary-light">
+                <a href="https://cs.gbase.ai/terms-of-use" class="hover:text-primary transition-colors">利用規約</a>
+                <a href="https://cs.gbase.ai/privacy-policy" class="hover:text-primary transition-colors">プライバシーポリシー</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Zone Data
+        var zones = [
+            {
+                id: 0,
+                icon: '🎫',
+                label: '総合案内',
+                title: '総合案内デスク',
+                color: 'blue',
+                lang: 'ja',
+                urlBase: 'https://gbase.ai/bot/a182ac3e-0552-4fc0-aced-cd995e5f91c2',
+                showLangSelector: true,
+                anchor: 'feature-faq',
+                description: '商業施設の入口に設置されたAIコンシェルジュ。営業時間、イベント情報、施設の基本案内など、よくある質問に即座に回答します。',
+                features: [
+                    '営業時間・定休日の案内',
+                    'イベント・セール情報',
+                    '駐車場・アクセス情報',
+                    '施設サービス案内'
+                ],
+                prompts: [
+                    '営業時間を教えて',
+                    '今日のイベントは？',
+                    '駐車場はありますか？',
+                    'ベビーカーを借りたい'
+                ]
+            },
+            {
+                id: 1,
+                icon: '🗺️',
+                label: 'フロアナビ',
+                title: 'フロアナビゲーション',
+                color: 'orange',
+                lang: 'ja',
+                urlBase: 'https://gbase.ai/bot/a182ac3e-0552-4fc0-aced-cd995e5f91c2',
+                showLangSelector: false,
+                anchor: 'feature-floormap',
+                description: '「ユニクロはどこ？」と聞くだけで、現在地から目的地までの最短ルートを3Dマップで表示します。',
+                features: [
+                    '店舗への道順案内',
+                    '3Dフロアマップ表示',
+                    'ルート設定オプション',
+                    '曖昧な要望から店舗提案'
+                ],
+                prompts: [
+                    'ユニクロはどこ？',
+                    'トイレに行きたい',
+                    '子供服のお店を教えて',
+                    'ATMはありますか？'
+                ]
+            },
+            {
+                id: 2,
+                icon: '🛍️',
+                label: '商品検索',
+                title: '商品検索・在庫確認',
+                color: 'pink',
+                lang: 'ja',
+                urlBase: 'https://gbase.ai/bot/a182ac3e-0552-4fc0-aced-cd995e5f91c2',
+                showLangSelector: false,
+                anchor: 'feature-search',
+                description: '「赤いワンピースが欲しい」など曖昧な要望から、複数店舗の商品を横断検索できます。',
+                features: [
+                    '複数店舗横断検索',
+                    '曖昧な要望から商品提案',
+                    'リアルタイム在庫確認',
+                    '価格帯・ブランド絞り込み'
+                ],
+                prompts: [
+                    '赤いワンピースが欲しい',
+                    '子供用の靴を探して',
+                    '予算5000円でプレゼント',
+                    '今セール中の商品は？'
+                ]
+            },
+            {
+                id: 3,
+                icon: '🌍',
+                label: '多言語対応',
+                title: '多言語対応（10言語以上）',
+                color: 'green',
+                lang: 'en',
+                urlBase: 'https://gbase.ai/bot/a182ac3e-0552-4fc0-aced-cd995e5f91c2',
+                showLangSelector: true,
+                anchor: 'feature-realtime',
+                description: '英語、中国語、韓国語など10言語以上に自動対応。外国人観光客も母国語で快適に利用できます。',
+                features: [
+                    '10言語以上の自動翻訳',
+                    '免税カウンター案内',
+                    '外貨両替所の案内',
+                    'Wi-Fi・SIMカード情報'
+                ],
+                prompts: [
+                    'Where is the restroom?',
+                    '免税柜台在哪里？',
+                    '화장실이 어디에요?',
+                    'ห้องน้ำอยู่ที่ไหน?'
+                ]
+            },
+            {
+                id: 4,
+                icon: '🎤',
+                label: '音声会話',
+                title: '音声会話（ハンズフリー）',
+                color: 'purple',
+                lang: 'ja',
+                urlBase: 'https://gbase.ai/realtime/a182ac3e-0552-4fc0-aced-cd995e5f91c2',
+                showLangSelector: false,
+                anchor: 'feature-realtime',
+                description: 'キーボード入力は不要。話しかけるだけで、AIが意図を理解し的確に案内します。',
+                features: [
+                    'ハンズフリー音声操作',
+                    '騒がしい環境でも認識',
+                    '方言・アクセント対応',
+                    '音声で回答読み上げ'
+                ],
+                prompts: [
+                    '「話しかけて」をクリック',
+                    '声で質問してみよう',
+                    '近くのカフェを教えて',
+                    'お手洗いはどこですか'
+                ]
+            }
+        ];
+
+        // Language data for selector
+        var languages = [
+            { code: 'ja', flag: '🇯🇵', name: '日本語' },
+            { code: 'en', flag: '🇺🇸', name: 'English' },
+            { code: 'zh', flag: '🇨🇳', name: '中文' },
+            { code: 'ko', flag: '🇰🇷', name: '한국어' },
+            { code: 'vi', flag: '🇻🇳', name: 'Tiếng Việt' },
+            { code: 'pt', flag: '🇵🇹', name: 'Português' },
+            { code: 'pt-BR', flag: '🇧🇷', name: 'Português BR' },
+            { code: 'id', flag: '🇮🇩', name: 'Indonesia' },
+            { code: 'ne', flag: '🇳🇵', name: 'नेपाली' },
+            { code: 'es', flag: '🇪🇸', name: 'Español' }
+        ];
+
+        var currentLang = 'ja';
+        var langFromUrl = null;  // Track language from URL parameter
+
+        var currentZone = 0;
+
+        // Create language button using DOM methods
+        function createLangButton(lang) {
+            var btn = document.createElement('button');
+            btn.className = 'lang-btn flex flex-col items-center gap-1 p-2 rounded-lg hover:bg-primary/5 hover:scale-105 transition-all cursor-pointer';
+            btn.dataset.lang = lang.code;
+            btn.onclick = function() { changeLang(lang.code); };
+
+            var flag = document.createElement('span');
+            flag.className = 'text-2xl';
+            flag.textContent = lang.flag;
+
+            var name = document.createElement('span');
+            name.className = 'text-[10px] font-medium text-text-secondary-light';
+            name.textContent = lang.name;
+
+            btn.appendChild(flag);
+            btn.appendChild(name);
+            return btn;
+        }
+
+        // Update language buttons to show active state
+        function updateLangButtons(activeLang) {
+            document.querySelectorAll('.lang-btn').forEach(function(btn) {
+                var nameSpan = btn.querySelector('span:last-child');
+                if (btn.dataset.lang === activeLang) {
+                    btn.classList.add('bg-primary/10', 'ring-2', 'ring-primary');
+                    nameSpan.classList.remove('text-text-secondary-light');
+                    nameSpan.classList.add('text-primary', 'font-bold');
+                } else {
+                    btn.classList.remove('bg-primary/10', 'ring-2', 'ring-primary');
+                    nameSpan.classList.add('text-text-secondary-light');
+                    nameSpan.classList.remove('text-primary', 'font-bold');
+                }
+            });
+        }
+
+        // Change language within current zone
+        function changeLang(langCode) {
+            currentLang = langCode;
+            var zone = zones[currentZone];
+            var iframe = document.getElementById('bot-iframe');
+            iframe.src = zone.urlBase + '?lang=' + langCode;
+            updateLangButtons(langCode);
+        }
+
+        // Initialize language selector buttons
+        function initLangSelector() {
+            var container = document.getElementById('lang-buttons');
+            container.replaceChildren();
+            languages.forEach(function(lang) {
+                container.appendChild(createLangButton(lang));
+            });
+        }
+
+        // Create feature list item using DOM methods
+        function createFeatureItem(text, color) {
+            var li = document.createElement('li');
+            li.className = 'flex items-start gap-2';
+
+            var icon = document.createElement('span');
+            icon.className = 'material-symbols-outlined text-base mt-0.5 text-zone-' + color;
+            icon.textContent = 'check_circle';
+
+            var span = document.createElement('span');
+            span.className = 'text-text-main-light text-sm';
+            span.textContent = text;
+
+            li.appendChild(icon);
+            li.appendChild(span);
+            return li;
+        }
+
+        // Create prompt button using DOM methods
+        function createPromptButton(text) {
+            var btn = document.createElement('button');
+            btn.className = 'text-left bg-white hover:bg-gray-50 border border-border-light rounded-lg px-3 py-2 text-sm text-text-main-light transition-colors flex items-center gap-2';
+            btn.onclick = function() { copyPrompt(this); };
+
+            var icon = document.createElement('span');
+            icon.className = 'material-symbols-outlined text-text-secondary-light text-base';
+            icon.textContent = 'content_copy';
+
+            var textNode = document.createTextNode('「' + text + '」');
+
+            btn.appendChild(icon);
+            btn.appendChild(textNode);
+            return btn;
+        }
+
+        // Select Zone
+        function selectZone(index) {
+            currentZone = index;
+            var zone = zones[index];
+
+            // Update zone cards
+            document.querySelectorAll('.mall-zone-card').forEach(function(card, i) {
+                if (i === index) {
+                    card.classList.add('active');
+                } else {
+                    card.classList.remove('active');
+                }
+            });
+
+            // Update badge
+            var badge = document.getElementById('zone-badge');
+            badge.className = 'inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-badge-' + zone.color + ' text-zone-' + zone.color + ' text-sm font-bold mb-3';
+
+            // Update text content
+            document.getElementById('zone-icon').textContent = zone.icon;
+            document.getElementById('zone-label').textContent = zone.label;
+            document.getElementById('zone-title').textContent = zone.title;
+            document.getElementById('zone-description').textContent = zone.description;
+
+            // Update features list using DOM methods
+            var featuresList = document.getElementById('zone-features-list');
+            featuresList.replaceChildren();
+            zone.features.forEach(function(feature) {
+                featuresList.appendChild(createFeatureItem(feature, zone.color));
+            });
+
+            // Update prompts using DOM methods
+            var promptsContainer = document.getElementById('zone-prompts');
+            promptsContainer.replaceChildren();
+            zone.prompts.forEach(function(prompt) {
+                promptsContainer.appendChild(createPromptButton(prompt));
+            });
+
+            // Update phone frame glow
+            var phoneFrame = document.getElementById('phone-frame');
+            phoneFrame.className = 'relative bg-gray-900 rounded-[2.5rem] p-2.5 shadow-xl glow-' + zone.color;
+
+            var phoneGlow = document.getElementById('phone-glow');
+            phoneGlow.className = 'absolute -inset-4 bg-glow-' + zone.color + ' rounded-[3rem] blur-2xl -z-10 pulse-glow';
+
+            // Update iframe with zone-specific URL
+            var iframe = document.getElementById('bot-iframe');
+            // Use URL param language on first load, otherwise use zone's default
+            if (langFromUrl) {
+                currentLang = langFromUrl;
+                langFromUrl = null;  // Clear after first use
+            } else {
+                currentLang = zone.lang;
+            }
+            iframe.src = zone.urlBase + '?lang=' + currentLang;
+
+            // Show/hide language selector
+            var langSelector = document.getElementById('lang-selector');
+            if (zone.showLangSelector) {
+                langSelector.classList.remove('hidden');
+                updateLangButtons(currentLang);
+            } else {
+                langSelector.classList.add('hidden');
+            }
+
+            // Update navigation
+            document.getElementById('prev-btn').disabled = index === 0;
+            document.getElementById('next-btn').disabled = index === zones.length - 1;
+            document.getElementById('zone-counter').textContent = (index + 1) + ' / ' + zones.length;
+
+            // Scroll to demo area on mobile
+            if (window.innerWidth < 1024) {
+                document.getElementById('demo-area').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+
+            // Update back link to return to the correct section
+            document.getElementById('back-link').href = 'index.html#' + zone.anchor;
+        }
+
+        function prevZone() {
+            if (currentZone > 0) selectZone(currentZone - 1);
+        }
+
+        function nextZone() {
+            if (currentZone < zones.length - 1) selectZone(currentZone + 1);
+        }
+
+        function copyPrompt(btn) {
+            var text = btn.textContent.replace('content_copy', '').trim();
+            text = text.replace(/[「」""]/g, '');
+            navigator.clipboard.writeText(text);
+
+            // Visual feedback
+            var icon = btn.querySelector('.material-symbols-outlined');
+            icon.textContent = 'check';
+            icon.classList.remove('text-text-secondary-light');
+            icon.classList.add('text-green-600');
+
+            setTimeout(function() {
+                icon.textContent = 'content_copy';
+                icon.classList.remove('text-green-600');
+                icon.classList.add('text-text-secondary-light');
+            }, 1500);
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key >= '1' && e.key <= '5') {
+                selectZone(parseInt(e.key) - 1);
+            } else if (e.key === 'ArrowLeft') {
+                prevZone();
+            } else if (e.key === 'ArrowRight') {
+                nextZone();
+            }
+        });
+
+        // Initialize - check URL parameters for zone and lang
+        (function init() {
+            // Initialize language selector buttons
+            initLangSelector();
+
+            var urlParams = new URLSearchParams(window.location.search);
+            var zoneParam = urlParams.get('zone');
+            var langParam = urlParams.get('lang');
+
+            // Store language from URL for first load
+            if (langParam) {
+                langFromUrl = langParam;
+            }
+
+            if (zoneParam !== null) {
+                var zoneIndex = parseInt(zoneParam);
+                if (zoneIndex >= 0 && zoneIndex < zones.length) {
+                    selectZone(zoneIndex);
+                    setTimeout(function() {
+                        document.getElementById('demo-area').scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }, 300);
+                } else {
+                    selectZone(0);
+                }
+            } else {
+                selectZone(0);
+            }
+        })();
+    </script>
+
+</body>
+
+</html>

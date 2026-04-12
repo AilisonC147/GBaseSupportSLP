@@ -121,14 +121,6 @@
                                         class="block px-4 py-2 text-sm hover:bg-background-light rounded text-text-main-light">
                                         <div class="font-medium">商業施設・百貨店</div>
                                     </a>
-                                    <a href="#core-features"
-                                        class="block px-4 py-2 text-sm hover:bg-background-light rounded text-text-main-light">
-                                        <div class="font-medium">ホテル・旅館</div>
-                                    </a>
-                                    <a href="#core-features"
-                                        class="block px-4 py-2 text-sm hover:bg-background-light rounded text-text-main-light">
-                                        <div class="font-medium">EC・オンラインストア</div>
-                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -139,15 +131,15 @@
                             </button>
                             <div class="absolute left-0 top-full pt-2 hidden group-hover:block w-64">
                                 <div class="bg-white border border-border-light rounded-lg shadow-xl p-2 flex flex-col gap-1">
-                                    <a href="index.html#feature-floormap"
-                                        class="block px-4 py-2 text-sm hover:bg-primary/5 rounded text-text-main-light">
-                                        <div class="font-bold">フロアマップ・ナビゲーション</div>
-                                        <div class="text-xs text-text-secondary-light">3Dマップで目的地まで案内</div>
-                                    </a>
                                     <a href="index.html#feature-faq"
                                         class="block px-4 py-2 text-sm hover:bg-primary/5 rounded text-text-main-light">
                                         <div class="font-bold">FAQ・施設案内AI</div>
                                         <div class="text-xs text-text-secondary-light">よくある質問を自動対応</div>
+                                    </a>
+                                    <a href="index.html#feature-floormap"
+                                        class="block px-4 py-2 text-sm hover:bg-primary/5 rounded text-text-main-light">
+                                        <div class="font-bold">フロアマップ・ナビゲーション</div>
+                                        <div class="text-xs text-text-secondary-light">3Dマップで目的地まで案内</div>
                                     </a>
                                     <a href="index.html#feature-realtime"
                                         class="block px-4 py-2 text-sm hover:bg-primary/5 rounded text-text-main-light">
@@ -191,7 +183,7 @@
                         class="flex items-center justify-center rounded-full h-10 px-5 border border-border-light hover:border-text-main-light transition-colors text-text-main-light text-sm font-medium">
                         無料ではじめる
                     </a>
-                    <a href="https://cs.gbase.ai/contact"
+                    <a href="contact.html"
                         class="flex items-center justify-center rounded-full h-10 px-5 bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 transition-all text-white text-sm font-medium">
                         お問い合わせ
                     </a>
@@ -215,7 +207,7 @@
                     class="flex items-center justify-center rounded-full h-10 px-5 border border-border-light text-text-main-light text-sm font-medium">
                     無料ではじめる
                 </a>
-                <a href="https://cs.gbase.ai/contact"
+                <a href="contact.html"
                     class="flex items-center justify-center rounded-full h-10 px-5 bg-gradient-to-r from-blue-500 to-purple-500 text-white text-sm font-medium">
                     お問い合わせ
                 </a>
@@ -240,23 +232,26 @@
                         <span class="text-primary text-xs font-bold uppercase tracking-wider">AI Concierge for Business</span>
                     </div>
                     <h1
-                        class="text-3xl md:text-4xl lg:text-4xl font-black leading-tight tracking-[-0.033em] text-text-main-light">
-                        案内所の問い合わせを<span class="text-primary">70%削減</span>
+                        class="text-4xl md:text-5xl lg:text-5xl font-black leading-tight tracking-[-0.033em] text-text-main-light">
+                        案内所の問い合わせを<br>
+                        <span class="text-primary">50~70%削減</span>
                     </h1>
                     <p class="text-lg text-text-secondary-light leading-relaxed max-w-xl">
                         最短<strong>1週間</strong>で導入、専用端末<strong>不要</strong>。<br>
                         店舗検索から在庫確認、多言語対応まで。<br>
-                        NEWoMan高輪が実証したAIコンシェルジュを、あなたの施設にも。
+                        大型商業施設で実証済みのAIコンシェルジュを、あなたの施設にも。
                     </p>
                     <div class="flex flex-col sm:flex-row gap-4 mt-2">
                         <a href="register.html"
                             class="flex items-center justify-center rounded-lg h-12 px-8 bg-primary hover:bg-primary-dark transition-colors text-white text-base font-bold shadow-lg shadow-primary/20">
                             14日間無料トライアル開始
                         </a>
+                        <!-- Hidden temporarily - will be moved to case study page
                         <a href="download.html"
                             class="flex items-center justify-center rounded-lg h-12 px-8 bg-white border border-border-light hover:border-primary transition-colors text-text-main-light text-base font-bold">
                             導入事例PDFを入手
                         </a>
+                        -->
                     </div>
                 </div>
                 <!-- Language Selector -->
@@ -269,46 +264,46 @@
                         </div>
                         <!-- Language Grid -->
                         <div class="grid grid-cols-5 gap-3 md:gap-4">
-                            <button onclick="openWidgetModal('ja')" class="flex flex-col items-center gap-2 p-3 rounded-xl hover:bg-primary/5 hover:scale-105 transition-all cursor-pointer group">
+                            <a href="kiosk-floating.html?lang=ja" class="flex flex-col items-center gap-2 p-3 rounded-xl hover:bg-primary/5 hover:scale-105 transition-all cursor-pointer group">
                                 <span class="text-3xl md:text-4xl">🇯🇵</span>
                                 <span class="text-xs font-medium text-text-secondary-light group-hover:text-primary">日本語</span>
-                            </button>
-                            <button onclick="openWidgetModal('en')" class="flex flex-col items-center gap-2 p-3 rounded-xl hover:bg-primary/5 hover:scale-105 transition-all cursor-pointer group">
+                            </a>
+                            <a href="kiosk-floating.html?lang=en" class="flex flex-col items-center gap-2 p-3 rounded-xl hover:bg-primary/5 hover:scale-105 transition-all cursor-pointer group">
                                 <span class="text-3xl md:text-4xl">🇺🇸</span>
                                 <span class="text-xs font-medium text-text-secondary-light group-hover:text-primary">English</span>
-                            </button>
-                            <button onclick="openWidgetModal('zh')" class="flex flex-col items-center gap-2 p-3 rounded-xl hover:bg-primary/5 hover:scale-105 transition-all cursor-pointer group">
+                            </a>
+                            <a href="kiosk-floating.html?lang=zh" class="flex flex-col items-center gap-2 p-3 rounded-xl hover:bg-primary/5 hover:scale-105 transition-all cursor-pointer group">
                                 <span class="text-3xl md:text-4xl">🇨🇳</span>
                                 <span class="text-xs font-medium text-text-secondary-light group-hover:text-primary">中文</span>
-                            </button>
-                            <button onclick="openWidgetModal('ko')" class="flex flex-col items-center gap-2 p-3 rounded-xl hover:bg-primary/5 hover:scale-105 transition-all cursor-pointer group">
+                            </a>
+                            <a href="kiosk-floating.html?lang=ko" class="flex flex-col items-center gap-2 p-3 rounded-xl hover:bg-primary/5 hover:scale-105 transition-all cursor-pointer group">
                                 <span class="text-3xl md:text-4xl">🇰🇷</span>
                                 <span class="text-xs font-medium text-text-secondary-light group-hover:text-primary">한국어</span>
-                            </button>
-                            <button onclick="openWidgetModal('vi')" class="flex flex-col items-center gap-2 p-3 rounded-xl hover:bg-primary/5 hover:scale-105 transition-all cursor-pointer group">
+                            </a>
+                            <a href="kiosk-floating.html?lang=vi" class="flex flex-col items-center gap-2 p-3 rounded-xl hover:bg-primary/5 hover:scale-105 transition-all cursor-pointer group">
                                 <span class="text-3xl md:text-4xl">🇻🇳</span>
                                 <span class="text-xs font-medium text-text-secondary-light group-hover:text-primary">Tiếng Việt</span>
-                            </button>
-                            <button onclick="openWidgetModal('pt')" class="flex flex-col items-center gap-2 p-3 rounded-xl hover:bg-primary/5 hover:scale-105 transition-all cursor-pointer group">
+                            </a>
+                            <a href="kiosk-floating.html?lang=pt" class="flex flex-col items-center gap-2 p-3 rounded-xl hover:bg-primary/5 hover:scale-105 transition-all cursor-pointer group">
                                 <span class="text-3xl md:text-4xl">🇵🇹</span>
                                 <span class="text-xs font-medium text-text-secondary-light group-hover:text-primary">Português</span>
-                            </button>
-                            <button onclick="openWidgetModal('pt-BR')" class="flex flex-col items-center gap-2 p-3 rounded-xl hover:bg-primary/5 hover:scale-105 transition-all cursor-pointer group">
+                            </a>
+                            <a href="kiosk-floating.html?lang=pt-br" class="flex flex-col items-center gap-2 p-3 rounded-xl hover:bg-primary/5 hover:scale-105 transition-all cursor-pointer group">
                                 <span class="text-3xl md:text-4xl">🇧🇷</span>
                                 <span class="text-xs font-medium text-text-secondary-light group-hover:text-primary">Português BR</span>
-                            </button>
-                            <button onclick="openWidgetModal('id')" class="flex flex-col items-center gap-2 p-3 rounded-xl hover:bg-primary/5 hover:scale-105 transition-all cursor-pointer group">
+                            </a>
+                            <a href="kiosk-floating.html?lang=id" class="flex flex-col items-center gap-2 p-3 rounded-xl hover:bg-primary/5 hover:scale-105 transition-all cursor-pointer group">
                                 <span class="text-3xl md:text-4xl">🇮🇩</span>
                                 <span class="text-xs font-medium text-text-secondary-light group-hover:text-primary">Indonesia</span>
-                            </button>
-                            <button onclick="openWidgetModal('ne')" class="flex flex-col items-center gap-2 p-3 rounded-xl hover:bg-primary/5 hover:scale-105 transition-all cursor-pointer group">
+                            </a>
+                            <a href="kiosk-floating.html?lang=ne" class="flex flex-col items-center gap-2 p-3 rounded-xl hover:bg-primary/5 hover:scale-105 transition-all cursor-pointer group">
                                 <span class="text-3xl md:text-4xl">🇳🇵</span>
                                 <span class="text-xs font-medium text-text-secondary-light group-hover:text-primary">नेपाली</span>
-                            </button>
-                            <button onclick="openWidgetModal('es')" class="flex flex-col items-center gap-2 p-3 rounded-xl hover:bg-primary/5 hover:scale-105 transition-all cursor-pointer group">
+                            </a>
+                            <a href="kiosk-floating.html?lang=es" class="flex flex-col items-center gap-2 p-3 rounded-xl hover:bg-primary/5 hover:scale-105 transition-all cursor-pointer group">
                                 <span class="text-3xl md:text-4xl">🇪🇸</span>
                                 <span class="text-xs font-medium text-text-secondary-light group-hover:text-primary">Español</span>
-                            </button>
+                            </a>
                         </div>
                         <!-- Hint -->
                         <div class="mt-6 text-center">
@@ -327,7 +322,7 @@
             <div class="max-w-[1200px] w-full mx-auto px-4 md:px-10 lg:px-40">
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center text-text-main-light">
                     <div class="p-4">
-                        <p class="text-5xl font-black text-primary mb-1">70<span class="text-2xl font-bold text-primary/70">%</span></p>
+                        <p class="text-4xl font-black text-primary mb-1">50~70<span class="text-2xl font-bold text-primary/70">%</span></p>
                         <p class="text-sm font-medium text-text-secondary-light">案内所・電話対応削減</p>
                     </div>
                     <div class="p-4">
@@ -335,12 +330,12 @@
                         <p class="text-sm font-medium text-text-secondary-light">多言語対応 (Inbound)</p>
                     </div>
                     <div class="p-4">
-                        <p class="text-5xl font-black text-primary mb-1">0<span class="text-2xl font-bold text-primary/70">円</span></p>
-                        <p class="text-sm font-medium text-text-secondary-light">専用筐体コスト (iPad対応)</p>
+                        <span class="material-symbols-outlined text-4xl text-primary mb-1">devices</span>
+                        <p class="text-sm font-medium text-text-secondary-light">PC・スマホ・大型タッチパネル対応</p>
                     </div>
                     <div class="p-4">
-                        <p class="text-5xl font-black text-primary mb-1">24<span class="text-2xl font-bold text-primary/70">h</span></p>
-                        <p class="text-sm font-medium text-text-secondary-light">365日 無人対応</p>
+                        <p class="text-5xl font-black text-primary mb-1">1<span class="text-2xl font-bold text-primary/70">秒</span></p>
+                        <p class="text-sm font-medium text-text-secondary-light">以内に即時応答</p>
                     </div>
                 </div>
             </div>
@@ -421,74 +416,11 @@
                 </div>
 
                 <div class="space-y-16">
-                    <!-- 機能1: フロアマップ・ナビゲーション（テキスト左、GIF右） -->
-                    <div id="feature-floormap" class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center scroll-mt-20">
-                        <div class="order-2 lg:order-1">
-                            <div class="flex items-center gap-3 mb-4">
-                                <span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-red-100 text-red-600 text-xs font-bold">
-                                    <span class="material-symbols-outlined text-sm">check</span>
-                                    案内所負担を解決
-                                </span>
-                            </div>
-                            <h3 class="text-2xl md:text-3xl font-bold text-text-main-light mb-4">フロアマップ・ナビゲーション</h3>
-                            <p class="text-text-secondary-light mb-6 text-lg leading-relaxed">現在地から目的地までの最短ルートを、3Dマップと直感的な矢印でご案内。「子供の靴」など曖昧な要望からも最適な店舗を提案します。</p>
-                            <ul class="space-y-3">
-                                <li class="flex items-center gap-3 text-text-main-light">
-                                    <span class="size-6 rounded-full bg-orange-100 flex items-center justify-center">
-                                        <span class="material-symbols-outlined text-orange-600 text-sm">check</span>
-                                    </span>
-                                    現在地からの最短ルート案内
-                                </li>
-                                <li class="flex items-center gap-3 text-text-main-light">
-                                    <span class="size-6 rounded-full bg-orange-100 flex items-center justify-center">
-                                        <span class="material-symbols-outlined text-orange-600 text-sm">check</span>
-                                    </span>
-                                    エレベーター優先等のルート設定
-                                </li>
-                                <li class="flex items-center gap-3 text-text-main-light">
-                                    <span class="size-6 rounded-full bg-orange-100 flex items-center justify-center">
-                                        <span class="material-symbols-outlined text-orange-600 text-sm">check</span>
-                                    </span>
-                                    曖昧な要望から店舗を提案
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="order-1 lg:order-2 flex justify-center">
-                            <!-- Video: フロアマップデモ（手機フレーム） -->
-                            <div class="relative w-[180px] md:w-[220px] cursor-pointer group" onclick="openVideoModal('./assets/shopmap-new.mp4')">
-                                <!-- Phone Frame -->
-                                <div class="relative bg-gray-900 rounded-[2rem] p-2 shadow-2xl group-hover:scale-105 transition-transform">
-                                    <!-- Phone Notch -->
-                                    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-1/3 h-5 bg-gray-900 rounded-b-xl z-10"></div>
-                                    <!-- Phone Screen -->
-                                    <div class="relative rounded-[1.5rem] overflow-hidden bg-black aspect-[9/19]">
-                                        <video
-                                            src="./assets/shopmap-new.mp4"
-                                            alt="フロアマップ・ナビゲーション デモ"
-                                            class="w-full h-full object-cover"
-                                            autoplay
-                                            loop
-                                            muted
-                                            playsinline
-                                            data-feature="floor-map">
-                                        </video>
-                                        <!-- Expand hint -->
-                                        <div class="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors flex items-center justify-center">
-                                            <span class="material-symbols-outlined text-white text-3xl opacity-0 group-hover:opacity-100 transition-opacity">fullscreen</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Decorative glow -->
-                                <div class="absolute -inset-4 bg-orange-400/20 rounded-[3rem] blur-2xl -z-10"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- 機能2: FAQ・施設案内AI（GIF左、テキスト右） -->
+                    <!-- 機能1: FAQ・施設案内AI（GIF左、テキスト右） -->
                     <div id="feature-faq" class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center scroll-mt-20">
-                        <div class="order-1 flex justify-center">
+                        <div class="order-1 flex flex-col items-center">
                             <!-- Video: FAQ対応デモ（手機フレーム） -->
-                            <div class="relative w-[180px] md:w-[220px] cursor-pointer group" onclick="openVideoModal('./assets/faq.mp4')">
+                            <div class="relative w-[180px] md:w-[220px] cursor-pointer group" onclick="openVideoModal('./assets/営業時間.mp4')">
                                 <!-- Phone Frame -->
                                 <div class="relative bg-gray-900 rounded-[2rem] p-2 shadow-2xl group-hover:scale-105 transition-transform">
                                     <!-- Phone Notch -->
@@ -496,9 +428,9 @@
                                     <!-- Phone Screen -->
                                     <div class="relative rounded-[1.5rem] overflow-hidden bg-black aspect-[9/19]">
                                         <video
-                                            src="./assets/faq.mp4"
+                                            src="./assets/営業時間.mp4"
                                             alt="FAQ・施設案内AI デモ"
-                                            class="w-full h-full object-cover"
+                                            class="w-full h-full object-contain"
                                             autoplay
                                             loop
                                             muted
@@ -513,6 +445,23 @@
                                 </div>
                                 <!-- Decorative glow -->
                                 <div class="absolute -inset-4 bg-indigo-400/20 rounded-[3rem] blur-2xl -z-10"></div>
+                            </div>
+                            <!-- Demo CTA under video -->
+                            <div class="mt-6 text-center">
+                                <p class="text-sm text-text-secondary-light mb-2 flex items-center justify-center gap-1">
+                                    <span class="material-symbols-outlined text-indigo-500 text-base animate-bounce">arrow_downward</span>
+                                    実際にAIと会話してみよう
+                                </p>
+                                <div class="flex flex-wrap justify-center gap-2">
+                                    <a href="kiosk-floating.html?zone=0" class="inline-flex items-center gap-2 px-5 py-2.5 bg-indigo-500 hover:bg-indigo-600 rounded-full text-white font-bold transition-all hover:scale-105 shadow-lg shadow-indigo-500/30">
+                                        <span class="material-symbols-outlined text-lg">smart_toy</span>
+                                        FAQ AI
+                                    </a>
+                                    <a href="kiosk-floating.html?zone=3" class="inline-flex items-center gap-2 px-5 py-2.5 bg-green-500 hover:bg-green-600 rounded-full text-white font-bold transition-all hover:scale-105 shadow-lg shadow-green-500/30">
+                                        <span class="material-symbols-outlined text-lg">translate</span>
+                                        多言語
+                                    </a>
+                                </div>
                             </div>
                         </div>
                         <div class="order-2">
@@ -547,9 +496,83 @@
                         </div>
                     </div>
 
-                    <!-- 機能3: リアルタイム会話（テキスト左、GIF右） -->
-                    <div id="feature-realtime" class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center scroll-mt-20">
+                    <!-- 機能2: フロアマップ・ナビゲーション（テキスト左、GIF右） -->
+                    <div id="feature-floormap" class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center scroll-mt-20">
                         <div class="order-2 lg:order-1">
+                            <div class="flex items-center gap-3 mb-4">
+                                <span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-red-100 text-red-600 text-xs font-bold">
+                                    <span class="material-symbols-outlined text-sm">check</span>
+                                    案内所負担を解決
+                                </span>
+                            </div>
+                            <h3 class="text-2xl md:text-3xl font-bold text-text-main-light mb-4">フロアマップ・ナビゲーション</h3>
+                            <p class="text-text-secondary-light mb-6 text-lg leading-relaxed">現在地から目的地までの最短ルートを、3Dマップと直感的な矢印でご案内。「私のメガネが壊れちゃった」など曖昧な要望からも最適な店舗を提案します。</p>
+                            <ul class="space-y-3">
+                                <li class="flex items-center gap-3 text-text-main-light">
+                                    <span class="size-6 rounded-full bg-orange-100 flex items-center justify-center">
+                                        <span class="material-symbols-outlined text-orange-600 text-sm">check</span>
+                                    </span>
+                                    現在地からの最短ルート案内
+                                </li>
+                                <li class="flex items-center gap-3 text-text-main-light">
+                                    <span class="size-6 rounded-full bg-orange-100 flex items-center justify-center">
+                                        <span class="material-symbols-outlined text-orange-600 text-sm">check</span>
+                                    </span>
+                                    エレベーター優先等のルート設定
+                                </li>
+                                <li class="flex items-center gap-3 text-text-main-light">
+                                    <span class="size-6 rounded-full bg-orange-100 flex items-center justify-center">
+                                        <span class="material-symbols-outlined text-orange-600 text-sm">check</span>
+                                    </span>
+                                    曖昧な要望から店舗を提案
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="order-1 lg:order-2 flex flex-col items-center">
+                            <!-- Video: フロアマップデモ（手機フレーム） -->
+                            <div class="relative w-[180px] md:w-[220px] cursor-pointer group" onclick="openVideoModal('./assets/メガネ_push2talk.mp4')">
+                                <!-- Phone Frame -->
+                                <div class="relative bg-gray-900 rounded-[2rem] p-2 shadow-2xl group-hover:scale-105 transition-transform">
+                                    <!-- Phone Notch -->
+                                    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-1/3 h-5 bg-gray-900 rounded-b-xl z-10"></div>
+                                    <!-- Phone Screen -->
+                                    <div class="relative rounded-[1.5rem] overflow-hidden bg-black aspect-[9/19]">
+                                        <video
+                                            src="./assets/メガネ_push2talk.mp4"
+                                            alt="フロアマップ・ナビゲーション デモ"
+                                            class="w-full h-full object-contain"
+                                            autoplay
+                                            loop
+                                            muted
+                                            playsinline
+                                            data-feature="floor-map">
+                                        </video>
+                                        <!-- Expand hint -->
+                                        <div class="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors flex items-center justify-center">
+                                            <span class="material-symbols-outlined text-white text-3xl opacity-0 group-hover:opacity-100 transition-opacity">fullscreen</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Decorative glow -->
+                                <div class="absolute -inset-4 bg-orange-400/20 rounded-[3rem] blur-2xl -z-10"></div>
+                            </div>
+                            <!-- Demo CTA under video -->
+                            <div class="mt-6 text-center">
+                                <p class="text-sm text-text-secondary-light mb-2 flex items-center justify-center gap-1">
+                                    <span class="material-symbols-outlined text-orange-500 text-base animate-bounce">arrow_downward</span>
+                                    実際にAIと会話してみよう
+                                </p>
+                                <a href="kiosk-floating.html?zone=1" class="inline-flex items-center gap-2 px-6 py-3 bg-orange-500 hover:bg-orange-600 rounded-full text-white font-bold transition-all hover:scale-105 shadow-lg shadow-orange-500/30">
+                                    <span class="material-symbols-outlined">smart_toy</span>
+                                    AIで道案内を体験
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 機能3: リアルタイム会話（GIF左、テキスト右） -->
+                    <div id="feature-realtime" class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center scroll-mt-20">
+                        <div class="order-2 lg:order-2">
                             <div class="flex items-center gap-3 mb-4">
                                 <span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-orange-100 text-orange-600 text-xs font-bold">
                                     <span class="material-symbols-outlined text-sm">check</span>
@@ -579,9 +602,9 @@
                                 </li>
                             </ul>
                         </div>
-                        <div class="order-1 lg:order-2 flex justify-center">
+                        <div class="order-1 lg:order-1 flex flex-col items-center">
                             <!-- Video: リアルタイム会話デモ（手機フレーム） -->
-                            <div class="relative w-[180px] md:w-[220px] cursor-pointer group" onclick="openVideoModal('./assets/realtime.mp4')">
+                            <div class="relative w-[180px] md:w-[220px] cursor-pointer group" onclick="openVideoModal('./assets/メガネ_リアルタイム.mp4')">
                                 <!-- Phone Frame -->
                                 <div class="relative bg-gray-900 rounded-[2rem] p-2 shadow-2xl group-hover:scale-105 transition-transform">
                                     <!-- Phone Notch -->
@@ -589,9 +612,9 @@
                                     <!-- Phone Screen -->
                                     <div class="relative rounded-[1.5rem] overflow-hidden bg-black aspect-[9/19]">
                                         <video
-                                            src="./assets/realtime.mp4"
+                                            src="./assets/メガネ_リアルタイム.mp4"
                                             alt="リアルタイム会話 デモ"
-                                            class="w-full h-full object-cover"
+                                            class="w-full h-full object-contain"
                                             autoplay
                                             loop
                                             muted
@@ -606,6 +629,23 @@
                                 </div>
                                 <!-- Decorative glow -->
                                 <div class="absolute -inset-4 bg-purple-400/20 rounded-[3rem] blur-2xl -z-10"></div>
+                            </div>
+                            <!-- Demo CTA under video -->
+                            <div class="mt-6 text-center">
+                                <p class="text-sm text-text-secondary-light mb-2 flex items-center justify-center gap-1">
+                                    <span class="material-symbols-outlined text-purple-500 text-base animate-bounce">arrow_downward</span>
+                                    実際にAIと会話してみよう
+                                </p>
+                                <div class="flex flex-wrap justify-center gap-2">
+                                    <a href="https://gbase.ai/realtime/198db143-19fc-4997-a654-0c6d748e4b61" target="_blank" class="inline-flex items-center gap-2 px-5 py-2.5 bg-purple-500 hover:bg-purple-600 rounded-full text-white font-bold transition-all hover:scale-105 shadow-lg shadow-purple-500/30">
+                                        <span class="material-symbols-outlined text-lg">mic</span>
+                                        リアルタイム会話
+                                    </a>
+                                    <a href="kiosk-floating.html?zone=3" class="inline-flex items-center gap-2 px-5 py-2.5 bg-green-500 hover:bg-green-600 rounded-full text-white font-bold transition-all hover:scale-105 shadow-lg shadow-green-500/30">
+                                        <span class="material-symbols-outlined text-lg">translate</span>
+                                        多言語
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -625,7 +665,7 @@
                 <!-- Bento Grid Layout - Minimal Style -->
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4 auto-rows-[140px]">
                     <!-- 商品検索 (大卡片 - 2x2) Static UI -->
-                    <div class="col-span-2 row-span-2 bg-white rounded-2xl border border-border-light relative overflow-hidden group hover:shadow-xl hover:border-primary/30 transition-all">
+                    <div id="feature-search" class="col-span-2 row-span-2 bg-white rounded-2xl border border-border-light relative overflow-hidden group hover:shadow-xl hover:border-primary/30 transition-all scroll-mt-20">
                         <div class="h-full flex flex-col">
                             <!-- Header -->
                             <div class="p-4 border-b border-border-light">
@@ -680,6 +720,11 @@
                                         <span class="text-[11px] font-bold text-primary">¥2,990</span>
                                     </div>
                                 </div>
+                                <!-- Demo Link -->
+                                <a href="kiosk-floating.html" class="mt-2 flex items-center justify-center gap-1.5 py-2 bg-primary hover:bg-primary-dark rounded-lg text-white text-xs font-bold transition-colors">
+                                    <span class="material-symbols-outlined text-sm">play_circle</span>
+                                    商品検索を体験
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -767,8 +812,8 @@
             <div class="max-w-[1200px] w-full mx-auto">
                 <div class="text-center mb-16">
                     <span class="text-primary font-bold tracking-wider uppercase text-sm mb-2 block">Case Study</span>
-                    <h2 class="text-3xl md:text-4xl font-black text-text-main-light mb-4">NEWoMan高輪 <span class="text-primary">導入成功事例</span></h2>
-                    <p class="text-text-secondary-light text-lg">ルミネが実証した70%対応削減の実績</p>
+                    <h2 class="text-3xl md:text-4xl font-black text-text-main-light mb-4">大型商業施設での<span class="text-primary">導入成功事例</span></h2>
+                    <p class="text-text-secondary-light text-lg">首都圏の商業施設で実証した対応削減の実績</p>
                 </div>
 
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -804,7 +849,7 @@
                                 <div class="bg-gray-900 rounded-[1.5rem] p-1.5 shadow-2xl">
                                     <div class="absolute top-0 left-1/2 -translate-x-1/2 w-1/3 h-4 bg-gray-900 rounded-b-lg z-10"></div>
                                     <div class="rounded-[1.2rem] overflow-hidden bg-white aspect-[9/19]">
-                                        <img src="./assets/スマホ.png" alt="スマホで質問" class="w-full h-full object-cover">
+                                        <img src="./assets/スマホ.png" alt="スマホで質問" class="w-full h-full object-contain">
                                     </div>
                                 </div>
                                 <div class="mt-3 text-center">
@@ -826,20 +871,20 @@
                     <div class="space-y-8">
                         <div class="grid grid-cols-2 gap-6">
                             <div class="bg-white rounded-xl p-6 border border-border-light shadow-sm text-center">
-                                <p class="text-4xl font-black text-primary mb-2">70<span class="text-xl">%</span></p>
-                                <p class="text-sm text-text-secondary-light font-medium">案内所対応削減</p>
-                            </div>
-                            <div class="bg-white rounded-xl p-6 border border-border-light shadow-sm text-center">
-                                <p class="text-4xl font-black text-primary mb-2">92<span class="text-xl">%</span></p>
-                                <p class="text-sm text-text-secondary-light font-medium">顧客満足度</p>
+                                <p class="text-3xl font-black text-primary mb-2">50~70<span class="text-xl">%</span></p>
+                                <p class="text-sm text-text-secondary-light font-medium">案内所・電話対応削減</p>
                             </div>
                             <div class="bg-white rounded-xl p-6 border border-border-light shadow-sm text-center">
                                 <p class="text-4xl font-black text-primary mb-2">10<span class="text-xl">+</span></p>
-                                <p class="text-sm text-text-secondary-light font-medium">多言語対応</p>
+                                <p class="text-sm text-text-secondary-light font-medium">多言語対応(Inbound)</p>
                             </div>
                             <div class="bg-white rounded-xl p-6 border border-border-light shadow-sm text-center">
-                                <p class="text-4xl font-black text-primary mb-2">24<span class="text-xl">h</span></p>
-                                <p class="text-sm text-text-secondary-light font-medium">365日対応</p>
+                                <span class="material-symbols-outlined text-4xl text-primary mb-2">devices</span>
+                                <p class="text-sm text-text-secondary-light font-medium">PC・スマホ・大型タッチ<br>パネル対応</p>
+                            </div>
+                            <div class="bg-white rounded-xl p-6 border border-border-light shadow-sm text-center">
+                                <p class="text-4xl font-black text-primary mb-2">1<span class="text-xl">秒</span></p>
+                                <p class="text-sm text-text-secondary-light font-medium">以内に即時応答</p>
                             </div>
                         </div>
 
@@ -848,7 +893,7 @@
                                 <span class="text-primary font-bold">「導入初月から効果を実感」</span><br>
                                 案内所への問い合わせが大幅に減少し、スタッフは接客に集中できるようになりました。特にインバウンド対応では、多言語AIが活躍しています。
                             </p>
-                            <p class="text-sm text-text-secondary-light mt-4">— ルミネ NEWoMan高輪 運営担当者</p>
+                            <p class="text-sm text-text-secondary-light mt-4">— 首都圏大型商業施設 運営担当者</p>
                         </div>
 
                         <div class="flex flex-col sm:flex-row gap-4">
@@ -856,22 +901,15 @@
                                 class="flex items-center justify-center rounded-lg h-12 px-8 bg-primary hover:bg-primary-dark transition-colors text-white text-base font-bold shadow-lg shadow-primary/20">
                                 14日間無料トライアル開始
                             </a>
-                            <a href="download.html"
-                                class="flex items-center justify-center rounded-lg h-12 px-8 bg-white border border-border-light hover:border-primary transition-colors text-text-main-light text-base font-bold">
-                                詳しい事例PDFを入手
+                            <a href="https://prtimes.jp/main/html/rd/p/000000215.000003279.html" target="_blank"
+                                class="flex items-center justify-center gap-2 rounded-lg h-12 px-8 bg-white border border-border-light hover:border-primary transition-colors text-text-main-light text-base font-bold">
+                                <span class="material-symbols-outlined text-lg">open_in_new</span>
+                                導入事例を詳しく見る
                             </a>
                         </div>
                     </div>
                 </div>
 
-                <!-- 案例后引导 -->
-                <div class="mt-12 text-center">
-                    <a href="download.html" class="inline-flex items-center gap-2 px-6 py-3 bg-primary/10 hover:bg-primary/20 rounded-full transition-all cursor-pointer group">
-                        <span class="material-symbols-outlined text-primary group-hover:animate-bounce">arrow_downward</span>
-                        <span class="font-bold text-primary">詳しい資料をダウンロード</span>
-                        <span class="material-symbols-outlined text-primary group-hover:animate-bounce">arrow_downward</span>
-                    </a>
-                </div>
             </div>
         </div>
 
@@ -941,14 +979,14 @@
                             <div
                                 class="shrink-0 size-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 font-black">
                                 Q</div>
-                            <h3 class="font-bold text-lg text-text-main-light pt-1">既存のPOS・在庫システムと連携できますか？</h3>
+                            <h3 class="font-bold text-lg text-text-main-light pt-1">AIの回答精度はどの程度ですか？</h3>
                         </div>
                         <div class="flex items-start gap-4">
                             <div
                                 class="shrink-0 size-8 rounded-full bg-green-100 flex items-center justify-center text-green-600 font-black">
                                 A</div>
                             <p class="text-text-secondary-light leading-relaxed pt-1">
-                                はい、主要なPOSシステムや在庫管理システムとAPI連携が可能です。リアルタイムの在庫状況をお客様に案内でき、「行ってみたら売り切れ」を防止します。
+                                導入時に施設の情報を学習させることで、高い精度で回答できます。運用中も管理画面から回答内容を確認・修正でき、継続的に精度を向上させることが可能です。
                             </p>
                         </div>
                     </div>
@@ -997,7 +1035,7 @@
                             </div>
                             <p class="text-text-main-light font-medium">まだ疑問がありますか？</p>
                         </div>
-                        <a href="https://cs.gbase.ai/contact"
+                        <a href="contact.html"
                             class="flex items-center justify-center gap-2 rounded-lg h-12 px-6 bg-primary hover:bg-primary-dark transition-colors text-white text-sm font-bold">
                             <span class="material-symbols-outlined text-lg">support_agent</span>
                             専門スタッフに相談する
@@ -1020,8 +1058,8 @@
         <div id="final-cta" class="w-full px-4 md:px-10 lg:px-40 py-24 bg-background-dark text-white relative overflow-hidden">
             <div class="absolute inset-0 bg-primary/10 opacity-30 pattern-grid"></div>
             <div class="max-w-[960px] mx-auto text-center relative z-10">
-                <p class="text-primary font-bold text-sm uppercase tracking-wider mb-4">NEWoMan高輪と同じAIを導入</p>
-                <h2 class="text-3xl md:text-5xl font-bold mb-6">今日から案内所の負担を<br class="md:hidden"><span class="text-primary">70%削減</span></h2>
+                <p class="text-primary font-bold text-sm uppercase tracking-wider mb-4">大型商業施設で実証済みのAIを導入</p>
+                <h2 class="text-3xl md:text-5xl font-bold mb-6">今日から案内所の負担を<br class="md:hidden"><span class="text-primary">大幅削減</span></h2>
                 <p class="text-lg text-gray-300 mb-10 max-w-2xl mx-auto">
                     14日間の無料トライアルで、効果を実感してください。<br>
                     専用端末不要・クレジットカード登録不要・最短1週間で導入完了。
@@ -1031,15 +1069,15 @@
                         class="flex items-center justify-center rounded-lg h-14 px-8 bg-primary hover:bg-primary-dark transition-colors text-white text-lg font-bold shadow-lg shadow-primary/30">
                         14日間無料トライアル開始
                     </a>
+                    <!-- Hidden temporarily - will be moved to case study page
                     <a href="download.html"
                         class="flex items-center justify-center rounded-lg h-14 px-8 bg-transparent border border-gray-600 hover:border-white hover:bg-white/5 transition-colors text-white text-lg font-bold">
                         導入事例PDFを入手
                     </a>
+                    -->
                 </div>
             </div>
         </div>
-
-
 
         <!-- Footer -->
         <footer class="w-full bg-background-light pt-16 pb-8 border-t border-border-light">
@@ -1055,13 +1093,13 @@
                                     class="text-sm text-text-secondary-light hover:text-primary">製品概要</a></li>
                             <li><a href="#case-study"
                                     class="text-sm text-text-secondary-light hover:text-primary">ソリューション一覧</a></li>
-                            <li><a href="https://cs.gbase.ai/contact"
+                            <li><a href="contact.html"
                                     class="text-sm text-text-secondary-light hover:text-primary">コンサルティング向け</a></li>
                             <li><a href="https://cs.gbase.ai/price"
                                     class="text-sm text-text-secondary-light hover:text-primary">料金プラン</a></li>
                             <li><a href="https://cs.gbase.ai/blog"
                                     class="text-sm text-text-secondary-light hover:text-primary">ブログ・資料</a></li>
-                            <li><a href="https://cs.gbase.ai/contact"
+                            <li><a href="contact.html"
                                     class="text-sm text-text-secondary-light hover:text-primary">お問い合わせ</a></li>
                             <li><a href="https://admin.gbase.ai/"
                                     class="text-sm text-text-secondary-light hover:text-primary">ログイン</a></li>
@@ -1084,7 +1122,7 @@
                                     class="text-sm text-text-secondary-light hover:text-primary">GBase（AIナレッジエージェント）</a></li>
                             <li><a href="https://subtitles.felo.me/" target="_blank"
                                     class="text-sm text-text-secondary-light hover:text-primary">Felo Subtitles（多言語字幕会議エージェント）</a></li>
-                            <li><a href="https://gtm.gbase.ai/" target="_blank"
+                            <li><a href="https://s.gbase.ai/" target="_blank"
                                     class="text-sm text-text-secondary-light hover:text-primary">GBase GTM（顧客リーチAIエージェント）</a></li>
                         </ul>
                     </div>
@@ -1142,7 +1180,7 @@
             </button>
             <div class="bg-gray-900 rounded-[2.5rem] p-2 shadow-2xl">
                 <div class="rounded-[2rem] overflow-hidden bg-black aspect-[9/19]">
-                    <video id="modal-video" class="w-full h-full object-cover" loop muted playsinline controls></video>
+                    <video id="modal-video" class="w-full h-full object-contain" loop muted playsinline controls></video>
                 </div>
             </div>
         </div>
@@ -1164,37 +1202,7 @@
             modal.classList.add('hidden');
             modal.classList.remove('flex');
         }
-        function openWidgetModal(lang) {
-            const modal = document.getElementById('widget-modal');
-            const iframe = document.getElementById('widget-iframe');
-            iframe.src = 'https://gbase.ai/widget-page/a182ac3e-0552-4fc0-aced-cd995e5f91c2?lang=' + lang;
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
-        }
-        function closeWidgetModal() {
-            const modal = document.getElementById('widget-modal');
-            const iframe = document.getElementById('widget-iframe');
-            iframe.src = '';
-            modal.classList.add('hidden');
-            modal.classList.remove('flex');
-        }
     </script>
-
-    <!-- Widget Modal -->
-    <div id="widget-modal" class="fixed inset-0 bg-black/80 z-50 hidden items-center justify-center p-4" onclick="closeWidgetModal()">
-        <div class="relative w-full max-w-[360px]" onclick="event.stopPropagation()">
-            <button onclick="closeWidgetModal()" class="absolute -top-12 right-0 text-white hover:text-gray-300 transition-colors">
-                <span class="material-symbols-outlined text-3xl">close</span>
-            </button>
-            <div class="bg-gray-900 rounded-[2.5rem] p-2 shadow-2xl">
-                <div class="absolute top-0 left-1/2 -translate-x-1/2 w-1/3 h-6 bg-gray-900 rounded-b-xl z-10"></div>
-                <div class="rounded-[2rem] overflow-hidden bg-white aspect-[9/19]">
-                    <iframe id="widget-iframe" class="w-full h-full border-0" allow="microphone" title="GBase Support Demo"></iframe>
-                </div>
-            </div>
-            <p class="text-center text-white/70 text-sm mt-4">「話しかけて」をクリックして体験</p>
-        </div>
-    </div>
 </body>
 
 </html>

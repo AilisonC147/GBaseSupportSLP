@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>AIコンシェルジュ Kiosk | GBase</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            font-family: 'Noto Sans JP', sans-serif;
+            background: #000;
+        }
+
+        /* Bot iframe - full screen */
+        #bot-frame {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            z-index: 1;
+        }
+
+        /* Floating overlay panel - matches Playwright design */
+        #kiosk-overlay {
+            position: fixed;
+            left: 10px;
+            top: 70px;
+            bottom: 70px;
+            width: 280px;
+            background: rgba(26, 26, 46, 0.97);
+            backdrop-filter: blur(10px);
+            z-index: 99999;
+            display: flex;
+            flex-direction: column;
+            transform: translateX(0);
+            transition: transform 0.3s ease;
+            box-shadow: 0 4px 30px rgba(0,0,0,0.5);
+            overflow: hidden;
+            border-radius: 16px;
+        }
+
+        #kiosk-overlay.hidden {
+            transform: translateX(calc(-100% - 20px));
+        }
+
+        /* Header */
+        #kiosk-header {
+            padding: 12px 16px;
+            background: rgba(255,255,255,0.05);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        #kiosk-header h1 {
+            color: #fff;
+            font-size: 14px;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        #kiosk-header p {
+            color: rgba(255,255,255,0.5);
+            font-size: 11px;
+            margin: 0;
+        }
+
+        /* Zone buttons grid */
+        #kiosk-zones {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+            padding: 12px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .kiosk-zone-btn {
+            padding: 10px 8px;
+            border-radius: 10px;
+            border: 2px solid transparent;
+            background: rgba(255,255,255,0.08);
+            color: #fff;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            text-align: center;
+        }
+
+        .kiosk-zone-btn .zone-icon {
+            font-size: 20px;
+        }
+
+        .kiosk-zone-btn .zone-label {
+            font-size: 11px;
+            opacity: 0.9;
+        }
+
+        .kiosk-zone-btn:hover {
+            background: rgba(255,255,255,0.15);
+            transform: scale(1.02);
+        }
+
+        .kiosk-zone-btn.active {
+            background: var(--zone-color);
+            border-color: rgba(255,255,255,0.3);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        /* Prompts list */
+        #kiosk-prompts {
+            flex: 1;
+            padding: 12px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .kiosk-prompt-btn {
+            width: 100%;
+            padding: 12px 14px;
+            border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.12);
+            background: rgba(255,255,255,0.05);
+            color: #fff;
+            font-size: 13px;
+            text-align: left;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .kiosk-prompt-btn:hover {
+            background: rgba(255,255,255,0.12);
+            border-color: var(--zone-color);
+        }
+
+        .kiosk-prompt-btn:active {
+            transform: scale(0.98);
+        }
+
+        .kiosk-prompt-btn.copied {
+            background: #22c55e;
+            border-color: #22c55e;
+        }
+
+        .kiosk-prompt-btn .arrow {
+            opacity: 0.4;
+            font-size: 12px;
+        }
+
+        .kiosk-prompt-btn:hover .arrow {
+            opacity: 1;
+        }
+
+        /* Footer */
+        #kiosk-footer {
+            padding: 12px;
+            background: rgba(0,0,0,0.2);
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        #kiosk-hint {
+            text-align: center;
+            color: rgba(255,255,255,0.5);
+            font-size: 11px;
+            line-height: 1.5;
+        }
+
+        #kiosk-hint .icon {
+            font-size: 14px;
+            vertical-align: middle;
+        }
+
+        #kiosk-status {
+            text-align: center;
+            color: rgba(255,255,255,0.3);
+            font-size: 10px;
+            margin-top: 8px;
+        }
+
+        /* Toggle button - desktop only */
+        #kiosk-toggle-btn {
+            position: fixed;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 99998;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            color: white;
+            font-size: 26px;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(102, 126, 234, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s ease;
+        }
+
+        #kiosk-toggle-btn.visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        #kiosk-toggle-btn:hover {
+            transform: translateY(-50%) scale(1.1);
+            box-shadow: 0 6px 25px rgba(102, 126, 234, 0.7);
+        }
+
+        /* Backdrop for click-outside-to-close */
+        #kiosk-backdrop {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 99998;
+            background: transparent;
+            display: none;
+        }
+
+        #kiosk-backdrop.visible {
+            display: block;
+        }
+
+        /* Mobile peek tab - shown when drawer is hidden */
+        #kiosk-peek-tab {
+            display: none;
+        }
+
+        /* Toast notification */
+        #toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(34, 197, 94, 0.95);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 500;
+            z-index: 100000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+
+        #toast.show {
+            opacity: 1;
+        }
+
+        /* Loading state */
+        #loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #1a1a2e;
+            z-index: 100001;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.5s ease;
+        }
+
+        #loading-overlay.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid rgba(255,255,255,0.2);
+            border-top-color: #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        #loading-overlay p {
+            color: rgba(255,255,255,0.7);
+            margin-top: 16px;
+            font-size: 14px;
+        }
+
+        /* Back button in header */
+        #back-btn {
+            padding: 6px 10px;
+            border-radius: 8px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: rgba(255,255,255,0.8);
+            font-size: 11px;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            text-decoration: none;
+            transition: all 0.2s;
+            margin-left: auto;
+        }
+
+        #back-btn:hover {
+            background: rgba(255,255,255,0.2);
+            color: #fff;
+        }
+
+        /* Mobile responsive - Bottom drawer design */
+        @media (max-width: 768px) {
+            #kiosk-overlay {
+                left: 0;
+                right: 0;
+                top: auto;
+                bottom: 0;
+                width: 100%;
+                max-width: none;
+                border-radius: 20px 20px 0 0;
+                max-height: 55vh;
+                transform: translateY(0);
+            }
+
+            #kiosk-overlay.hidden {
+                transform: translateY(100%);
+            }
+
+            /* Drag handle */
+            #kiosk-header::before {
+                content: '';
+                display: block;
+                width: 40px;
+                height: 4px;
+                background: rgba(255,255,255,0.3);
+                border-radius: 2px;
+                margin: 0 auto 8px;
+            }
+
+            #kiosk-header {
+                padding: 12px 16px 8px;
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            #kiosk-header > div {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
+
+            #kiosk-header h1 {
+                font-size: 13px;
+            }
+
+            #kiosk-header p {
+                display: none;
+            }
+
+            #back-btn {
+                margin-left: 0;
+                padding: 5px 10px;
+                font-size: 11px;
+            }
+
+            /* Horizontal scrolling zones */
+            #kiosk-zones {
+                display: flex;
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                gap: 8px;
+                padding: 8px 12px;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+            }
+
+            #kiosk-zones::-webkit-scrollbar {
+                display: none;
+            }
+
+            .kiosk-zone-btn {
+                flex: 0 0 auto;
+                padding: 8px 14px;
+                flex-direction: row;
+                gap: 6px;
+                min-width: auto;
+            }
+
+            .kiosk-zone-btn .zone-icon {
+                font-size: 18px;
+            }
+
+            .kiosk-zone-btn .zone-label {
+                font-size: 12px;
+            }
+
+            /* Prompts in 2 columns */
+            #kiosk-prompts {
+                padding: 10px 12px;
+                gap: 8px;
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                flex: none;
+                max-height: 30vh;
+                overflow-y: auto;
+            }
+
+            .kiosk-prompt-btn {
+                padding: 10px 12px;
+                font-size: 12px;
+            }
+
+            #kiosk-footer {
+                padding: 10px 12px;
+                padding-bottom: max(10px, env(safe-area-inset-bottom));
+            }
+
+            #kiosk-hint {
+                font-size: 11px;
+            }
+
+            #kiosk-status {
+                display: none;
+            }
+
+            /* Hide desktop toggle button on mobile */
+            #kiosk-toggle-btn {
+                display: none !important;
+            }
+
+            /* Mobile peek tab - minimal handle */
+            #kiosk-peek-tab {
+                display: flex;
+                position: fixed;
+                left: 50%;
+                bottom: 0;
+                transform: translateX(-50%);
+                z-index: 99998;
+                width: 60px;
+                height: 20px;
+                padding-bottom: env(safe-area-inset-bottom);
+                background: rgba(26, 26, 46, 0.9);
+                border-radius: 10px 10px 0 0;
+                border: none;
+                cursor: pointer;
+                box-shadow: 0 -2px 10px rgba(0,0,0,0.2);
+                align-items: center;
+                justify-content: center;
+                opacity: 0;
+                pointer-events: none;
+                transition: all 0.3s ease;
+            }
+
+            #kiosk-peek-tab.visible {
+                opacity: 1;
+                pointer-events: auto;
+            }
+
+            #kiosk-peek-tab .handle {
+                width: 32px;
+                height: 4px;
+                background: rgba(255,255,255,0.5);
+                border-radius: 2px;
+            }
+
+            #kiosk-peek-tab:active .handle {
+                background: rgba(255,255,255,0.8);
+            }
+
+            #kiosk-peek-tab .label {
+                display: none;
+            }
+
+            /* Toast position */
+            #toast {
+                bottom: 80px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Bot iframe -->
+    <iframe id="bot-frame" src=""></iframe>
+
+    <!-- Loading overlay -->
+    <div id="loading-overlay">
+        <div class="spinner"></div>
+        <p data-i18n="loading">読み込み中...</p>
+    </div>
+
+    <!-- Floating overlay panel -->
+    <div id="kiosk-overlay">
+        <div id="kiosk-header">
+            <div>
+                <h1>🤖 <span data-i18n="title">AIコンシェルジュ</span></h1>
+                <p>ニュウマン高輪</p>
+            </div>
+            <a id="back-btn" href="index.html" data-i18n="back">← 戻る</a>
+        </div>
+        <div id="kiosk-zones"></div>
+        <div id="kiosk-prompts"></div>
+        <div id="kiosk-footer">
+            <div id="kiosk-hint">
+                <span class="icon">👆</span> <span data-i18n="hint">タップでコピー → 貼り付けて送信</span>
+            </div>
+            <div id="kiosk-status">Bot Share Mode</div>
+        </div>
+    </div>
+
+    <!-- Backdrop for click-outside-to-close -->
+    <div id="kiosk-backdrop"></div>
+
+    <!-- Toggle button - desktop (shown when overlay is hidden) -->
+    <button id="kiosk-toggle-btn">☰</button>
+
+    <!-- Mobile peek tab - minimal handle -->
+    <button id="kiosk-peek-tab">
+        <span class="handle"></span>
+    </button>
+
+    <!-- Toast notification -->
+    <div id="toast">
+        <span>📋</span>
+        <span id="toast-text">コピーしました！</span>
+    </div>
+
+    <script>
+        // Configuration
+        var CONFIG = {
+            botBaseUrl: 'https://gbase.ai/bot/198db143-19fc-4997-a654-0c6d748e4b61',
+            realtimeBaseUrl: 'https://gbase.ai/realtime/198db143-19fc-4997-a654-0c6d748e4b61'
+        };
+
+        // Current language
+        var currentLang = 'ja';
+
+        // Translations
+        var TRANSLATIONS = {
+            ja: {
+                title: 'AIコンシェルジュ',
+                back: '← 戻る',
+                loading: '読み込み中...',
+                hint: 'タップでコピー → 貼り付けて送信',
+                copied: 'コピーしました！',
+                realtimeStart: 'リアルタイム会話を開始',
+                zones: ['総合案内', 'フロアナビ', '店舗検索', '多言語', 'その他', 'リアルタイム会話'],
+                prompts: [
+                    ['営業時間を教えて', '今日のイベントは？', '駐車場はありますか？', 'ベビーカーを借りたい'],
+                    ['映画館はどこ？', 'トイレに行きたい', 'ATMはありますか？', 'カフェへの行き方'],
+                    ['カフェを探して', 'レストランのおすすめ', '子供服のお店', 'お土産を買いたい'],
+                    ['Where is the restroom?', '免税柜台在哪里？', '화장실이 어디에요?', 'ห้องน้ำอยู่ที่ไหน?'],
+                    ['Wi-Fiはありますか？', 'コインロッカーの場所', '車椅子の貸し出し', '忘れ物をしました'],
+                    []
+                ]
+            },
+            en: {
+                title: 'AI Concierge',
+                back: '← Back',
+                loading: 'Loading...',
+                hint: 'Tap to copy → Paste and send',
+                copied: 'Copied!',
+                realtimeStart: 'Start Realtime Conversation',
+                zones: ['General Info', 'Floor Guide', 'Shop Search', 'Multilingual', 'Others', 'Realtime Chat'],
+                prompts: [
+                    ['What are the opening hours?', 'Any events today?', 'Is there parking?', 'Can I borrow a stroller?'],
+                    ['Where is the cinema?', 'Where is the restroom?', 'Is there an ATM?', 'How to get to a cafe?'],
+                    ['Find a cafe', 'Restaurant recommendations', 'Kids clothing stores', 'I want to buy souvenirs'],
+                    ['Where is the restroom?', '免税柜台在哪里？', '화장실이 어디에요?', 'ห้องน้ำอยู่ที่ไหน?'],
+                    ['Is there Wi-Fi?', 'Where are the lockers?', 'Wheelchair rental', 'I lost something'],
+                    []
+                ]
+            },
+            zh: {
+                title: 'AI礼宾服务',
+                back: '← 返回',
+                loading: '加载中...',
+                hint: '点击复制 → 粘贴并发送',
+                copied: '已复制！',
+                realtimeStart: '开始实时对话',
+                zones: ['综合咨询', '楼层导航', '店铺搜索', '多语言', '其他', '实时对话'],
+                prompts: [
+                    ['营业时间是几点？', '今天有什么活动？', '有停车场吗？', '可以借婴儿车吗？'],
+                    ['电影院在哪里？', '洗手间在哪里？', '有ATM吗？', '咖啡厅怎么走？'],
+                    ['找咖啡厅', '推荐餐厅', '童装店', '想买纪念品'],
+                    ['Where is the restroom?', '免税柜台在哪里？', '화장실이 어디에요?', 'ห้องน้ำอยู่ที่ไหน?'],
+                    ['有Wi-Fi吗？', '储物柜在哪？', '轮椅租借', '我丢东西了'],
+                    []
+                ]
+            },
+            ko: {
+                title: 'AI 컨시어지',
+                back: '← 뒤로',
+                loading: '로딩 중...',
+                hint: '탭하여 복사 → 붙여넣기하여 전송',
+                copied: '복사되었습니다!',
+                realtimeStart: '실시간 대화 시작',
+                zones: ['종합 안내', '플로어 가이드', '매장 검색', '다국어', '기타', '실시간 대화'],
+                prompts: [
+                    ['영업시간이 어떻게 되나요?', '오늘 이벤트가 있나요?', '주차장이 있나요?', '유모차를 빌릴 수 있나요?'],
+                    ['영화관은 어디인가요?', '화장실은 어디인가요?', 'ATM이 있나요?', '카페는 어떻게 가나요?'],
+                    ['카페를 찾아주세요', '레스토랑 추천', '아동복 매장', '기념품을 사고 싶어요'],
+                    ['Where is the restroom?', '免税柜台在哪里？', '화장실이 어디에요?', 'ห้องน้ำอยู่ที่ไหน?'],
+                    ['Wi-Fi가 있나요?', '물품보관함은 어디인가요?', '휠체어 대여', '분실물이 있어요'],
+                    []
+                ]
+            },
+            vi: {
+                title: 'Trợ lý AI',
+                back: '← Quay lại',
+                loading: 'Đang tải...',
+                hint: 'Nhấn để sao chép → Dán và gửi',
+                copied: 'Đã sao chép!',
+                realtimeStart: 'Bắt đầu hội thoại',
+                zones: ['Thông tin chung', 'Hướng dẫn tầng', 'Tìm cửa hàng', 'Đa ngôn ngữ', 'Khác', 'Trò chuyện trực tiếp'],
+                prompts: [
+                    ['Giờ mở cửa là mấy giờ?', 'Hôm nay có sự kiện gì?', 'Có bãi đỗ xe không?', 'Tôi có thể mượn xe đẩy không?'],
+                    ['Rạp chiếu phim ở đâu?', 'Nhà vệ sinh ở đâu?', 'Có ATM không?', 'Đường đến quán cà phê?'],
+                    ['Tìm quán cà phê', 'Gợi ý nhà hàng', 'Cửa hàng quần áo trẻ em', 'Tôi muốn mua quà lưu niệm'],
+                    ['Where is the restroom?', '免税柜台在哪里？', '화장실이 어디에요?', 'ห้องน้ำอยู่ที่ไหน?'],
+                    ['Có Wi-Fi không?', 'Tủ khóa ở đâu?', 'Thuê xe lăn', 'Tôi bị mất đồ'],
+                    []
+                ]
+            },
+            pt: {
+                title: 'Concierge IA',
+                back: '← Voltar',
+                loading: 'Carregando...',
+                hint: 'Toque para copiar → Cole e envie',
+                copied: 'Copiado!',
+                realtimeStart: 'Iniciar Conversa',
+                zones: ['Informações', 'Guia de Andares', 'Buscar Lojas', 'Multilíngue', 'Outros', 'Chat em Tempo Real'],
+                prompts: [
+                    ['Qual o horário de funcionamento?', 'Há eventos hoje?', 'Tem estacionamento?', 'Posso pegar um carrinho?'],
+                    ['Onde fica o cinema?', 'Onde é o banheiro?', 'Tem caixa eletrônico?', 'Como chego no café?'],
+                    ['Procurar um café', 'Recomendações de restaurantes', 'Lojas de roupas infantis', 'Quero comprar lembranças'],
+                    ['Where is the restroom?', '免税柜台在哪里？', '화장실이 어디에요?', 'ห้องน้ำอยู่ที่ไหน?'],
+                    ['Tem Wi-Fi?', 'Onde ficam os armários?', 'Aluguel de cadeira de rodas', 'Perdi algo'],
+                    []
+                ]
+            },
+            'pt-br': {
+                title: 'Concierge IA',
+                back: '← Voltar',
+                loading: 'Carregando...',
+                hint: 'Toque para copiar → Cole e envie',
+                copied: 'Copiado!',
+                realtimeStart: 'Iniciar Conversa',
+                zones: ['Informações', 'Guia de Andares', 'Buscar Lojas', 'Multilíngue', 'Outros', 'Chat em Tempo Real'],
+                prompts: [
+                    ['Qual o horário de funcionamento?', 'Tem eventos hoje?', 'Tem estacionamento?', 'Posso pegar um carrinho?'],
+                    ['Onde fica o cinema?', 'Onde é o banheiro?', 'Tem caixa eletrônico?', 'Como chego no café?'],
+                    ['Procurar um café', 'Recomendações de restaurantes', 'Lojas de roupas infantis', 'Quero comprar lembranças'],
+                    ['Where is the restroom?', '免税柜台在哪里？', '화장실이 어디에요?', 'ห้องน้ำอยู่ที่ไหน?'],
+                    ['Tem Wi-Fi?', 'Onde ficam os armários?', 'Aluguel de cadeira de rodas', 'Perdi algo'],
+                    []
+                ]
+            },
+            id: {
+                title: 'Asisten AI',
+                back: '← Kembali',
+                loading: 'Memuat...',
+                hint: 'Ketuk untuk menyalin → Tempel dan kirim',
+                copied: 'Tersalin!',
+                realtimeStart: 'Mulai Percakapan',
+                zones: ['Info Umum', 'Panduan Lantai', 'Cari Toko', 'Multibahasa', 'Lainnya', 'Obrolan Langsung'],
+                prompts: [
+                    ['Jam operasional?', 'Ada acara hari ini?', 'Ada parkir?', 'Bisa pinjam stroller?'],
+                    ['Bioskop di mana?', 'Toilet di mana?', 'Ada ATM?', 'Cara ke kafe?'],
+                    ['Cari kafe', 'Rekomendasi restoran', 'Toko baju anak', 'Mau beli oleh-oleh'],
+                    ['Where is the restroom?', '免税柜台在哪里？', '화장실이 어디에요?', 'ห้องน้ำอยู่ที่ไหน?'],
+                    ['Ada Wi-Fi?', 'Loker di mana?', 'Sewa kursi roda', 'Saya kehilangan barang'],
+                    []
+                ]
+            },
+            ne: {
+                title: 'AI सहायक',
+                back: '← पछाडि',
+                loading: 'लोड हुँदैछ...',
+                hint: 'प्रतिलिपि गर्न ट्याप गर्नुहोस् → टाँस्नुहोस् र पठाउनुहोस्',
+                copied: 'प्रतिलिपि गरियो!',
+                realtimeStart: 'कुराकानी सुरु गर्नुहोस्',
+                zones: ['सामान्य जानकारी', 'तल्ला गाइड', 'पसल खोज्नुहोस्', 'बहुभाषिक', 'अन्य', 'प्रत्यक्ष कुराकानी'],
+                prompts: [
+                    ['खुल्ने समय के हो?', 'आज कुनै कार्यक्रम छ?', 'पार्किङ छ?', 'के म स्ट्रोलर लिन सक्छु?'],
+                    ['सिनेमा हल कहाँ छ?', 'शौचालय कहाँ छ?', 'ATM छ?', 'क्याफे कसरी जाने?'],
+                    ['क्याफे खोज्नुहोस्', 'रेस्टुरेन्ट सिफारिसहरू', 'बच्चाको लुगा पसलहरू', 'म उपहार किन्न चाहन्छु'],
+                    ['Where is the restroom?', '免税柜台在哪里？', '화장실이 어디에요?', 'ห้องน้ำอยู่ที่ไหน?'],
+                    ['Wi-Fi छ?', 'लकर कहाँ छ?', 'व्हीलचेयर भाडामा', 'मैले केही हरायो'],
+                    []
+                ]
+            },
+            es: {
+                title: 'Conserje IA',
+                back: '← Volver',
+                loading: 'Cargando...',
+                hint: 'Toca para copiar → Pega y envía',
+                copied: '¡Copiado!',
+                realtimeStart: 'Iniciar Conversación',
+                zones: ['Info General', 'Guía de Pisos', 'Buscar Tiendas', 'Multilingüe', 'Otros', 'Chat en Vivo'],
+                prompts: [
+                    ['¿Cuál es el horario?', '¿Hay eventos hoy?', '¿Hay estacionamiento?', '¿Puedo usar un cochecito?'],
+                    ['¿Dónde está el cine?', '¿Dónde está el baño?', '¿Hay cajero automático?', '¿Cómo llego al café?'],
+                    ['Buscar una cafetería', 'Recomendaciones de restaurantes', 'Tiendas de ropa infantil', 'Quiero comprar recuerdos'],
+                    ['Where is the restroom?', '免税柜台在哪里？', '화장실이 어디에요?', 'ห้องน้ำอยู่ที่ไหน?'],
+                    ['¿Hay Wi-Fi?', '¿Dónde están los casilleros?', 'Alquiler de silla de ruedas', 'Perdí algo'],
+                    []
+                ]
+            }
+        };
+
+        // Get ZONES for current language
+        function getZones() {
+            var t = TRANSLATIONS[currentLang] || TRANSLATIONS.ja;
+            return [
+                { icon: '🎫', label: t.zones[0], color: '#3b82f6', prompts: t.prompts[0] },
+                { icon: '🗺️', label: t.zones[1], color: '#f97316', prompts: t.prompts[1] },
+                { icon: '🛍️', label: t.zones[2], color: '#ec4899', prompts: t.prompts[2] },
+                { icon: '🌍', label: t.zones[3], color: '#22c55e', prompts: t.prompts[3] },
+                { icon: '❓', label: t.zones[4], color: '#8b5cf6', prompts: t.prompts[4] },
+                { icon: '🎤', label: t.zones[5], color: '#a855f7', isRealtime: true, realtimeUrl: CONFIG.realtimeBaseUrl + '?lang=' + currentLang, prompts: t.prompts[5] }
+            ];
+        }
+
+        var currentZoneIndex = 0;
+
+        // Get language from URL parameter
+        function getInitialLang() {
+            var params = new URLSearchParams(window.location.search);
+            var lang = params.get('lang');
+            if (lang && TRANSLATIONS[lang]) {
+                return lang;
+            }
+            return 'ja';
+        }
+
+        // Get zone from URL parameter
+        function getInitialZone() {
+            var params = new URLSearchParams(window.location.search);
+            var zone = params.get('zone');
+            var zones = getZones();
+            if (zone !== null) {
+                var zoneIndex = parseInt(zone, 10);
+                if (zoneIndex >= 0 && zoneIndex < zones.length) {
+                    return zoneIndex;
+                }
+            }
+            return 0;
+        }
+
+        // Apply translations to UI
+        function applyTranslations() {
+            var t = TRANSLATIONS[currentLang] || TRANSLATIONS.ja;
+            document.querySelectorAll('[data-i18n]').forEach(function(el) {
+                var key = el.getAttribute('data-i18n');
+                if (t[key]) {
+                    el.textContent = t[key];
+                }
+            });
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            currentLang = getInitialLang();
+            applyTranslations();
+            var initialZone = getInitialZone();
+            currentZoneIndex = initialZone;
+            initZones();
+            renderPrompts(initialZone);
+            loadBot();
+            setupEventListeners();
+            // Show backdrop on initial load (panel starts open)
+            document.getElementById('kiosk-backdrop').classList.add('visible');
+        });
+
+        // Load bot iframe
+        function loadBot() {
+            var iframe = document.getElementById('bot-frame');
+            var loading = document.getElementById('loading-overlay');
+
+            iframe.src = CONFIG.botBaseUrl + '?lang=' + currentLang;
+
+            iframe.onload = function() {
+                setTimeout(function() {
+                    loading.classList.add('hidden');
+                }, 1000);
+            };
+
+            // Fallback timeout
+            setTimeout(function() {
+                loading.classList.add('hidden');
+            }, 5000);
+        }
+
+        // Initialize zone buttons using safe DOM methods
+        function initZones() {
+            var container = document.getElementById('kiosk-zones');
+            container.textContent = '';
+            var zones = getZones();
+
+            zones.forEach(function(zone, index) {
+                var btn = document.createElement('button');
+                btn.className = 'kiosk-zone-btn' + (index === currentZoneIndex ? ' active' : '');
+                btn.style.setProperty('--zone-color', zone.color);
+
+                var iconSpan = document.createElement('span');
+                iconSpan.className = 'zone-icon';
+                iconSpan.textContent = zone.icon;
+
+                var labelSpan = document.createElement('span');
+                labelSpan.className = 'zone-label';
+                labelSpan.textContent = zone.label;
+
+                btn.appendChild(iconSpan);
+                btn.appendChild(labelSpan);
+
+                btn.onclick = function(e) {
+                    e.stopPropagation();
+                    selectZone(index);
+                };
+                container.appendChild(btn);
+            });
+        }
+
+        // Select zone
+        function selectZone(index) {
+            currentZoneIndex = index;
+
+            // Update active state
+            var buttons = document.querySelectorAll('.kiosk-zone-btn');
+            buttons.forEach(function(btn, i) {
+                if (i === index) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+
+            renderPrompts(index);
+        }
+
+        // Render prompts for zone using safe DOM methods
+        function renderPrompts(zoneIndex) {
+            var zones = getZones();
+            var zone = zones[zoneIndex];
+            var t = TRANSLATIONS[currentLang] || TRANSLATIONS.ja;
+            var container = document.getElementById('kiosk-prompts');
+            container.textContent = '';
+            container.style.setProperty('--zone-color', zone.color);
+
+            // Special handling for realtime zone
+            if (zone.isRealtime) {
+                var realtimeBtn = document.createElement('a');
+                realtimeBtn.href = zone.realtimeUrl;
+                realtimeBtn.target = '_blank';
+                realtimeBtn.className = 'kiosk-prompt-btn realtime-btn';
+                realtimeBtn.style.setProperty('--zone-color', zone.color);
+                realtimeBtn.style.background = 'linear-gradient(135deg, #a855f7 0%, #9333ea 100%)';
+                realtimeBtn.style.border = 'none';
+                realtimeBtn.style.textDecoration = 'none';
+                realtimeBtn.style.justifyContent = 'center';
+                realtimeBtn.style.padding = '16px';
+                realtimeBtn.style.fontSize = '14px';
+
+                var iconSpan = document.createElement('span');
+                iconSpan.textContent = '🎤 ';
+
+                var textSpan = document.createElement('span');
+                textSpan.textContent = t.realtimeStart;
+
+                realtimeBtn.appendChild(iconSpan);
+                realtimeBtn.appendChild(textSpan);
+
+                realtimeBtn.onclick = function() {
+                    setTimeout(function() { hideOverlay(); }, 300);
+                };
+                container.appendChild(realtimeBtn);
+                return;
+            }
+
+            zone.prompts.forEach(function(prompt) {
+                var btn = document.createElement('button');
+                btn.className = 'kiosk-prompt-btn';
+                btn.style.setProperty('--zone-color', zone.color);
+
+                var textSpan = document.createElement('span');
+                textSpan.textContent = prompt;
+
+                var arrowSpan = document.createElement('span');
+                arrowSpan.className = 'arrow';
+                arrowSpan.textContent = '→';
+
+                btn.appendChild(textSpan);
+                btn.appendChild(arrowSpan);
+
+                btn.onclick = function() {
+                    sendPrompt(prompt, btn);
+                };
+                container.appendChild(btn);
+            });
+        }
+
+        // Copy prompt to clipboard
+        function sendPrompt(prompt, btn) {
+            var t = TRANSLATIONS[currentLang] || TRANSLATIONS.ja;
+            btn.classList.add('copied');
+            var arrow = btn.querySelector('.arrow');
+            if (arrow) arrow.textContent = '⏳';
+
+            navigator.clipboard.writeText(prompt).then(function() {
+                if (arrow) arrow.textContent = '✓';
+                showToast(t.copied);
+
+                // Auto-hide overlay after copying
+                setTimeout(function() {
+                    hideOverlay();
+                }, 800);
+            }).catch(function() {
+                if (arrow) arrow.textContent = '✗';
+                showToast('Error');
+            });
+
+            setTimeout(function() {
+                btn.classList.remove('copied');
+                if (arrow) arrow.textContent = '→';
+            }, 2000);
+        }
+
+        // Show toast notification
+        function showToast(message) {
+            var toast = document.getElementById('toast');
+            var text = document.getElementById('toast-text');
+            text.textContent = message;
+            toast.classList.add('show');
+
+            setTimeout(function() {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            var overlay = document.getElementById('kiosk-overlay');
+            var toggleBtn = document.getElementById('kiosk-toggle-btn');
+            var peekTab = document.getElementById('kiosk-peek-tab');
+            var backdrop = document.getElementById('kiosk-backdrop');
+            var header = document.getElementById('kiosk-header');
+
+            // Toggle button click (desktop)
+            toggleBtn.onclick = function() {
+                showOverlay();
+            };
+
+            // Peek tab click (mobile)
+            peekTab.onclick = function() {
+                showOverlay();
+            };
+
+            // Click backdrop to close (works over iframe)
+            backdrop.onclick = function() {
+                hideOverlay();
+            };
+
+            // Touch swipe to close (mobile)
+            var touchStartY = 0;
+            var touchCurrentY = 0;
+
+            header.addEventListener('touchstart', function(e) {
+                touchStartY = e.touches[0].clientY;
+            }, { passive: true });
+
+            header.addEventListener('touchmove', function(e) {
+                touchCurrentY = e.touches[0].clientY;
+                var diff = touchCurrentY - touchStartY;
+                if (diff > 0) {
+                    overlay.style.transform = 'translateY(' + diff + 'px)';
+                }
+            }, { passive: true });
+
+            header.addEventListener('touchend', function(e) {
+                var diff = touchCurrentY - touchStartY;
+                overlay.style.transform = '';
+                if (diff > 50) {
+                    hideOverlay();
+                }
+                touchStartY = 0;
+                touchCurrentY = 0;
+            }, { passive: true });
+        }
+
+        // Show overlay
+        function showOverlay() {
+            document.getElementById('kiosk-overlay').classList.remove('hidden');
+            document.getElementById('kiosk-backdrop').classList.add('visible');
+            document.getElementById('kiosk-toggle-btn').classList.remove('visible');
+            document.getElementById('kiosk-peek-tab').classList.remove('visible');
+        }
+
+        // Hide overlay
+        function hideOverlay() {
+            document.getElementById('kiosk-overlay').classList.add('hidden');
+            document.getElementById('kiosk-backdrop').classList.remove('visible');
+            document.getElementById('kiosk-toggle-btn').classList.add('visible');
+            document.getElementById('kiosk-peek-tab').classList.add('visible');
+        }
+    </script>
+</body>
+</html>
