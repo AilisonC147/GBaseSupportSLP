@@ -48,8 +48,7 @@
       "name": "AIコンシェルジュ",
       "applicationCategory": "BusinessApplication",
       "operatingSystem": "Webブラウザ",
-      "offers": { "@type": "Offer", "price": "要問い合わせ", "priceCurrency": "JPY" },
-      "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.5", "ratingCount": "12" }
+      "offers": { "@type": "Offer", "price": "要問い合わせ", "priceCurrency": "JPY" }
     }
     </script>
     <!-- Schema.org: FAQPage -->
@@ -59,11 +58,11 @@
       "@type": "FAQPage",
       "mainEntity": [
         { "@type": "Question", "name": "AIコンシェルジュの導入コストは？",
-          "acceptedAnswer": { "@type": "Answer", "text": "導入規模やカスタマイズ内容によりますが、月額10万円〜からご利用いただけます。まずは無料相談にてヒアリングさせていただきます。" } },
+          "acceptedAnswer": { "@type": "Answer", "text": "導入規模・拠点数・カスタマイズ内容によって異なるため、要問い合わせです。無料相談にて要件をヒアリングし、最適な構成と見積りをご提案いたします。" } },
         { "@type": "Question", "name": "多言語対応は何言語まで可能ですか？",
           "acceptedAnswer": { "@type": "Answer", "text": "日本語・英語・中国語・韓国語・ベトナム語・ポルトガル語・スペイン語・インドネシア語・ネパール語など10言語以上に対応しています。追加言語のご相談も承ります。" } },
         { "@type": "Question", "name": "既存の受付システムとの連携は？",
-          "acceptedAnswer": { "@type": "Answer", "text": "LINE WORKS・Slack・Teams・来訪管理システム・入退館ゲートなど、APIとWebhookで既存システムと柔軟に連携可能です。" } },
+          "acceptedAnswer": { "@type": "Answer", "text": "担当者への通知連携はLINE WORKS・WowTalkに標準対応。LINEは来訪者側のチャット入口として利用可能です。その他は来訪管理システム・入退館ゲートなどAPIとWebhookで柔軟に連携可能です。" } },
         { "@type": "Question", "name": "オフィス 受付 無人化の効果測定方法は？",
           "acceptedAnswer": { "@type": "Answer", "text": "管理画面で対話数・対応言語比率・取次件数・ピーク時間帯などを可視化。KPIダッシュボードで受付業務削減効果を定量的に測定できます。" } }
       ]
@@ -197,7 +196,7 @@
                         <div class="text-center">
                             <div class="text-8xl mb-4">🤖</div>
                             <p class="text-xl font-bold text-text-main-light mb-2">AIが、おもてなしする。</p>
-                            <p class="text-sm text-text-secondary-light">realtime + memory + skill<br>= 拟人化AI受付</p>
+                            <p class="text-sm text-text-secondary-light">realtime + memory + skill<br>= 擬人化AI受付</p>
                         </div>
                     </div>
                 </div>
@@ -279,11 +278,11 @@
                         </div>
                         <h3 class="text-2xl font-bold">スマート受付｜QR・ID認証で担当者即時呼出</h3>
                         <p class="text-text-secondary-light leading-relaxed">
-                            QRコード・来訪ID・電話番号など複数の認証方式で来訪者を識別。LINE WORKS / Slack / Teams 連携で担当者へ即時通知し、取次時間を大幅に短縮します。将来的には顔認証 受付オプションの提供も予定しています。
+                            QRコード・来訪ID・電話番号など複数の認証方式で来訪者を識別。LINE WORKS / WowTalk 連携で担当者へ即時通知し、取次時間を大幅に短縮します。将来的には顔認証 受付オプションの提供も予定しています。
                         </p>
                         <ul class="text-sm text-text-secondary-light space-y-1 mt-2">
                             <li>・QR／ID／電話番号認証</li>
-                            <li>・担当者へLINE WORKS/Slack通知</li>
+                            <li>・LINE WORKS / WowTalk 通知</li>
                             <li>・来訪管理システムAPI連携</li>
                         </ul>
                     </div>
@@ -315,7 +314,7 @@
                             受付システム ai導入事例｜Sapporo Factory
                         </h2>
                         <p class="text-text-secondary-light leading-relaxed mb-6">
-                            札幌ファクトリーでは、前台受付にAIタッチスクリーンKioskを導入。音声対話＋タッチUIで、日本語・英語・中国語・韓国語の来館者対応を自動化。LINE WORKS連携でスタッフ呼び出しもワンタップで実現しました。
+                            札幌ファクトリーでは、エントランス受付にAIタッチスクリーンKioskを導入。音声対話＋タッチUIで、日本語・英語・中国語・韓国語の来館者対応を自動化。LINE WORKS連携でスタッフ呼び出しもワンタップで実現しました。
                         </p>
                         <div class="grid grid-cols-3 gap-4 mb-6">
                             <div class="bg-white rounded-xl p-4 border border-border-light text-center">
@@ -331,9 +330,12 @@
                                 <p class="text-xs text-text-secondary-light mt-1">無人稼働</p>
                             </div>
                         </div>
-                        <blockquote class="border-l-4 border-primary pl-4 italic text-text-secondary-light">
-                            「AIコンシェルジュ導入後、受付スタッフは高付加価値業務に専念できるようになり、来館者満足度も向上しました。」
-                        </blockquote>
+                        <div class="bg-white rounded-xl p-5 border border-border-light">
+                            <p class="text-sm text-text-main-light leading-relaxed mb-3">
+                                多言語対応とエントランス案内の自動化により、受付スタッフが接客・イベント対応などの付加価値業務に時間を使えるようになりました。
+                            </p>
+                            <p class="text-xs text-text-secondary-light">— 札幌ファクトリー 運営担当者（※掲載許諾調整中）</p>
+                        </div>
                         <a href="contact.html?product=ai-concierge" class="cta-button inline-flex items-center gap-2 mt-6 px-6 py-3 rounded-lg bg-primary hover:bg-primary-dark text-white font-bold transition-colors">
                             デモを予約する
                             <span class="material-symbols-outlined text-base">arrow_forward</span>
@@ -353,54 +355,125 @@
             </div>
         </section>
 
-        <!-- 演進ロードマップ -->
+        <!-- できること一覧 -->
         <section class="w-full px-4 md:px-10 lg:px-40 py-16 flex justify-center bg-surface-light">
             <div class="max-w-[1200px] w-full">
                 <div class="text-center mb-12">
-                    <span class="text-primary text-xs font-bold uppercase tracking-wider">Product Roadmap</span>
+                    <span class="text-primary text-xs font-bold uppercase tracking-wider">Capabilities</span>
                     <h2 class="text-3xl md:text-4xl font-black text-text-main-light mt-2 mb-4">
-                        Kiosk から <span class="text-primary">Mobile Concierge</span> へ
+                        今すぐ <span class="text-primary">使える機能</span>
                     </h2>
                     <p class="text-text-secondary-light max-w-3xl mx-auto">
-                        固定Kioskから始まり、マルチチャネル統合、そして自律移動型のAI迎賓員へ。硬件に依存しない「AIの脳」として進化していきます。
+                        すべて本番稼働中の機能です。標準パッケージですぐにご利用いただけます。
                     </p>
                 </div>
-                <div class="grid grid-cols-1 md:grid-cols-4 gap-4 relative">
-                    <div class="bg-background-light rounded-2xl p-6 border border-border-light">
-                        <div class="text-xs font-bold text-primary mb-2">NOW</div>
-                        <div class="text-2xl mb-3">🖥️</div>
-                        <h3 class="font-bold mb-2">Smart Kiosk</h3>
-                        <p class="text-xs text-text-secondary-light">タッチスクリーン型AI受付。Sapporo Factoryで稼働中。標準化パッケージで短期導入可能。</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div class="bg-background-light rounded-xl p-5 border border-border-light flex gap-3">
+                        <span class="material-symbols-outlined text-primary">check_circle</span>
+                        <div>
+                            <h3 class="font-bold mb-1">タッチスクリーンKiosk</h3>
+                            <p class="text-xs text-text-secondary-light">音声＋タッチUI。エントランス常設。</p>
+                        </div>
                     </div>
-                    <div class="bg-background-light rounded-2xl p-6 border border-border-light">
-                        <div class="text-xs font-bold text-primary mb-2">3 → 6 MONTHS</div>
-                        <div class="text-2xl mb-3">🔗</div>
-                        <h3 class="font-bold mb-2">Multi-Channel</h3>
-                        <p class="text-xs text-text-secondary-light">LINE / Web Widget / QRコード対応。Kiosk・スマホ・Webを横断する統合体験。</p>
+                    <div class="bg-background-light rounded-xl p-5 border border-border-light flex gap-3">
+                        <span class="material-symbols-outlined text-primary">check_circle</span>
+                        <div>
+                            <h3 class="font-bold mb-1">10言語以上の自動判別</h3>
+                            <p class="text-xs text-text-secondary-light">日英中韓越葡西尼泊爾など。</p>
+                        </div>
                     </div>
-                    <div class="bg-background-light rounded-2xl p-6 border border-border-light">
-                        <div class="text-xs font-bold text-primary mb-2">6 → 12 MONTHS</div>
-                        <div class="text-2xl mb-3">🤖</div>
-                        <h3 class="font-bold mb-2">Mobile Concierge</h3>
-                        <p class="text-xs text-text-secondary-light">ロボット硬件適配SDK提供。人感センサーで主動的に挨拶・案内する移動型AI。</p>
+                    <div class="bg-background-light rounded-xl p-5 border border-border-light flex gap-3">
+                        <span class="material-symbols-outlined text-primary">check_circle</span>
+                        <div>
+                            <h3 class="font-bold mb-1">LINE WORKS / WowTalk 通知</h3>
+                            <p class="text-xs text-text-secondary-light">担当者への即時取次通知（LINEは入口専用）。</p>
+                        </div>
                     </div>
-                    <div class="bg-background-light rounded-2xl p-6 border border-border-light">
-                        <div class="text-xs font-bold text-primary mb-2">12 → 18 MONTHS</div>
-                        <div class="text-2xl mb-3">🌐</div>
-                        <h3 class="font-bold mb-2">Autonomous</h3>
-                        <p class="text-xs text-text-secondary-light">自律巡回・Multi-Agent協調。施設内を主動的に回る「本物のAI迎賓員」。</p>
+                    <div class="bg-background-light rounded-xl p-5 border border-border-light flex gap-3">
+                        <span class="material-symbols-outlined text-primary">check_circle</span>
+                        <div>
+                            <h3 class="font-bold mb-1">フロアマップ案内</h3>
+                            <p class="text-xs text-text-secondary-light">店舗検索、目的地までのナビ表示。</p>
+                        </div>
+                    </div>
+                    <div class="bg-background-light rounded-xl p-5 border border-border-light flex gap-3">
+                        <span class="material-symbols-outlined text-primary">check_circle</span>
+                        <div>
+                            <h3 class="font-bold mb-1">FAQ・施設案内AI</h3>
+                            <p class="text-xs text-text-secondary-light">管理画面からノーコードで編集可能。</p>
+                        </div>
+                    </div>
+                    <div class="bg-background-light rounded-xl p-5 border border-border-light flex gap-3">
+                        <span class="material-symbols-outlined text-primary">check_circle</span>
+                        <div>
+                            <h3 class="font-bold mb-1">KPI ダッシュボード</h3>
+                            <p class="text-xs text-text-secondary-light">対話数・言語比率・ピーク時間を可視化。</p>
+                        </div>
+                    </div>
+                    <div class="bg-background-light rounded-xl p-5 border border-border-light flex gap-3">
+                        <span class="material-symbols-outlined text-primary">check_circle</span>
+                        <div>
+                            <h3 class="font-bold mb-1">Web Widget / QR 入口</h3>
+                            <p class="text-xs text-text-secondary-light">Kiosk以外のチャネルにも展開可能。</p>
+                        </div>
+                    </div>
+                    <div class="bg-background-light rounded-xl p-5 border border-border-light flex gap-3">
+                        <span class="material-symbols-outlined text-primary">check_circle</span>
+                        <div>
+                            <h3 class="font-bold mb-1">QR / ID 認証受付</h3>
+                            <p class="text-xs text-text-secondary-light">来訪者識別と担当者自動呼出。</p>
+                        </div>
+                    </div>
+                    <div class="bg-background-light rounded-xl p-5 border border-border-light flex gap-3">
+                        <span class="material-symbols-outlined text-primary">check_circle</span>
+                        <div>
+                            <h3 class="font-bold mb-1">API / Webhook 連携</h3>
+                            <p class="text-xs text-text-secondary-light">既存の来訪管理・入退館システムと接続。</p>
+                        </div>
                     </div>
                 </div>
-                <div class="mt-8 bg-primary/5 border-l-4 border-primary rounded-r-xl p-6">
-                    <p class="text-text-main-light leading-relaxed text-sm">
-                        <strong class="text-primary">戦略原則：硬件に依存しない</strong>｜GBaseは「AIの脳」を提供し、ロボット硬件はお客様／パートナー様が自由に選択可能。軽資産・早期導入・広範な適配を実現します。
-                    </p>
+                <p class="text-center text-xs text-text-secondary-light mt-8">
+                    ※顔認証オプション、移動型ロボット連携SDKなどは今後リリース予定。導入後もアップデートで順次ご利用可能になります。
+                </p>
+            </div>
+        </section>
+
+        <!-- 比較表 -->
+        <section class="w-full px-4 md:px-10 lg:px-40 py-16 flex justify-center bg-background-light">
+            <div class="max-w-[1000px] w-full">
+                <div class="text-center mb-12">
+                    <span class="text-primary text-xs font-bold uppercase tracking-wider">Comparison</span>
+                    <h2 class="text-3xl md:text-4xl font-black text-text-main-light mt-2 mb-4">
+                        有人受付・従来チャットボットとの<span class="text-primary">違い</span>
+                    </h2>
+                </div>
+                <div class="bg-white rounded-2xl border border-border-light overflow-hidden shadow-sm">
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm">
+                            <thead class="bg-background-light">
+                                <tr>
+                                    <th class="text-left p-4 font-bold">比較項目</th>
+                                    <th class="text-center p-4 font-bold text-primary">AIコンシェルジュ</th>
+                                    <th class="text-center p-4 font-bold text-text-secondary-light">有人受付</th>
+                                    <th class="text-center p-4 font-bold text-text-secondary-light">従来チャットボット</th>
+                                </tr>
+                            </thead>
+                            <tbody class="[&amp;_td]:p-4 [&amp;_td]:border-t [&amp;_td]:border-border-light">
+                                <tr><td class="font-medium">24時間対応</td><td class="text-center text-primary">◎</td><td class="text-center text-text-secondary-light">△（シフト要）</td><td class="text-center">◯</td></tr>
+                                <tr><td class="font-medium">多言語（10言語以上）</td><td class="text-center text-primary">◎</td><td class="text-center text-text-secondary-light">×</td><td class="text-center text-text-secondary-light">△</td></tr>
+                                <tr><td class="font-medium">音声対話</td><td class="text-center text-primary">◎</td><td class="text-center">◎</td><td class="text-center text-text-secondary-light">×</td></tr>
+                                <tr><td class="font-medium">セッション内の文脈保持</td><td class="text-center text-primary">◎</td><td class="text-center">◎</td><td class="text-center text-text-secondary-light">△</td></tr>
+                                <tr><td class="font-medium">担当者即時呼出</td><td class="text-center text-primary">◎</td><td class="text-center">◎</td><td class="text-center text-text-secondary-light">×</td></tr>
+                                <tr><td class="font-medium">導入期間</td><td class="text-center text-primary">1〜4週間</td><td class="text-center text-text-secondary-light">採用1〜3ヶ月</td><td class="text-center">2〜4週間</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </section>
 
         <!-- 対応業種 -->
-        <section class="w-full px-4 md:px-10 lg:px-40 py-16 flex justify-center bg-background-light">
+        <section class="w-full px-4 md:px-10 lg:px-40 py-16 flex justify-center bg-surface-light">
             <div class="max-w-[1200px] w-full">
                 <div class="text-center mb-12">
                     <h2 class="text-3xl md:text-4xl font-black text-text-main-light mb-4">
@@ -439,7 +512,7 @@
         </section>
 
         <!-- 導入フロー -->
-        <section class="w-full px-4 md:px-10 lg:px-40 py-16 flex justify-center bg-surface-light">
+        <section class="w-full px-4 md:px-10 lg:px-40 py-16 flex justify-center bg-background-light">
             <div class="max-w-[1200px] w-full">
                 <div class="text-center mb-12">
                     <h2 class="text-3xl md:text-4xl font-black text-text-main-light mb-4">
@@ -473,7 +546,7 @@
         </section>
 
         <!-- FAQ -->
-        <section class="w-full px-4 md:px-10 lg:px-40 py-16 flex justify-center bg-background-light">
+        <section class="w-full px-4 md:px-10 lg:px-40 py-16 flex justify-center bg-surface-light">
             <div class="max-w-[900px] w-full">
                 <div class="text-center mb-12">
                     <h2 class="text-3xl md:text-4xl font-black text-text-main-light mb-4">よくある質問（FAQ）</h2>
@@ -485,7 +558,7 @@
                             AIコンシェルジュの導入コストは？
                             <span class="material-symbols-outlined text-primary group-open:rotate-180 transition-transform">expand_more</span>
                         </summary>
-                        <p class="mt-4 text-text-secondary-light leading-relaxed">導入規模やカスタマイズ内容によりますが、月額10万円〜からご利用いただけます。初期設定費用・ハードウェア費用は別途お見積もりいたします。まずは無料相談にてヒアリングさせていただきます。FAQ管理の効率化については <a href="https://cs.gbase.ai/blog/faq-management-efficiency/" class="text-primary hover:underline">こちらの記事</a> もご参考ください。</p>
+                        <p class="mt-4 text-text-secondary-light leading-relaxed">導入規模・拠点数・カスタマイズ内容によって変動するため、まずは無料相談で要件をヒアリングさせていただいた上で、最適な構成と見積りをご提案いたします。FAQ管理の効率化については <a href="https://cs.gbase.ai/blog/faq-management-efficiency/" class="text-primary hover:underline">こちらの記事</a> もご参考ください。</p>
                     </details>
                     <details class="bg-background-light rounded-xl p-6 border border-border-light group">
                         <summary class="cursor-pointer font-bold text-lg flex items-center justify-between">
@@ -499,7 +572,7 @@
                             既存の受付システムとの連携は？
                             <span class="material-symbols-outlined text-primary group-open:rotate-180 transition-transform">expand_more</span>
                         </summary>
-                        <p class="mt-4 text-text-secondary-light leading-relaxed">LINE WORKS・Slack・Microsoft Teams・来訪管理システム・入退館ゲートなど、REST APIとWebhookで既存システムと柔軟に連携可能です。個別連携のご相談もお気軽にどうぞ。</p>
+                        <p class="mt-4 text-text-secondary-light leading-relaxed">担当者への通知連携は <strong>LINE WORKS・WowTalk</strong> に標準対応しています。LINE は来訪者側のチャット入口としてご利用いただけます（現時点ではLINE側からの主動通知配信には対応していません）。その他の来訪管理システム・入退館ゲートなどは REST API / Webhook でカスタム連携可能です。</p>
                     </details>
                     <details class="bg-background-light rounded-xl p-6 border border-border-light group">
                         <summary class="cursor-pointer font-bold text-lg flex items-center justify-between">
