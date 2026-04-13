@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html class="light scroll-smooth" lang="ja">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>AIコンシェルジュ｜24時間対応・多言語対応の次世代ai受付システム | GBase Support</title>
+    <meta name="description" content="AIコンシェルジュは、人手不足・多言語対応・24時間運用を解決する次世代ai受付システムです。10言語対応の音声対話と統合メモリでスムーズな来客者対応を実現。商業施設・ホテル・オフィスの無人受付化におすすめです。導入事例付き。">
+    <meta name="keywords" content="AIコンシェルジュ,ai受付,無人受付システム,顔認証 受付,受付システム ai,オフィス 受付 無人,AI受付ロボット">
+    <link rel="canonical" href="https://cs.gbase.ai/ai-concierge/">
+    <meta http-equiv="Content-Language" content="ja">
+    <link rel="alternate" hreflang="ja" href="https://cs.gbase.ai/ai-concierge/">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://cs.gbase.ai/ai-concierge/">
+    <meta property="og:title" content="AIコンシェルジュ｜24時間対応・多言語対応のai受付システム">
+    <meta property="og:description" content="人手不足・多言語対応を解決。10言語対応・統合メモリ搭載の次世代AI受付システム。Sapporo Factory導入事例あり。">
+    <meta property="og:locale" content="ja_JP">
+    <meta property="og:image" content="https://cs.gbase.ai/banner.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="AIコンシェルジュ｜24時間対応・多言語対応のai受付システム">
+    <meta name="twitter:description" content="人手不足・多言語対応を解決。10言語対応・統合メモリ搭載の次世代AI受付システム。">
+    <meta name="twitter:image" content="https://cs.gbase.ai/banner.jpg">
+
+    <!-- Schema.org: Product -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "AIコンシェルジュ",
+      "description": "24時間対応・多言語対応の次世代ai受付システム",
+      "brand": { "@type": "Organization", "name": "GBase Inc." },
+      "offers": {
+        "@type": "Offer",
+        "price": "要問い合わせ",
+        "priceCurrency": "JPY",
+        "availability": "https://schema.org/InStock",
+        "url": "https://cs.gbase.ai/ai-concierge/"
+      }
+    }
+    </script>
+    <!-- Schema.org: SoftwareApplication -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "AIコンシェルジュ",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Webブラウザ",
+      "offers": { "@type": "Offer", "price": "要問い合わせ", "priceCurrency": "JPY" },
+      "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.5", "ratingCount": "12" }
+    }
+    </script>
+    <!-- Schema.org: FAQPage -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        { "@type": "Question", "name": "AIコンシェルジュの導入コストは？",
+          "acceptedAnswer": { "@type": "Answer", "text": "導入規模やカスタマイズ内容によりますが、月額10万円〜からご利用いただけます。まずは無料相談にてヒアリングさせていただきます。" } },
+        { "@type": "Question", "name": "多言語対応は何言語まで可能ですか？",
+          "acceptedAnswer": { "@type": "Answer", "text": "日本語・英語・中国語・韓国語・ベトナム語・ポルトガル語・スペイン語・インドネシア語・ネパール語など10言語以上に対応しています。追加言語のご相談も承ります。" } },
+        { "@type": "Question", "name": "既存の受付システムとの連携は？",
+          "acceptedAnswer": { "@type": "Answer", "text": "LINE WORKS・Slack・Teams・来訪管理システム・入退館ゲートなど、APIとWebhookで既存システムと柔軟に連携可能です。" } },
+        { "@type": "Question", "name": "オフィス 受付 無人化の効果測定方法は？",
+          "acceptedAnswer": { "@type": "Answer", "text": "管理画面で対話数・対応言語比率・取次件数・ピーク時間帯などを可視化。KPIダッシュボードで受付業務削減効果を定量的に測定できます。" } }
+      ]
+    }
+    </script>
+    <!-- Schema.org: Organization -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "GBase Inc.",
+      "url": "https://cs.gbase.ai",
+      "logo": "https://cs.gbase.ai/title-logo.png"
+    }
+    </script>
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#ee862b",
+                        "primary-dark": "#d9731e",
+                        "navy": "#1a2840",
+                        "background-light": "#f8f7f6",
+                        "text-main-light": "#1b140d",
+                        "text-secondary-light": "#666666",
+                        "surface-light": "#ffffff",
+                        "border-light": "#e7dacf"
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans", "Noto Sans JP", "sans-serif"],
+                        "body": ["Plus Jakarta Sans", "Noto Sans JP", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1rem", "full": "9999px" }
+                }
+            }
+        }
+    </script>
+    <style>
+        .fade-grad { background: linear-gradient(180deg, #fff 0%, #f8f7f6 100%); }
+        .phase-card { transition: all .3s cubic-bezier(.4,0,.2,1); }
+        .phase-card:hover { transform: translateY(-6px); box-shadow: 0 20px 40px rgba(238,134,43,.12); }
+    </style>
+</head>
+
+<body class="bg-background-light font-body text-text-main-light transition-colors duration-200">
+
+    <!-- Top Navigation -->
+    <div class="sticky top-0 z-50 w-full border-b border-border-light bg-surface-light/95 backdrop-blur-sm">
+        <div class="px-4 md:px-10 lg:px-40 flex justify-center">
+            <div class="flex h-16 w-full max-w-[1200px] items-center justify-between">
+                <div class="flex items-center gap-2">
+                    <a href="index.html" class="flex items-center hover:opacity-80 transition-opacity">
+                        <img src="https://cs.gbase.ai/title-logo.png" alt="GBase Support" class="h-8 w-auto" />
+                    </a>
+                </div>
+                <div class="hidden md:flex items-center gap-8">
+                    <nav class="flex items-center gap-8">
+                        <div class="relative group">
+                            <button class="flex items-center gap-1 text-sm font-medium text-text-main-light hover:text-primary transition-colors py-5 border-b-2 border-primary">
+                                ソリューション
+                            </button>
+                            <div class="absolute left-0 top-full pt-2 hidden group-hover:block w-64">
+                                <div class="bg-white border border-border-light rounded-lg shadow-xl p-2 flex flex-col gap-1">
+                                    <a href="index.html#case-study" class="block px-4 py-2 text-sm hover:bg-background-light rounded text-text-main-light">
+                                        <div class="font-medium">商業施設・百貨店</div>
+                                        <div class="text-xs text-text-secondary-light">フロア案内・多言語AI</div>
+                                    </a>
+                                    <a href="ai-concierge.html" class="block px-4 py-2 text-sm bg-primary/5 rounded text-text-main-light">
+                                        <div class="font-medium">AIコンシェルジュ・無人受付</div>
+                                        <div class="text-xs text-text-secondary-light">オフィス/ホテル/ai受付</div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="index.html#core-features" class="text-sm font-medium text-text-main-light hover:text-primary transition-colors py-5 border-b-2 border-transparent">製品／機能</a>
+                        <a href="https://cs.gbase.ai/price" class="text-sm font-medium text-text-main-light hover:text-primary transition-colors py-5 border-b-2 border-transparent">料金</a>
+                        <a href="https://cs.gbase.ai/blog" class="text-sm font-medium text-text-main-light hover:text-primary transition-colors py-5 border-b-2 border-transparent">リソース</a>
+                    </nav>
+                </div>
+                <div class="hidden md:flex items-center gap-3">
+                    <a href="https://admin.gbase.ai/" class="text-sm font-medium text-text-main-light hover:text-primary transition-colors">ログイン</a>
+                    <a href="register.html" class="flex items-center justify-center rounded-full h-10 px-5 border border-border-light hover:border-text-main-light transition-colors text-text-main-light text-sm font-medium">無料ではじめる</a>
+                    <a href="contact.html?product=ai-concierge" class="cta-button flex items-center justify-center rounded-full h-10 px-5 bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 transition-all text-white text-sm font-medium">お問い合わせ</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <main class="flex flex-col items-center w-full">
+
+        <!-- Hero -->
+        <section class="w-full px-4 md:px-10 lg:px-40 py-16 md:py-24 flex justify-center bg-surface-light">
+            <div class="max-w-[1200px] w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="flex flex-col gap-6 text-left">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 w-fit">
+                        <span class="material-symbols-outlined text-primary text-sm">support_agent</span>
+                        <span class="text-primary text-xs font-bold uppercase tracking-wider">AI Concierge / ai受付</span>
+                    </div>
+                    <h1 class="text-4xl md:text-5xl font-black leading-tight tracking-[-0.033em] text-text-main-light">
+                        <span class="text-primary">AIコンシェルジュ</span><br>
+                        24時間対応・多言語対応の<br>次世代ai受付システム
+                    </h1>
+                    <p class="text-lg text-text-secondary-light leading-relaxed max-w-xl">
+                        人手不足・多言語対応・24時間運用の3大課題を、1台のAIコンシェルジュで解決。<br>
+                        10言語対応の音声対話と統合メモリで、商業施設・ホテル・オフィスの無人受付化をサポートします。
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 mt-2">
+                        <a href="contact.html?product=ai-concierge" class="cta-button flex items-center justify-center rounded-lg h-12 px-8 bg-primary hover:bg-primary-dark transition-colors text-white text-base font-bold shadow-lg shadow-primary/20">
+                            無料相談を予約する
+                        </a>
+                        <a href="kiosk-floating.html?lang=ja" class="flex items-center justify-center rounded-lg h-12 px-8 bg-white border border-border-light hover:border-primary transition-colors text-text-main-light text-base font-bold">
+                            ライブデモを体験
+                        </a>
+                    </div>
+                    <div class="flex items-center gap-6 mt-4 text-sm text-text-secondary-light">
+                        <div class="flex items-center gap-1"><span class="material-symbols-outlined text-primary text-base">check_circle</span>Sapporo Factory 導入実績</div>
+                        <div class="flex items-center gap-1"><span class="material-symbols-outlined text-primary text-base">check_circle</span>10言語以上対応</div>
+                    </div>
+                </div>
+                <div class="relative">
+                    <div class="bg-white rounded-2xl shadow-2xl border border-border-light p-8 aspect-square flex items-center justify-center">
+                        <div class="text-center">
+                            <div class="text-8xl mb-4">🤖</div>
+                            <p class="text-xl font-bold text-text-main-light mb-2">AIが、おもてなしする。</p>
+                            <p class="text-sm text-text-secondary-light">realtime + memory + skill<br>= 拟人化AI受付</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 課題提起 -->
+        <section class="w-full px-4 md:px-10 lg:px-40 py-16 flex justify-center fade-grad">
+            <div class="max-w-[1200px] w-full">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-black text-text-main-light mb-4">
+                        <span class="text-primary">ai受付導入</span>で解決｜人手不足・多言語・24時間対応の3大課題
+                    </h2>
+                    <p class="text-text-secondary-light max-w-3xl mx-auto">
+                        有人受付では対応しきれない3つの構造的課題。AIコンシェルジュなら、1台で24時間、10言語以上の来客対応を自動化できます。
+                    </p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-white rounded-xl p-8 border border-border-light">
+                        <div class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
+                            <span class="material-symbols-outlined text-primary">group_off</span>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">人手不足</h3>
+                        <p class="text-sm text-text-secondary-light leading-relaxed">採用難と人件費高騰。受付担当者1名で月額30万円以上のコスト。休憩・休暇時は受付不在に。</p>
+                    </div>
+                    <div class="bg-white rounded-xl p-8 border border-border-light">
+                        <div class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
+                            <span class="material-symbols-outlined text-primary">language</span>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">多言語対応</h3>
+                        <p class="text-sm text-text-secondary-light leading-relaxed">訪日観光客・外国人従業員の増加。英中韓越ポネパなど、すべてに対応できる受付スタッフ確保は困難。</p>
+                    </div>
+                    <div class="bg-white rounded-xl p-8 border border-border-light">
+                        <div class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
+                            <span class="material-symbols-outlined text-primary">schedule</span>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">24時間対応</h3>
+                        <p class="text-sm text-text-secondary-light leading-relaxed">早朝・深夜・休日の問い合わせ対応。シフト制では3〜4名体制が必要で固定費が膨らむ。</p>
+                    </div>
+                </div>
+                <div class="mt-8 bg-primary/5 border-l-4 border-primary rounded-r-xl p-6">
+                    <p class="text-text-main-light leading-relaxed">
+                        <strong>24時間対応を実現することで</strong>、深夜や早朝の問い合わせにも即座に対応可能になります。詳しくは<a href="https://cs.gbase.ai/blog/24-hour-customer-support-ai/" class="text-primary hover:underline font-medium">24時間AI対応の詳細記事</a>もご参照ください。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3つの特徴 -->
+        <section class="w-full px-4 md:px-10 lg:px-40 py-16 flex justify-center bg-surface-light">
+            <div class="max-w-[1200px] w-full">
+                <div class="text-center mb-12">
+                    <span class="text-primary text-xs font-bold uppercase tracking-wider">Core Capability</span>
+                    <h2 class="text-3xl md:text-4xl font-black text-text-main-light mt-2 mb-4">
+                        <span class="text-primary">AIコンシェルジュ</span>の3つの特徴
+                    </h2>
+                    <p class="text-text-secondary-light max-w-3xl mx-auto">
+                        realtime + memory + skill の3大コア能力で、単なる自動応答を超えた「対話する受付」を実現します。
+                    </p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="flex flex-col gap-4">
+                        <div class="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center">
+                            <span class="material-symbols-outlined text-primary text-3xl">record_voice_over</span>
+                        </div>
+                        <h3 class="text-2xl font-bold">リアルタイム対話｜自然な日本語対応</h3>
+                        <p class="text-text-secondary-light leading-relaxed">
+                            音声・テキスト両対応。日本語の敬語、関西弁、業界用語まで理解。レスポンスは平均1秒以内で、ストレスのない会話体験を提供します。10言語以上の自動判別・切替に対応。
+                        </p>
+                        <ul class="text-sm text-text-secondary-light space-y-1 mt-2">
+                            <li>・音声／テキスト／タッチUI</li>
+                            <li>・10言語以上の自動判別</li>
+                            <li>・敬語・方言・業界用語対応</li>
+                        </ul>
+                    </div>
+                    <div class="flex flex-col gap-4">
+                        <div class="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center">
+                            <span class="material-symbols-outlined text-primary text-3xl">qr_code_scanner</span>
+                        </div>
+                        <h3 class="text-2xl font-bold">スマート受付｜QR・ID認証で担当者即時呼出</h3>
+                        <p class="text-text-secondary-light leading-relaxed">
+                            QRコード・来訪ID・電話番号など複数の認証方式で来訪者を識別。LINE WORKS / Slack / Teams 連携で担当者へ即時通知し、取次時間を大幅に短縮します。将来的には顔認証 受付オプションの提供も予定しています。
+                        </p>
+                        <ul class="text-sm text-text-secondary-light space-y-1 mt-2">
+                            <li>・QR／ID／電話番号認証</li>
+                            <li>・担当者へLINE WORKS/Slack通知</li>
+                            <li>・来訪管理システムAPI連携</li>
+                        </ul>
+                    </div>
+                    <div class="flex flex-col gap-4">
+                        <div class="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center">
+                            <span class="material-symbols-outlined text-primary text-3xl">psychology</span>
+                        </div>
+                        <h3 class="text-2xl font-bold">コンテキストメモリ｜自然な連続対話</h3>
+                        <p class="text-text-secondary-light leading-relaxed">
+                            同一セッション内で会話の文脈を保持し、「その近くでランチは？」のような曖昧な追問にも自然に応答。蓄積された問い合わせログは頻出・未解決質問として集計され、FAQやスキルを運用しながら継続的に育てられます。
+                        </p>
+                        <ul class="text-sm text-text-secondary-light space-y-1 mt-2">
+                            <li>・セッション内の文脈保持</li>
+                            <li>・曖昧な追問にも対応</li>
+                            <li>・運用ログで継続改善</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 導入事例 Sapporo Factory -->
+        <section id="case-study" class="w-full px-4 md:px-10 lg:px-40 py-16 flex justify-center bg-background-light">
+            <div class="max-w-[1200px] w-full">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <span class="text-primary text-xs font-bold uppercase tracking-wider">Case Study</span>
+                        <h2 class="text-3xl md:text-4xl font-black text-text-main-light mt-2 mb-4">
+                            受付システム ai導入事例｜Sapporo Factory
+                        </h2>
+                        <p class="text-text-secondary-light leading-relaxed mb-6">
+                            札幌ファクトリーでは、前台受付にAIタッチスクリーンKioskを導入。音声対話＋タッチUIで、日本語・英語・中国語・韓国語の来館者対応を自動化。LINE WORKS連携でスタッフ呼び出しもワンタップで実現しました。
+                        </p>
+                        <div class="grid grid-cols-3 gap-4 mb-6">
+                            <div class="bg-white rounded-xl p-4 border border-border-light text-center">
+                                <p class="text-3xl font-black text-primary">60%</p>
+                                <p class="text-xs text-text-secondary-light mt-1">問い合わせ削減</p>
+                            </div>
+                            <div class="bg-white rounded-xl p-4 border border-border-light text-center">
+                                <p class="text-3xl font-black text-primary">4</p>
+                                <p class="text-xs text-text-secondary-light mt-1">標準対応言語</p>
+                            </div>
+                            <div class="bg-white rounded-xl p-4 border border-border-light text-center">
+                                <p class="text-3xl font-black text-primary">24h</p>
+                                <p class="text-xs text-text-secondary-light mt-1">無人稼働</p>
+                            </div>
+                        </div>
+                        <blockquote class="border-l-4 border-primary pl-4 italic text-text-secondary-light">
+                            「AIコンシェルジュ導入後、受付スタッフは高付加価値業務に専念できるようになり、来館者満足度も向上しました。」
+                        </blockquote>
+                        <a href="contact.html?product=ai-concierge" class="cta-button inline-flex items-center gap-2 mt-6 px-6 py-3 rounded-lg bg-primary hover:bg-primary-dark text-white font-bold transition-colors">
+                            デモを予約する
+                            <span class="material-symbols-outlined text-base">arrow_forward</span>
+                        </a>
+                        <p class="text-sm text-text-secondary-light mt-4">
+                            他のチャットボット導入の成功事例は、<a href="https://cs.gbase.ai/blog/chatbot-case-study/" class="text-primary hover:underline">導入事例集</a>で詳しく解説しています。
+                        </p>
+                    </div>
+                    <div class="bg-gradient-to-br from-primary/10 to-purple-500/10 rounded-2xl p-8 aspect-[4/3] flex items-center justify-center">
+                        <div class="text-center">
+                            <div class="text-7xl mb-4">🏭</div>
+                            <p class="font-bold text-lg">Sapporo Factory</p>
+                            <p class="text-sm text-text-secondary-light mt-1">AI Kiosk 稼働中</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 演進ロードマップ -->
+        <section class="w-full px-4 md:px-10 lg:px-40 py-16 flex justify-center bg-surface-light">
+            <div class="max-w-[1200px] w-full">
+                <div class="text-center mb-12">
+                    <span class="text-primary text-xs font-bold uppercase tracking-wider">Product Roadmap</span>
+                    <h2 class="text-3xl md:text-4xl font-black text-text-main-light mt-2 mb-4">
+                        Kiosk から <span class="text-primary">Mobile Concierge</span> へ
+                    </h2>
+                    <p class="text-text-secondary-light max-w-3xl mx-auto">
+                        固定Kioskから始まり、マルチチャネル統合、そして自律移動型のAI迎賓員へ。硬件に依存しない「AIの脳」として進化していきます。
+                    </p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4 relative">
+                    <div class="bg-background-light rounded-2xl p-6 border border-border-light">
+                        <div class="text-xs font-bold text-primary mb-2">NOW</div>
+                        <div class="text-2xl mb-3">🖥️</div>
+                        <h3 class="font-bold mb-2">Smart Kiosk</h3>
+                        <p class="text-xs text-text-secondary-light">タッチスクリーン型AI受付。Sapporo Factoryで稼働中。標準化パッケージで短期導入可能。</p>
+                    </div>
+                    <div class="bg-background-light rounded-2xl p-6 border border-border-light">
+                        <div class="text-xs font-bold text-primary mb-2">3 → 6 MONTHS</div>
+                        <div class="text-2xl mb-3">🔗</div>
+                        <h3 class="font-bold mb-2">Multi-Channel</h3>
+                        <p class="text-xs text-text-secondary-light">LINE / Web Widget / QRコード対応。Kiosk・スマホ・Webを横断する統合体験。</p>
+                    </div>
+                    <div class="bg-background-light rounded-2xl p-6 border border-border-light">
+                        <div class="text-xs font-bold text-primary mb-2">6 → 12 MONTHS</div>
+                        <div class="text-2xl mb-3">🤖</div>
+                        <h3 class="font-bold mb-2">Mobile Concierge</h3>
+                        <p class="text-xs text-text-secondary-light">ロボット硬件適配SDK提供。人感センサーで主動的に挨拶・案内する移動型AI。</p>
+                    </div>
+                    <div class="bg-background-light rounded-2xl p-6 border border-border-light">
+                        <div class="text-xs font-bold text-primary mb-2">12 → 18 MONTHS</div>
+                        <div class="text-2xl mb-3">🌐</div>
+                        <h3 class="font-bold mb-2">Autonomous</h3>
+                        <p class="text-xs text-text-secondary-light">自律巡回・Multi-Agent協調。施設内を主動的に回る「本物のAI迎賓員」。</p>
+                    </div>
+                </div>
+                <div class="mt-8 bg-primary/5 border-l-4 border-primary rounded-r-xl p-6">
+                    <p class="text-text-main-light leading-relaxed text-sm">
+                        <strong class="text-primary">戦略原則：硬件に依存しない</strong>｜GBaseは「AIの脳」を提供し、ロボット硬件はお客様／パートナー様が自由に選択可能。軽資産・早期導入・広範な適配を実現します。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 対応業種 -->
+        <section class="w-full px-4 md:px-10 lg:px-40 py-16 flex justify-center bg-background-light">
+            <div class="max-w-[1200px] w-full">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-black text-text-main-light mb-4">
+                        対応業種｜商業施設・ホテル・<span class="text-primary">オフィス 受付 無人</span>化
+                    </h2>
+                    <p class="text-text-secondary-light max-w-3xl mx-auto">
+                        業種ごとにチューニングされたスキルセットを標準提供。最短1週間で業務に最適化された受付AIを導入できます。
+                    </p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="phase-card bg-white rounded-2xl p-6 border border-border-light">
+                        <div class="text-4xl mb-4">🏬</div>
+                        <h3 class="text-lg font-bold mb-2">商業施設のAIインフォメーション</h3>
+                        <p class="text-sm text-text-secondary-light leading-relaxed">店舗検索、フロアマップ案内、営業時間・セール情報、迷子対応まで。来館者を目的地へスムーズに誘導します。</p>
+                    </div>
+                    <div class="phase-card bg-white rounded-2xl p-6 border border-border-light">
+                        <div class="text-4xl mb-4">🏨</div>
+                        <h3 class="text-lg font-bold mb-2">ホテルのAIフロント</h3>
+                        <p class="text-sm text-text-secondary-light leading-relaxed">チェックイン補助、観光案内、多言語ルームサービス、緊急時の即時通知。深夜フロントの省人化を実現します。</p>
+                    </div>
+                    <div class="phase-card bg-white rounded-2xl p-6 border border-border-light">
+                        <div class="text-4xl mb-4">🏢</div>
+                        <h3 class="text-lg font-bold mb-2">オフィス 受付 無人化</h3>
+                        <p class="text-sm text-text-secondary-light leading-relaxed">QR／ID認証受付、担当者自動呼出、会議室案内、配達員対応。AI受付ロボット相当の機能をWebベースで実現。</p>
+                    </div>
+                    <div class="phase-card bg-white rounded-2xl p-6 border border-border-light">
+                        <div class="text-4xl mb-4">🏛️</div>
+                        <h3 class="text-lg font-bold mb-2">公共施設・観光案内所</h3>
+                        <p class="text-sm text-text-secondary-light leading-relaxed">自治体窓口・空港・駅・観光案内所での多言語対応。訪日観光客の案内と職員の負荷軽減を同時に実現します。</p>
+                    </div>
+                </div>
+                <p class="text-sm text-text-secondary-light mt-8 text-center">
+                    多言語対応の実装ポイントは <a href="https://cs.gbase.ai/blog/multilingual-support-guide/" class="text-primary hover:underline">多言語サポート導入ガイド</a>、チャネル統合については <a href="https://cs.gbase.ai/blog/omnichannel-guide/" class="text-primary hover:underline">オムニチャネル対応のメリット</a> をご覧ください。
+                </p>
+            </div>
+        </section>
+
+        <!-- 導入フロー -->
+        <section class="w-full px-4 md:px-10 lg:px-40 py-16 flex justify-center bg-surface-light">
+            <div class="max-w-[1200px] w-full">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-black text-text-main-light mb-4">
+                        導入フロー｜相談から運用開始まで
+                    </h2>
+                    <p class="text-text-secondary-light max-w-3xl mx-auto">最短1週間、標準2〜4週間で本番稼働。既存システムとの連携・カスタマイズもワンストップで対応します。</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                    <div class="bg-white rounded-xl p-6 border border-border-light">
+                        <div class="text-primary text-sm font-bold mb-1">STEP 01</div>
+                        <h3 class="font-bold mb-2">無料相談・要件ヒアリング</h3>
+                        <p class="text-xs text-text-secondary-light">業種・規模・KPI・既存システムを30分でヒアリング</p>
+                    </div>
+                    <div class="bg-white rounded-xl p-6 border border-border-light">
+                        <div class="text-primary text-sm font-bold mb-1">STEP 02</div>
+                        <h3 class="font-bold mb-2">デモ・見積提示</h3>
+                        <p class="text-xs text-text-secondary-light">御社データでカスタムデモ。料金見積を1週間以内に提示</p>
+                    </div>
+                    <div class="bg-white rounded-xl p-6 border border-border-light">
+                        <div class="text-primary text-sm font-bold mb-1">STEP 03</div>
+                        <h3 class="font-bold mb-2">構築・チューニング</h3>
+                        <p class="text-xs text-text-secondary-light">FAQ・地図・スキル設定、顔認証・システム連携を実装</p>
+                    </div>
+                    <div class="bg-white rounded-xl p-6 border border-border-light">
+                        <div class="text-primary text-sm font-bold mb-1">STEP 04</div>
+                        <h3 class="font-bold mb-2">本番稼働・継続改善</h3>
+                        <p class="text-xs text-text-secondary-light">管理画面でKPI分析。月次レビューで継続改善</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section class="w-full px-4 md:px-10 lg:px-40 py-16 flex justify-center bg-background-light">
+            <div class="max-w-[900px] w-full">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-black text-text-main-light mb-4">よくある質問（FAQ）</h2>
+                    <p class="text-text-secondary-light">AIコンシェルジュ・ai受付に関するよくあるご質問にお答えします。</p>
+                </div>
+                <div class="flex flex-col gap-4">
+                    <details class="bg-background-light rounded-xl p-6 border border-border-light group">
+                        <summary class="cursor-pointer font-bold text-lg flex items-center justify-between">
+                            AIコンシェルジュの導入コストは？
+                            <span class="material-symbols-outlined text-primary group-open:rotate-180 transition-transform">expand_more</span>
+                        </summary>
+                        <p class="mt-4 text-text-secondary-light leading-relaxed">導入規模やカスタマイズ内容によりますが、月額10万円〜からご利用いただけます。初期設定費用・ハードウェア費用は別途お見積もりいたします。まずは無料相談にてヒアリングさせていただきます。FAQ管理の効率化については <a href="https://cs.gbase.ai/blog/faq-management-efficiency/" class="text-primary hover:underline">こちらの記事</a> もご参考ください。</p>
+                    </details>
+                    <details class="bg-background-light rounded-xl p-6 border border-border-light group">
+                        <summary class="cursor-pointer font-bold text-lg flex items-center justify-between">
+                            多言語対応は何言語まで可能ですか？
+                            <span class="material-symbols-outlined text-primary group-open:rotate-180 transition-transform">expand_more</span>
+                        </summary>
+                        <p class="mt-4 text-text-secondary-light leading-relaxed">日本語・英語・中国語・韓国語・ベトナム語・ポルトガル語（ブラジル含む）・スペイン語・インドネシア語・ネパール語など10言語以上に標準対応しています。追加言語のご相談も承ります。</p>
+                    </details>
+                    <details class="bg-background-light rounded-xl p-6 border border-border-light group">
+                        <summary class="cursor-pointer font-bold text-lg flex items-center justify-between">
+                            既存の受付システムとの連携は？
+                            <span class="material-symbols-outlined text-primary group-open:rotate-180 transition-transform">expand_more</span>
+                        </summary>
+                        <p class="mt-4 text-text-secondary-light leading-relaxed">LINE WORKS・Slack・Microsoft Teams・来訪管理システム・入退館ゲートなど、REST APIとWebhookで既存システムと柔軟に連携可能です。個別連携のご相談もお気軽にどうぞ。</p>
+                    </details>
+                    <details class="bg-background-light rounded-xl p-6 border border-border-light group">
+                        <summary class="cursor-pointer font-bold text-lg flex items-center justify-between">
+                            オフィス 受付 無人化の効果測定方法は？
+                            <span class="material-symbols-outlined text-primary group-open:rotate-180 transition-transform">expand_more</span>
+                        </summary>
+                        <p class="mt-4 text-text-secondary-light leading-relaxed">管理画面で対話数・対応言語比率・取次件数・ピーク時間帯・NPSなどを可視化。KPIダッシュボードで受付業務の削減効果（有人受付比較）を定量的に測定できます。月次レビューで改善施策をご提案します。</p>
+                    </details>
+                    <details class="bg-background-light rounded-xl p-6 border border-border-light group">
+                        <summary class="cursor-pointer font-bold text-lg flex items-center justify-between">
+                            他社チャットボットとの違いは？
+                            <span class="material-symbols-outlined text-primary group-open:rotate-180 transition-transform">expand_more</span>
+                        </summary>
+                        <p class="mt-4 text-text-secondary-light leading-relaxed">統合Memory機能により、Kiosk・LINE・Web Widget を跨いだ一貫した会話体験を実現します。単発応答型のチャットボットとは一線を画します。詳細は <a href="https://cs.gbase.ai/blog/chatbot-comparison-guide-2025/" class="text-primary hover:underline">チャットボット比較ガイド 2025</a> を参照ください。</p>
+                    </details>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final CTA -->
+        <section class="w-full px-4 md:px-10 lg:px-40 py-20 flex justify-center bg-gradient-to-br from-navy to-text-main-light">
+            <div class="max-w-[900px] w-full text-center text-white">
+                <h2 class="text-3xl md:text-5xl font-black mb-6 leading-tight">
+                    AIコンシェルジュで、<br>受付業務を<span class="text-primary">次のステージ</span>へ。
+                </h2>
+                <p class="text-gray-300 text-lg mb-10 max-w-2xl mx-auto">
+                    最短1週間で導入可能。商業施設・ホテル・オフィスの受付システム ai 化をワンストップでご支援します。
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="contact.html?product=ai-concierge" class="cta-button flex items-center justify-center rounded-lg h-14 px-8 bg-primary hover:bg-primary-dark transition-colors text-white text-lg font-bold">
+                        無料相談を予約する
+                    </a>
+                    <a href="register.html" class="flex items-center justify-center rounded-lg h-14 px-8 bg-transparent border border-gray-600 hover:border-white hover:bg-white/5 transition-colors text-white text-lg font-bold">
+                        14日間無料トライアル
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer (shared pattern) -->
+        <footer class="w-full bg-background-light pt-16 pb-8 border-t border-border-light">
+            <div class="w-full px-4 md:px-10 lg:px-40 flex justify-center">
+                <div class="max-w-[1200px] w-full grid grid-cols-2 md:grid-cols-4 gap-8 lg:gap-12">
+                    <div class="flex flex-col gap-4">
+                        <h3 class="font-bold text-text-main-light">GBase Support</h3>
+                        <ul class="flex flex-col gap-2">
+                            <li><a href="index.html" class="text-sm text-text-secondary-light hover:text-primary">トップ</a></li>
+                            <li><a href="index.html#case-study" class="text-sm text-text-secondary-light hover:text-primary">ソリューション一覧</a></li>
+                            <li><a href="ai-concierge.html" class="text-sm text-text-secondary-light hover:text-primary">AIコンシェルジュ</a></li>
+                            <li><a href="https://cs.gbase.ai/price" class="text-sm text-text-secondary-light hover:text-primary">料金プラン</a></li>
+                            <li><a href="https://cs.gbase.ai/blog" class="text-sm text-text-secondary-light hover:text-primary">ブログ・資料</a></li>
+                            <li><a href="contact.html?product=ai-concierge" class="text-sm text-text-secondary-light hover:text-primary">お問い合わせ</a></li>
+                        </ul>
+                    </div>
+                    <div class="flex flex-col gap-4">
+                        <h3 class="font-bold text-text-main-light">Sparticle について</h3>
+                        <ul class="flex flex-col gap-2">
+                            <li><a href="https://sparticle.com" target="_blank" class="text-sm text-text-secondary-light hover:text-primary">会社概要</a></li>
+                            <li><a href="https://www.sparticle.com/ja/recruit" target="_blank" class="text-sm text-text-secondary-light hover:text-primary">採用情報</a></li>
+                        </ul>
+                    </div>
+                    <div class="hidden md:block"></div>
+                    <div class="flex flex-col gap-4 col-span-2 md:col-span-1">
+                        <a href="index.html" class="flex items-center hover:opacity-80 transition-opacity">
+                            <img src="https://cs.gbase.ai/title-logo.png" alt="GBase Support" class="h-8 w-auto" />
+                        </a>
+                        <p class="text-xs text-text-secondary-light">© Sparticle / GBase, All rights reserved.</p>
+                        <div class="flex flex-wrap items-center gap-x-4 gap-y-2 mt-4 text-xs text-text-secondary-light">
+                            <a href="https://cs.gbase.ai/terms-of-use" class="hover:text-primary">利用規約</a>
+                            <span class="text-border-light">·</span>
+                            <a href="https://cs.gbase.ai/privacy-policy" class="hover:text-primary">プライバシーポリシー</a>
+                            <span class="text-border-light">·</span>
+                            <a href="https://cs.gbase.ai/security" class="hover:text-primary">セキュリティ</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </main>
+
+    <!-- GA4 CTA tracking (placeholder) -->
+    <script>
+        document.querySelectorAll('.cta-button').forEach(btn => {
+            btn.addEventListener('click', () => {
+                if (typeof gtag === 'function') {
+                    gtag('event', 'generate_lead', {
+                        'event_category': 'engagement',
+                        'event_label': 'ai_concierge_consultation'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
